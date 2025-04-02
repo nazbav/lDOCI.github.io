@@ -1,407 +1,104 @@
 {
     "filaments": [
-      {
-        "id": 1,
-        "name": "EXOFLEX 1000г",
-        "manufacturer": "EXOFLEX",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 155,
-        "spoolDiameter": 196,
-        "spoolWidth": 74,
-        "spoolInnerDiameter": 52,
-        "filamentDiameter": 84,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://exoflex.ru/" }
-        ]
-      },
-      {
-        "id": 2,
-        "name": "MANO 1000г",
-        "manufacturer": "MANO",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 185,
-        "spoolDiameter": 200,
-        "spoolWidth": 71,
-        "spoolInnerDiameter": 52,
-        "filamentDiameter": 110,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://3dmako.ru/" }
-        ]
-      },
-      {
-        "id": 3,
-        "name": "ECOFIL 500г/750г/800г/1000г",
-        "manufacturer": "CTP/MINT/IACT",
-        "type": "PLA",
-        "weight": null,
-        "diameter": 1.75,
-        "spoolWeight": null,
-        "spoolDiameter": 174,
-        "spoolWidth": 202,
-        "spoolInnerDiameter": 56,
-        "filamentDiameter": 110,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://www.sc3d.ru/" }
-        ]
-      },
-      {
-        "id": 4,
-        "name": "CYBERFIBER 750г",
-        "manufacturer": "CYBERFIBER",
-        "type": "PLA",
-        "weight": 750,
-        "diameter": 1.75,
-        "spoolWeight": null,
-        "spoolDiameter": null,
-        "spoolWidth": null,
-        "spoolInnerDiameter": null,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "http://www.cyberfiber.ru/" }
-        ]
-      },
-      {
-        "id": 5,
-        "name": "FDplast 750г",
-        "manufacturer": "FDplast",
-        "type": "PLA",
-        "weight": 750,
-        "diameter": 1.75,
-        "spoolWeight": null,
-        "spoolDiameter": null,
-        "spoolWidth": null,
-        "spoolInnerDiameter": null,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 6,
-        "name": "FILAMENT ANNO 750г",
-        "manufacturer": "FILAMENT ANNO",
-        "type": "PLA",
-        "weight": 750,
-        "diameter": 1.75,
-        "spoolWeight": null,
-        "spoolDiameter": null,
-        "spoolWidth": null,
-        "spoolInnerDiameter": null,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "http://filamentanno.ru/cat-alco.html" }
-        ]
-      },
-      {
-        "id": 7,
-        "name": "gReg 300м",
-        "manufacturer": "gReg",
-        "type": "PLA",
-        "weight": null,
-        "diameter": 1.75,
-        "spoolWeight": null,
-        "spoolDiameter": null,
-        "spoolWidth": null,
-        "spoolInnerDiameter": null,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://gtreg-3d.ru/Epcondables.Fila-metri/dmb" }
-        ]
-      },
-      {
-        "id": 8,
-        "name": "MY3D 750г/1000г",
-        "manufacturer": "MY3D",
-        "type": "PETG",
-        "weight": null,
-        "diameter": 1.75,
-        "spoolWeight": null,
-        "spoolDiameter": null,
-        "spoolWidth": null,
-        "spoolInnerDiameter": null,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 9,
-        "name": "REC 2000г",
-        "manufacturer": "REC",
-        "type": "PETG",
-        "weight": 2000,
-        "diameter": 1.75,
-        "spoolWeight": 601,
-        "spoolDiameter": 300,
-        "spoolWidth": 100,
-        "spoolInnerDiameter": 200,
-        "filamentDiameter": 100,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://rec3d.ru/plastic-dlya-3d-printecovial-plastic/" }
-        ]
-      },
-      {
-        "id": 10,
-        "name": "SEM 500г/800г/950г",
-        "manufacturer": "SEM",
-        "type": "PLA",
-        "weight": null,
-        "diameter": 1.75,
-        "spoolWeight": null,
-        "spoolDiameter": null,
-        "spoolWidth": null,
-        "spoolInnerDiameter": null,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://sem3d.ru/" }
-        ]
-      },
-      {
-        "id": 11,
-        "name": "Bestfilament 1000г",
-        "manufacturer": "Bestfilament",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 177,
-        "spoolDiameter": 200,
-        "spoolWidth": 65,
-        "spoolInnerDiameter": 52,
-        "filamentDiameter": 73,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://bestfilament.ru/" }
-        ]
-      },
-      {
-        "id": 12,
-        "name": "FDplast 1000г",
-        "manufacturer": "FDplast",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 195,
-        "spoolDiameter": 215,
-        "spoolWidth": 188,
-        "spoolInnerDiameter": 52,
-        "filamentDiameter": 99,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://grabcad.com/library/fdplast-2-5kg-spool-1" }
-        ]
-      },
-      {
-        "id": 13,
-        "name": "U3 Print / Geek Filament 450г/1000г",
-        "manufacturer": "U3 Print / Geek Filament",
-        "type": "PLA",
-        "weight": null,
-        "diameter": 1.75,
-        "spoolWeight": 256,
-        "spoolDiameter": 200,
-        "spoolWidth": 69,
-        "spoolInnerDiameter": 83,
-        "filamentDiameter": 90,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 14,
-        "name": "PRINT PRODUCT 1000г",
-        "manufacturer": "PRINT PRODUCT",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 261,
-        "spoolDiameter": 190,
-        "spoolWidth": 84,
-        "spoolInnerDiameter": 39,
-        "filamentDiameter": 100,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 15,
-        "name": "ABSMaker 1000г",
-        "manufacturer": "ABSMaker",
-        "type": "ABS",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 1783,
-        "spoolDiameter": 198,
-        "spoolWidth": 75,
-        "spoolInnerDiameter": 52,
-        "filamentDiameter": 110,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 16,
-        "name": "Solidfilament 300г/500г/1000г",
-        "manufacturer": "BestFilament",
-        "type": "PLA",
-        "weight": null,
-        "diameter": 1.75,
-        "spoolWeight": 195,
-        "spoolDiameter": null,
-        "spoolWidth": null,
-        "spoolInnerDiameter": 52,
-        "filamentDiameter": 89,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://top3dshop.ru/materiali/" }
-        ]
-      },
-      {
-        "id": 17,
-        "name": "eSUN 1000г",
-        "manufacturer": "eSUN",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 215,
-        "spoolDiameter": 200,
-        "spoolWidth": 61,
-        "spoolInnerDiameter": 90,
-        "filamentDiameter": 90,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 18,
-        "name": "SynTech 1000г",
-        "manufacturer": "SynTech",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 42,
-        "spoolDiameter": 195,
-        "spoolWidth": 65,
-        "spoolInnerDiameter": 60,
-        "filamentDiameter": 60,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://www.syntechlab.ru/" }
-        ]
-      },
-      {
-        "id": 19,
-        "name": "Некрасовский полимер 1000г",
-        "manufacturer": "Некрасовский полимер",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 171,
-        "spoolDiameter": 200,
-        "spoolWidth": 73,
-        "spoolInnerDiameter": 109.5,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://www.gl6w.rk/IPE/Tra-Tinzerus-dna-3D-принтера-1-75-им-1-кг-Некрасовский-полимер-Серия-Местческая-р438600069" }
-        ]
-      },
-      {
-        "id": 20,
-        "name": "ERYONE 1000г",
-        "manufacturer": "ERYONE",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 192,
-        "spoolDiameter": 200,
-        "spoolWidth": 62,
-        "spoolInnerDiameter": 90,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": [
-          { "type": "website", "url": "https://enyone.com/xpodustaf/filament/" }
-        ]
-      },
-      {
-        "id": 21,
-        "name": "Creatity hyper series 1000г",
-        "manufacturer": "Creatity",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 164.9,
-        "spoolDiameter": 197,
-        "spoolWidth": 64.5,
-        "spoolInnerDiameter": 86.8,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 22,
-        "name": "3D printer filament T-MBS 1000г",
-        "manufacturer": "PopBit",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 195,
-        "spoolDiameter": 198,
-        "spoolWidth": 67,
-        "spoolInnerDiameter": 79,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 23,
-        "name": "Eryone 1000г",
-        "manufacturer": "Eryone",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 187.4,
-        "spoolDiameter": 199,
-        "spoolWidth": 63.9,
-        "spoolInnerDiameter": 87,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 24,
-        "name": "123D 1000г",
-        "manufacturer": "123D",
-        "type": "PLA",
-        "weight": 1000,
-        "diameter": 1.75,
-        "spoolWeight": 221,
-        "spoolDiameter": 172,
-        "spoolWidth": 64,
-        "spoolInnerDiameter": 25.5,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": []
-      },
-      {
-        "id": 25,
-        "name": "FILAMENTARNO 750г",
-        "manufacturer": "FILAMENTARNO",
-        "type": "PLA",
-        "weight": 750,
-        "diameter": 1.75,
-        "spoolWeight": null,
-        "spoolDiameter": null,
-        "spoolWidth": null,
-        "spoolInnerDiameter": null,
-        "filamentDiameter": null,
-        "printProfiles": [],
-        "links": []
-      }
+        {
+            "id": 1,
+            "name": "EXOFLEX 1000г",
+            "manufacturer": "EXOFLEX",
+            "type": "PLA",
+            "weight": 1000,
+            "diameter": 1.75,
+            "spoolWeight": 155,
+            "spoolDiameter": 196,
+            "spoolWidth": 74,
+            "spoolInnerDiameter": 52,
+            "filamentDiameter": 84,
+            "price": 1250,
+            "rating": 4.5,
+            "printProfiles": [
+                {
+                    "name": "Профиль для Ender 3",
+                    "url": "#",
+                    "temp": "200°C"
+                }
+            ],
+            "links": [
+                { "type": "website", "url": "https://exoflex.ru/" },
+                { "type": "ozon", "url": "https://www.ozon.ru/" }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "MANO 1000г",
+            "manufacturer": "MANO",
+            "type": "PLA",
+            "weight": 1000,
+            "diameter": 1.75,
+            "spoolWeight": 185,
+            "spoolDiameter": 200,
+            "spoolWidth": 71,
+            "spoolInnerDiameter": 52,
+            "filamentDiameter": 110,
+            "price": 1350,
+            "rating": 4.2,
+            "printProfiles": [],
+            "links": [
+                { "type": "website", "url": "https://3dmako.ru/" }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "ECOFIL 500г/750г/800г/1000г",
+            "manufacturer": "CTP/MINT/IACT",
+            "type": "PLA",
+            "weight": null,
+            "diameter": 1.75,
+            "spoolWeight": null,
+            "spoolDiameter": 174,
+            "spoolWidth": 202,
+            "spoolInnerDiameter": 56,
+            "filamentDiameter": 110,
+            "price": 1100,
+            "rating": 3.8,
+            "printProfiles": [],
+            "links": [
+                { "type": "website", "url": "https://www.sc3d.ru/" }
+            ]
+        },
+        {
+            "id": 9,
+            "name": "REC 2000г",
+            "manufacturer": "REC",
+            "type": "PETG",
+            "weight": 2000,
+            "diameter": 1.75,
+            "spoolWeight": 601,
+            "spoolDiameter": 300,
+            "spoolWidth": 100,
+            "spoolInnerDiameter": 200,
+            "filamentDiameter": 100,
+            "price": 2500,
+            "rating": 4.7,
+            "printProfiles": [],
+            "links": [
+                { "type": "website", "url": "https://rec3d.ru/plastic-dlya-3d-printecovial-plastic/" }
+            ]
+        },
+        {
+            "id": 15,
+            "name": "ABSMaker 1000г",
+            "manufacturer": "ABSMaker",
+            "type": "ABS",
+            "weight": 1000,
+            "diameter": 1.75,
+            "spoolWeight": 1783,
+            "spoolDiameter": 198,
+            "spoolWidth": 75,
+            "spoolInnerDiameter": 52,
+            "filamentDiameter": 110,
+            "price": 1800,
+            "rating": 4.1,
+            "printProfiles": [],
+            "links": []
+        }
     ]
-  }
+}

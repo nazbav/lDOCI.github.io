@@ -8,10 +8,19 @@
     <style>
         :root {
             --primary: #2563eb;
+            --primary-color: #2563eb;
             --secondary: #3b82f6;
+            --secondary-color: #3b82f6;
             --dark: #1e293b;
             --light: #f8fafc;
             --gray: #94a3b8;
+            --warning-color: #f59e0b;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
         body {
@@ -19,8 +28,6 @@
             line-height: 1.6;
             color: var(--dark);
             background: var(--light);
-            margin: 0;
-            padding: 0;
         }
         
         .container {
@@ -36,40 +43,216 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        h1 {
-            margin: 0;
-            padding: 0 20px;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        /* Остальные стили из предыдущего кода */
-        .filament-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        .page-title {
+            margin: 20px 0;
+            color: var(--dark);
+        }
+        
+        .catalog-wrapper {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .filters-panel {
+            width: 250px;
             background: white;
+            padding: 20px;
+            border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         
-        .filament-table th {
-            background: var(--primary);
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
+        .filter-group {
+            margin-bottom: 20px;
         }
         
-        .filament-table td {
-            padding: 10px 15px;
+        .filter-group h3 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .checkbox-group {
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .checkbox-group input {
+            margin-right: 8px;
+        }
+        
+        #reset-filters {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .catalog-content {
+            flex: 1;
+        }
+        
+        .search-sort-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .search-container {
+            position: relative;
+            width: 60%;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+        }
+        
+        .sort-container {
+            width: 35%;
+        }
+        
+        .sort-select {
+            width: 100%;
+            padding: 10px;
+        }
+        
+        .filament-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .filament-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .filament-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
             border-bottom: 1px solid #e2e8f0;
         }
         
-        .filament-table tr:hover {
-            background: #f1f5f9;
+        .card-title h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
         }
         
-        .store-link {
+        .card-title p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .card-material {
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            height: fit-content;
+        }
+        
+        .specs-list {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+        
+        .specs-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .specs-list i {
+            width: 20px;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        .specs-list span:first-of-type {
+            flex: 1;
+        }
+        
+        .specs-value {
+            font-weight: 600;
+        }
+        
+        .profiles-section h4 {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .profiles-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .profile-link {
             display: inline-block;
-            margin-right: 8px;
-            margin-bottom: 5px;
             padding: 3px 8px;
             background: #e0f2fe;
             border-radius: 4px;
@@ -78,26 +261,118 @@
             text-decoration: none;
         }
         
-        .filters {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
+        .no-profiles {
+            color: var(--gray);
+            font-size: 0.9rem;
         }
         
-        select, input {
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .marketplace-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .marketplace-link {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #e0f2fe;
+            border-radius: 4px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+        
+        .no-links {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .details-button {
+            padding: 8px 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .details-button:hover {
+            background: var(--secondary);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .pagination ul {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+        
+        .pagination-link {
+            display: block;
             padding: 8px 12px;
             border: 1px solid #cbd5e1;
             border-radius: 4px;
-            min-width: 150px;
+            text-decoration: none;
+            color: var(--dark);
         }
-
-
+        
+        .pagination-link.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .pagination-link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-dots {
+            display: block;
+            padding: 8px 12px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .no-results h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .no-results p {
+            color: var(--gray);
+        }
+        
         .reviews-container {
             background-color: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
         
@@ -105,50 +380,58 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
         }
         
         .reviews-title {
             font-size: 1.5rem;
-            color: var(--primary-color);
+            color: var(--primary);
+        }
+        
+        .reviews-title i {
+            margin-right: 10px;
         }
         
         .add-review-btn {
-            padding: 0.5rem 1rem;
-            background-color: var(--primary-color);
+            padding: 8px 16px;
+            background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 0.25rem;
+            border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.2s;
         }
         
         .add-review-btn:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--secondary);
+        }
+        
+        .add-review-btn i {
+            margin-right: 5px;
         }
         
         .review-list {
-            margin-top: 1.5rem;
+            margin-top: 20px;
         }
         
         .review-item {
-            padding: 1.5rem;
+            padding: 20px;
             border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
         }
         
         .review-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
         }
         
         .review-author {
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--primary);
         }
         
         .review-date {
@@ -158,36 +441,47 @@
         
         .review-rating {
             color: var(--warning-color);
-            margin: 0.5rem 0;
+            margin: 10px 0;
         }
         
         .review-text {
             line-height: 1.6;
         }
         
+        .no-reviews {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+        
+        .no-reviews i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
         .review-form {
             background-color: #f9fafb;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-top: 2rem;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
             display: none;
         }
         
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             font-weight: 500;
         }
         
         .form-control {
             width: 100%;
-            padding: 0.75rem;
+            padding: 10px;
             border: 1px solid #e5e7eb;
-            border-radius: 0.25rem;
+            border-radius: 4px;
             font-size: 1rem;
         }
         
@@ -198,8 +492,8 @@
         
         .rating-input {
             display: flex;
-            gap: 0.5rem;
-            margin: 0.5rem 0;
+            gap: 5px;
+            margin: 10px 0;
         }
         
         .rating-input i {
@@ -214,83 +508,174 @@
         }
         
         .submit-review-btn {
-            padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
+            padding: 10px 20px;
+            background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 0.25rem;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 1rem;
             transition: background-color 0.2s;
         }
         
         .submit-review-btn:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--secondary);
         }
-        /* Стили для карточек */
-.filament-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-/* Стили для пагинации */
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.pagination ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-}
-
-.pagination-item {
-    margin: 0 5px;
-}
-
-.pagination-link {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-decoration: none;
-}
-
-.pagination-link.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-/* Стили для модального окна */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    margin: 5% auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 800px;
-    border-radius: 8px;
-}
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .modal-title h2 {
+            margin-bottom: 5px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .specs-category {
+            margin: 25px 0 15px;
+            color: var(--primary);
+        }
+        
+        .specs-category i {
+            margin-right: 10px;
+        }
+        
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specs-table th, .specs-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .specs-table th {
+            width: 40%;
+            color: var(--gray);
+        }
+        
+        .profile-item {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @media (max-width: 768px) {
+            .catalog-wrapper {
+                flex-direction: column;
+            }
+            
+            .filters-panel {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .search-sort-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-container, .sort-container {
+                width: 100%;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container header-content">
             <div class="logo">
                 <i class="fas fa-cube"></i> 3D Печать
             </div>
@@ -305,90 +690,153 @@
         </div>
     </header>
 
-    <main>
-        <div class="container">
-            <h1 class="page-title">Каталог 3D-филаментов</h1>
-            
-            <p>
-                Наша база данных содержит информацию о различных производителях 3D-филамента, доступных на российском рынке. 
-                Здесь вы найдёте технические характеристики катушек, отзывы пользователей и ссылки на маркетплейсы.
-            </p>
+    <main class="container">
+        <h1 class="page-title">Каталог 3D-филаментов</h1>
+        
+        <p>
+            Наша база данных содержит информацию о различных производителях 3D-филамента, доступных на российском рынке. 
+            Здесь вы найдёте технические характеристики катушек, отзывы пользователей и ссылки на маркетплейсы.
+        </p>
 
-            <div class="catalog-wrapper">
-                <!-- Filters Panel -->
-                <aside class="filters-panel">
-                    <!-- Фильтры из предыдущего HTML остаются без изменений -->
-                </aside>
-
-                <!-- Main Content -->
-                <div class="catalog-content">
-                    <div class="search-sort-bar">
-                        <div class="search-container">
-                            <i class="fas fa-search search-icon"></i>
-                            <input type="text" id="search-input" class="search-input" placeholder="Поиск по названию или производителю...">
+        <div class="catalog-wrapper">
+            <!-- Filters Panel -->
+            <aside class="filters-panel">
+                <div class="filter-group">
+                    <h3>Материал</h3>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="material" value="all" checked> Все</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="material" value="PLA"> PLA</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="material" value="PETG"> PETG</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="material" value="ABS"> ABS</label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>Производитель</h3>
+                    <div id="manufacturers-filter">
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="manufacturer" value="all" checked> Все</label>
                         </div>
-                        <div class="sort-container">
-                            <select id="sort-select" class="sort-select">
-                                <option value="name-asc">Сортировка: Название (А-Я)</option>
-                                <option value="name-desc">Сортировка: Название (Я-А)</option>
-                                <option value="rating-desc">Сортировка: Рейтинг (высокий)</option>
-                                <option value="rating-asc">Сортировка: Рейтинг (низкий)</option>
-                            </select>
+                        <!-- Динамически заполнится через JS -->
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>Вес</h3>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="weight" value="all" checked> Все</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="weight" value="0.5"> 500г</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="weight" value="0.75"> 750г</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="weight" value="1"> 1000г</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="weight" value="2"> 2000г+</label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>Рейтинг</h3>
+                    <div class="checkbox-group">
+                        <label><input type="radio" name="rating" value="all" checked> Все</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="radio" name="rating" value="5"> 5 звезд</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="radio" name="rating" value="4"> 4+ звезды</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label><input type="radio" name="rating" value="3"> 3+ звезды</label>
+                    </div>
+                </div>
+                
+                <button id="reset-filters">Сбросить фильтры</button>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="catalog-content">
+                <div class="search-sort-bar">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="search-input" class="search-input" placeholder="Поиск по названию или производителю...">
+                    </div>
+                    <div class="sort-container">
+                        <select id="sort-select" class="sort-select">
+                            <option value="name-asc">Сортировка: Название (А-Я)</option>
+                            <option value="name-desc">Сортировка: Название (Я-А)</option>
+                            <option value="rating-desc">Сортировка: Рейтинг (высокий)</option>
+                            <option value="rating-asc">Сортировка: Рейтинг (низкий)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Filament Cards -->
+                <div id="filament-cards" class="filament-cards">
+                    <!-- Карточки будут загружаться через JS -->
+                    <div class="no-results">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <h3>Загрузка данных...</h3>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <ul id="pagination">
+                        <!-- Пагинация будет генерироваться через JS -->
+                    </ul>
+                </div>
+
+                <!-- Reviews Section -->
+                <div class="reviews-container">
+                    <div class="reviews-header">
+                        <h2 class="reviews-title"><i class="fas fa-comments"></i> Отзывы пользователей</h2>
+                        <button class="add-review-btn" id="add-review-btn"><i class="fas fa-plus"></i> Добавить отзыв</button>
+                    </div>
+                    
+                    <div class="review-list" id="review-list">
+                        <!-- Отзывы будут загружаться через JS -->
+                        <div class="no-reviews">
+                            <i class="fas fa-comment-slash"></i>
+                            <p>Пока нет отзывов. Будьте первым!</p>
                         </div>
                     </div>
-
-                    <!-- Filament Cards -->
-                    <div id="filament-cards" class="filament-cards">
-                        <!-- Карточки будут загружаться через JS -->
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="pagination">
-                        <ul id="pagination">
-                            <!-- Пагинация будет генерироваться через JS -->
-                        </ul>
-                    </div>
-
-                    <!-- Reviews Section -->
-                    <div class="reviews-container">
-                        <div class="reviews-header">
-                            <h2 class="reviews-title"><i class="fas fa-comments"></i> Отзывы пользователей</h2>
-                            <button class="add-review-btn" id="add-review-btn"><i class="fas fa-plus"></i> Добавить отзыв</button>
+                    
+                    <!-- Review Form -->
+                    <div class="review-form" id="review-form">
+                        <div class="form-group">
+                            <label for="review-author">Ваше имя:</label>
+                            <input type="text" id="review-author" class="form-control" required>
                         </div>
                         
-                        <div class="review-list" id="review-list">
-                            <!-- Отзывы будут загружаться через JS -->
-                            <div class="no-reviews">
-                                <i class="fas fa-comment-slash"></i>
-                                <p>Пока нет отзывов. Будьте первым!</p>
+                        <div class="form-group">
+                            <label>Ваша оценка:</label>
+                            <div class="rating-input" id="rating-input">
+                                <i class="fas fa-star" data-rating="1"></i>
+                                <i class="fas fa-star" data-rating="2"></i>
+                                <i class="fas fa-star" data-rating="3"></i>
+                                <i class="fas fa-star" data-rating="4"></i>
+                                <i class="fas fa-star" data-rating="5"></i>
                             </div>
                         </div>
                         
-                        <!-- Review Form -->
-                        <div class="review-form" id="review-form">
-                            <div class="form-group">
-                                <label for="review-author">Ваше имя:</label>
-                                <input type="text" id="review-author" class="form-control" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Ваша оценка:</label>
-                                <div class="rating-input" id="rating-input">
-                                    <i class="fas fa-star" data-rating="1"></i>
-                                    <i class="fas fa-star" data-rating="2"></i>
-                                    <i class="fas fa-star" data-rating="3"></i>
-                                    <i class="fas fa-star" data-rating="4"></i>
-                                    <i class="fas fa-star" data-rating="5"></i>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="review-text">Ваш отзыв:</label>
-                                <textarea id="review-text" class="form-control" required></textarea>
-                            </div>
-                            
-                            <button type="button" class="submit-review-btn" id="submit-review-btn">Отправить отзыв</button>
+                        <div class="form-group">
+                            <label for="review-text">Ваш отзыв:</label>
+                            <textarea id="review-text" class="form-control" required></textarea>
                         </div>
+                        
+                        <button type="button" class="submit-review-btn" id="submit-review-btn">Отправить отзыв</button>
                     </div>
                 </div>
             </div>
@@ -443,125 +891,5 @@
     </div>
 
     <script src="scripts.js"></script>
-    <script>
-        // Дополнительный JS для работы с отзывами
-        document.addEventListener('DOMContentLoaded', function() {
-            // Показать/скрыть форму отзыва
-            const reviewBtn = document.getElementById('add-review-btn');
-            const reviewForm = document.getElementById('review-form');
-            
-            if (reviewBtn && reviewForm) {
-                reviewBtn.addEventListener('click', function() {
-                    reviewForm.style.display = reviewForm.style.display === 'block' ? 'none' : 'block';
-                });
-            }
-            
-            // Рейтинг в форме
-            const ratingInput = document.getElementById('rating-input');
-            if (ratingInput) {
-                const stars = ratingInput.querySelectorAll('i');
-                let currentRating = 0;
-                
-                stars.forEach(star => {
-                    star.addEventListener('click', function() {
-                        const rating = parseInt(this.getAttribute('data-rating'));
-                        currentRating = rating;
-                        
-                        stars.forEach((s, index) => {
-                            if (index < rating) {
-                                s.classList.add('active');
-                            } else {
-                                s.classList.remove('active');
-                            }
-                        });
-                    });
-                    
-                    star.addEventListener('mouseover', function() {
-                        const rating = parseInt(this.getAttribute('data-rating'));
-                        
-                        stars.forEach((s, index) => {
-                            if (index < rating) {
-                                s.classList.add('hover');
-                            } else {
-                                s.classList.remove('hover');
-                            }
-                        });
-                    });
-                    
-                    star.addEventListener('mouseout', function() {
-                        stars.forEach(s => s.classList.remove('hover'));
-                    });
-                });
-            }
-            
-            // Отправка отзыва
-            const submitBtn = document.getElementById('submit-review-btn');
-            if (submitBtn) {
-                submitBtn.addEventListener('click', function() {
-                    const author = document.getElementById('review-author').value;
-                    const text = document.getElementById('review-text').value;
-                    const rating = document.querySelectorAll('#rating-input i.active').length;
-                    
-                    if (!author || !text || rating === 0) {
-                        alert('Пожалуйста, заполните все поля и поставьте оценку');
-                        return;
-                    }
-                    
-                    // Здесь будет код для сохранения отзыва
-                    addNewReview(author, text, rating);
-                    
-                    // Очистка формы
-                    document.getElementById('review-author').value = '';
-                    document.getElementById('review-text').value = '';
-                    document.querySelectorAll('#rating-input i').forEach(s => s.classList.remove('active'));
-                    document.getElementById('review-form').style.display = 'none';
-                });
-            }
-            
-            // Прокрутка к верху
-            const backToTop = document.getElementById('back-to-top');
-            if (backToTop) {
-                window.addEventListener('scroll', function() {
-                    if (window.pageYOffset > 300) {
-                        backToTop.classList.add('show');
-                    } else {
-                        backToTop.classList.remove('show');
-                    }
-                });
-                
-                backToTop.addEventListener('click', function() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-        });
-        
-        // Функция для добавления нового отзыва (заглушка)
-        function addNewReview(author, text, rating) {
-            const reviewList = document.getElementById('review-list');
-            const noReviews = reviewList.querySelector('.no-reviews');
-            
-            if (noReviews) {
-                noReviews.remove();
-            }
-            
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('ru-RU') + ' ' + now.toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'});
-            
-            const reviewItem = document.createElement('div');
-            reviewItem.className = 'review-item';
-            reviewItem.innerHTML = `
-                <div class="review-header">
-                    <span class="review-author">${author}</span>
-                    <span class="review-date">${dateStr}</span>
-                </div>
-                <div class="review-rating">
-                    ${'<i class="fas fa-star"></i>'.repeat(rating)}${'<i class="far fa-star"></i>'.repeat(5 - rating)}
-                </div>
-                <div class="review-text">${text}</div>
-            `;
-            
-            reviewList.prepend(reviewItem);
-        }
-    </script>
 </body>
 </html>
