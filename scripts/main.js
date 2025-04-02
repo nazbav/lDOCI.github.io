@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ========== ЗАГРУЗКА ДАННЫХ ==========
 async function loadData() {
     try {
-        const response = await fetch('./data/filaments.json');
+        const response = await fetch('data/filaments.json');
         if (!response.ok) throw new Error('Ошибка загрузки');
         const data = await response.json();
         allFilaments = data.filaments.map(filament => {
