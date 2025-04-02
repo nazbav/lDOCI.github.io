@@ -1,0 +1,2627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База знаний FlashForge Adventurer 5M</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --accent-color: #60a5fa;
+            --light-color: #f0f9ff;
+            --dark-color: #111827;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --max-width: 1280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f8fafc;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .hero {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+            background-image: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--light-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e5e7eb;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .category-card h3 i {
+            margin-right: 0.5rem;
+        }
+
+        .category-card p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .category-card .question-count {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .faq-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .faq-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .faq-question {
+            padding: 1rem 1.5rem;
+            background-color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background-color: #f9fafb;
+        }
+
+        .faq-question::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1rem 1.5rem;
+            max-height: 1000px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .tech-details {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-radius: 0.25rem;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .tech-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-right: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #e5e7eb;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #9ca3af;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .subcategory {
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            footer .container {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Table of Contents */
+        .toc {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .toc h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .toc ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc ul li a {
+            display: flex;
+            align-items: center;
+            color: var(--dark-color);
+        }
+
+        .toc ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .toc ul li a i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+        }
+
+        /* Additional utility classes */
+        .mb-1 { margin-bottom: 0.25rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .mb-5 { margin-bottom: 2rem; }
+        
+        .highlighted {
+        background-color: rgba(255, 215, 0, 0.4); /* Более яркий золотистый цвет */
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.25rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 165, 0, 0.5);
+        box-shadow: 0 0 3px rgba(255, 165, 0, 0.5);
+        animation: highlight-pulse 2s ease-in-out infinite;
+        }
+        .search-tip {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        font-style: italic;
+        }
+        .search-results-count {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        margin-top: 0.5rem;
+        text-align: center;
+        font-weight: 500;
+        color: white;
+        }
+        .category-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        height: 100%;
+        }
+
+    .category-link:hover {
+        text-decoration: none;
+     }
+
+    .category-link:hover .category-card {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+     }
+     @keyframes highlight-pulse {
+    0% { box-shadow: 0 0 3px rgba(255, 165, 0, 0.5); }
+    50% { box-shadow: 0 0 8px rgba(255, 165, 0, 0.8); }
+    100% { box-shadow: 0 0 3px rgba(255, 165, 0, 0.5); }
+    }
+
+    .faq-answer ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .faq-answer ul li {
+        padding-left: 1.5rem;
+        position: relative;
+    }
+
+    .faq-answer ul li:before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background-color: var(--primary-color);
+        position: absolute;
+        border-radius: 50%;
+        left: 0;
+        top: 0.65em;
+    }
+
+    .tech-details ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .tech-details ul li {
+        padding-left: 1.5rem;
+        position: relative;
+    }
+
+    .tech-details ul li:before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background-color: var(--primary-color);
+        position: absolute;
+        border-radius: 50%;
+        left: 0;
+        top: 0.65em;
+        opacity: 0.7;
+    }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-cube"></i>
+                <span>FlashForge 5M KB</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#soplemod">Соплемод</a></li>
+                    <li><a href="#nozzle">Сопла</a></li>
+                    <li><a href="#extruder">Экструдер</a></li>
+                    <li><a href="#bed">Стол</a></li>
+                    <li><a href="#plastics">Пластики</a></li>
+                    <li><a href="#mechanics">Механика</a></li>
+                    <li><a href="#software">ПО и прошивка</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>База знаний FlashForge Adventurer 5M</h1>
+            <p>Полное руководство по устранению неполадок, настройкам и оптимизации вашего 3D-принтера</p>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Поиск по базе знаний..." class="search-input" id="searchInput">
+                <p class="search-tip">При вводе текста система автоматически раскрывает и подсвечивает все совпадения, НЕ перемещая вас по странице</p>
+            </div>
+            <div id="noResultsMessage" style="display: none; margin-top: 1rem; padding: 1rem; background-color: #f8f9fa; border-radius: 0.5rem; text-align: center;">
+                <p>По вашему запросу ничего не найдено. Попробуйте изменить поисковый запрос.</p>
+            </div>
+            <div id="searchResults" class="search-results-count" style="display: none;">
+                Найдено результатов: <span id="resultsCount">0</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        
+
+        <div class="categories">
+            <a href="#soplemod" class="category-link">
+                <div class="category-card">
+                    <h3><i class="fas fa-microchip"></i> Соплемод</h3>
+                    <p>Проблемы установки, настройки и использования соплемода для улучшения печати.</p>
+                    <div class="question-count">5 вопросов</div>
+                </div>
+            </a>
+            
+            <a href="#nozzle" class="category-link">
+                <div class="category-card">
+                    <h3><i class="fas fa-cog"></i> Сопла</h3>
+                    <p>Проблемы с засорением, выбором и настройкой сопел различных диаметров.</p>
+                    <div class="question-count">7 вопросов</div>
+                </div>
+            </a>
+            
+            <a href="#extruder" class="category-link">
+                <div class="category-card">
+                    <h3><i class="fas fa-cogs"></i> Экструдер</h3>
+                    <p>Настройка, обслуживание и ремонт экструдера и системы подачи пластика.</p>
+                    <div class="question-count">8 вопросов</div>
+                </div>
+            </a>
+            
+            <a href="#bed" class="category-link">
+                <div class="category-card">
+                    <h3><i class="fas fa-layer-group"></i> Стол</h3>
+                    <p>Калибровка, выравнивание и настройка оптимальной адгезии печатного стола.</p>
+                    <div class="question-count">10 вопросов</div>
+                </div>
+            </a>
+            
+            <a href="#plastics" class="category-link">
+                <div class="category-card">
+                    <h3><i class="fas fa-flask"></i> Пластики</h3>
+                    <p>Рекомендации по печати различными материалами: PLA, PETG, ABS, TPU и другими.</p>
+                    <div class="question-count">15 вопросов</div>
+                </div>
+            </a>
+            
+            <a href="#mechanics" class="category-link">
+                <div class="category-card">
+                    <h3><i class="fas fa-wrench"></i> Механика</h3>
+                    <p>Проблемы с ремнями, двигателями, подшипниками и другими механическими элементами.</p>
+                    <div class="question-count">12 вопросов</div>
+                </div>
+            </a>
+            
+            <a href="#software" class="category-link">
+                <div class="category-card">
+                    <h3><i class="fas fa-code"></i> ПО и прошивка</h3>
+                    <p>Настройка слайсеров, обновление и проблемы с прошивкой, Klipper Mod и другие программные вопросы.</p>
+                    <div class="question-count">10 вопросов</div>
+                </div>
+            </a>
+            
+            <a href="#sensors" class="category-link">
+                <div class="category-card">
+                    <h3><i class="fas fa-thermometer-half"></i> Датчики</h3>
+                    <p>Калибровка и устранение неисправностей термисторов, тензодатчиков и других сенсоров.</p>
+                    <div class="question-count">5 вопросов</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- СОПЛЕМОД СЕКЦИЯ -->
+        <section id="soplemod" class="faq-section">
+            <h2>Соплемод</h2>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Неправильная фиксация соплемода в посадочном месте</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Соплемод вываливается при подаче филамента или не фиксируется защелками.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Подпилить края черной алюминиевой детали соплемода для лучшего прилегания (использовать надфиль).</li>
+                            <li>Проверить наличие и правильное расположение шайб под винтами.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Размеры соплемода могут незначительно отличаться от стокового хотенда, требуя ручной доработки.</li>
+                                <li>Неправильная установка может привести к утечке пластика через резьбу.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Засоры и утечка пластика</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Пластик застревает в горле хотенда или вытекает через резьбу сопла.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Нанести термопасту (например, GD900) на место соединения радиатора и горла для улучшения теплоотвода.</li>
+                            <li>Использовать два ключа для замены сопла: одним фиксировать хотенд, другим откручивать сопло (предварительно нагрев).</li>
+                            <li>Проверить качество каленого сопла — крашенные аналоги могут вызывать проблемы.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Белый пластик (особенно PET-G) чаще застревает из-за температурных особенностей.</li>
+                                <li>Латунные вставки в каленых соплах могут нарушать работу ретрактов.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Плохое качество печати с соплами 0.6 мм</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Модели печатаются с пропусками, "соплями", разноцветными участками из-за колебаний температуры/скорости.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Снизить температуру на 5–10°C от дефолтных значений для каленых сопел.</li>
+                            <li>Отключить или уменьшить ретракты, если используется сопло с латунной вставкой.</li>
+                            <li>Проверить настройки потока и скорости в слайсере (например, в OrcaSlicer).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Сопла 0.6 мм требуют корректировки параметров печати (скорость, охлаждение).</li>
+                                <li>Дефолтные профили могут не подходить для композитных материалов (CF/GF).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Перегрев и ошибка MCU (E0011)</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Принтер зависает или выдает ошибку после PID-калибровки или длительной печати.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Перепрошить принтер с последней версией ПО (например, версия 3.1.3).</li>
+                            <li>Проверить соединения нагревателя и датчика температуры на предмет короткого замыкания.</li>
+                            <li>Убедиться, что радиатор соплемода плотно прилегает.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Соплемод длиннее стокового хотенда, что может влиять на теплообмен.</li>
+                                <li>Ошибка E0011 часто связана с перегревом из-за некорректных PID-настроек.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Неэффективный обдув модели</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Нависания и мосты печатаются плохо даже с заменой обдува на 5015 вентилятор.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Напечатать <a href="https://www.printables.com/model/1078853-flashforge-adventure-5m-fan-duct-mod-i-snot-mod-i">крышку обдува</a>.</li>
+                            <li>Уменьшить скорость печати на нависаниях до 30–50%.</li>
+                            <li>Отключить "спиральный Z-Hop" в настройках слайсера, использовать "обычный" или "наклонный".</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Стоковые вентиляторы FlashForge могут иметь нестандартную распиновку.</li>
+                                <li>Обдув для соплемода требует точной геометрии из-за увеличенной длины хотенда.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СОПЛА СЕКЦИЯ -->
+        <section id="nozzle" class="faq-section">
+            <h2>Сопла</h2>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Засорение сопла</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Пластик не подается, экструдер щелкает, сопло забито мусором или перегретым пластиком.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Прогреть сопло до 280°C, прочистить комплектным шомполом или триммерной леской 1.6 мм.</li>
+                            <li>Сделать холодный пул (Cold Pull): использовать нейлон или PLA для вытягивания загрязнений после нагрева до 240°C и остывания до 120°C.</li>
+                            <li>Если засор не устраняется, установить новое сопло.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Перегрев радиатора хотенда может вызывать пробки. Проверьте вентилятор охлаждения.</li>
+                                <li>Для PETG и композитных пластиков рекомендуется сопло 0.6 мм или бамбумод.</li>
+                                <li>Не используйте иглу для чистки керамических нагревателей — это повреждает внутреннее покрытие.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Быстрый износ стоковых сопел при печати карбоном</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Латунные или стальные сопла быстро стачиваются карбоновыми волокнами, что приводит к потере точности печати.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Использовать каленые стальные сопла (например, 0.6 мм для FlashForge 5M).</li>
+                            <li>Для частой печати карбоном установить бамбумод или соплемод с калеными соплами.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Сопла диаметром меньше 0.6 мм чаще забиваются и изнашиваются.</li>
+                                <li>Карбоновые композиты требуют регулярной очистки хотенда от остатков волокон.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Засоры в хотенде из-за карбоновых волокон</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Филамент застревает в горле хотенда, особенно при использовании дешёвых карбоновых материалов.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Увеличить температуру хотенда на 5–10°C выше рекомендуемой.</li>
+                            <li>Регулярно чистить хотенд иглой для прочистки сопел.</li>
+                            <li>Использовать фильтры для филамента.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Белые и светлые карбоновые филаменты чаще забивают сопло из-за примесей.</li>
+                                <li>Латунные вставки в каленых соплах могут ухудшать ретракты.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Пробка в термобарьере</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Пластик застревает в холодной зоне хотэнда, что приводит к щелчкам экструдера.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Разборка хотэнда: открутить радиатор, нагреть термобарьер до 280°C и прочистить шомполом.</li>
+                            <li>Проверка пластика: использовать пластик со стабильным диаметром (например, FDplast или eSun).</li>
+                            <li>Снижение температуры ретракта: уменьшить ретракт до 0.4–0.6 мм для PETG.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Пробка часто возникает при перегреве пластика в фидере. Убедитесь, что кулер радиатора работает исправно.</li>
+                                <li>TPU и нейлон требуют особой осторожности из-за их гибкости.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Неправильная очистка сопла перед печатью</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> На сопле остаются куски пластика, которые мешают первому слою.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Заменить стандартный G-код очистки на аналог от Prusa:
+                                <pre>; Prusa-like cleaner
+G1 Y-110 X80 Z0.2 F4800
+G1 X20 E9 F1000 ; intro line
+G1 X-60 E12.5 F1000 ; intro line</pre>
+                            </li>
+                            <li>Удалить лишние перемещения сопла в стартовом G-коде.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Стандартный алгоритм FlashForge может оставлять пластик из-за возвратных движений.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЭКСТРУДЕР СЕКЦИЯ -->
+        <section id="extruder" class="faq-section">
+            <h2>Экструдер</h2>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Пропуск шагов экструдера из-за перегрева</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Экструдер щелкает, появляется недоэкструзия, особенно при длительной печати.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Обеспечить охлаждение двигателя экструдера (открыть крышку, установить дополнительный вентилятор).</li>
+                            <li>Снизить скорость печати и ускорения.</li>
+                            <li>Проверить диаметр филамента и настройки потока.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Перегрев чаще возникает при печати PETG или композитов.</li>
+                                <li>Температура двигателя не должна превышать 70°C.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Износ шестерен экструдера</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Шестерни стираются, особенно при печати композитными материалами (GF, CF) или после длительной эксплуатации (обычно 800-1200 часов).</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Заменить на каленые шестерни (например, BMG).</li>
+                            <li>Регулярно чистить и смазывать подшипники (игольчатый подшипник часто становится причиной износа вала).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Шестерни могут слизываться неравномерно из-за перекоса оси.</li>
+                                <li>После замены рекомендуется проверить соосность и прижим.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Пробуксовка филамента (шестерни не захватывают пластик)</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Шестерни проскальзывают, особенно с мягкими материалами (TPU) или при засорах.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Увеличить прижим шестерен (подпилить ограничители в фидере).</li>
+                            <li>Для TPU: снизить скорость печати до 20-30 мм/с, использовать сопло ≥0.6 мм.</li>
+                            <li>Проверить диаметр филамента (утолщения >1.75 мм вызывают пробуксовку).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Перегрев прутка в хотэнде может привести к его деформации и ухудшению зацепа.</li>
+                                <li>Мягкие TPU (95A) требуют снижения температуры до 195–200°C для предотвращения пробок.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Засорение шестерен пластиком</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> На шестернях накапливаются частицы пластика, особенно после пробок или печати мягкими материалами.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Разборка и чистка фидера (инструкция в файле, шаги 0-11).</li>
+                            <li>Использование нейлоновой лески для удаления остатков.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Не смазывать зубья шестерен — это ухудшает сцепление с филаментом.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Проблемы с печатью TPU</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Филамент наматывается на шестерни или не проталкивается.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Печать без тефлоновой трубки (прямая подача).</li>
+                            <li>Настройка температуры: 195-200°C для мягких TPU, обдув ≤40%.</li>
+                            <li>Модификация фидера (установка тефлоновой направляющей вплотную к шестерням).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>TPU может расширяться в хотэнде, создавая пробку. Требуется точная калибровка потока.</li>
+                                <li>Для TPU 95A и жестче стоковые настройки могут работать без доработок.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Люфт и перекос шестерен</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Шестерни болтаются на валу, что приводит к неравномерному износу.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Замена <a href="https://ozon.ru/t/qytxDHe" target="_blank">вала</a> на более жесткий (например, из сверла 3 мм).</li>
+                            <li>Установка шайб для фиксации положения.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Люфт часто вызван износом алюминиевого основания фидера.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СТОЛ СЕКЦИЯ -->
+        <section id="bed" class="faq-section">
+            <h2>Стол</h2>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Плохая адгезия первого слоя к PEI-пластине</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Модели отлипают во время печати, особенно при использовании PLA или PETG. Проблема усугубляется при печати мелких деталей или при недостаточной температуре стола.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Очистка пластины:</strong> Мыть пластину теплой водой с мылом, затем обезжиривать изопропиловым спиртом.</li>
+                            <li><strong>Использование адгезивов:</strong>
+                                <ul>
+                                    <li>Наносить комплектный клей или мультиадгезив (например, Ultimatum3D Work Hard).</li>
+                                    <li>Самодельный раствор: 5 г PVP K90 (повидон) на 200 мл изопропанола.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Настройки печати:</strong>
+                                <ul>
+                                    <li>Увеличить температуру стола (для PLA: 60°C, для PETG: 80°C).</li>
+                                    <li>Уменьшить скорость первого слоя до 20-30 мм/с.</li>
+                                    <li>Проверить и отрегулировать Z-offset (сопло должно быть ближе к столу).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>PEI-пластина со временем теряет адгезионные свойства. Рекомендуется периодически матировать поверхность наждачкой (P400-P600).</li>
+                                <li>Для PETG важно не перетягивать Z-offset, иначе пластик может повредить пластину.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Деформация углов и отрыв модели при печати больших деталей</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Края модели загибаются вверх, особенно при использовании ABS, ASA или нейлона. Проблема связана с усадкой материала и переохлаждением.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Закрытая камера:</strong> Печатать с закрытой дверью и крышкой для поддержания температуры в камере.</li>
+                            <li><strong>Кайма (brim):</strong> Добавить кайму шириной 5-10 мм для увеличения площади сцепления.</li>
+                            <li><strong>Адгезивы для сложных пластиков:</strong>
+                                <ul>
+                                    <li>Для нейлона (PA6/PA12) использовать FR4-пластину или стеклотекстолит с матированной поверхностью.</li>
+                                    <li>Для ABS/ASA — клей БФ-2 или ПВП-основные составы.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Настройки:</strong>
+                                <ul>
+                                    <li>Отключить обдув на первых 3-5 слоях.</li>
+                                    <li>Увеличить температуру стола (ABS: 100-110°C, нейлон: 80-110°C).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Нейлон требует предварительной сушки (12+ часов при 70-80°C).</li>
+                                <li>Магнитная подложка FlashForge 5M может слабо фиксировать толстые пластины (например, FR4), что приводит к деформации. Решение — использовать стекло или стальную пластину с зажимами.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Неравномерная адгезия из-за кривизны стола</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Модели отлипают только в отдельных зонах, что указывает на локальные провалы или выпуклости стола.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Ручная калибровка:</strong> Использовать щуп или бумагу для проверки зазора в 9 точках стола.</li>
+                            <li><strong>Карта стола 10x10:</strong> Активировать в настройках принтера или через Klipper для точной компенсации неровностей.</li>
+                            <li><strong>Дополнительные меры:</strong>
+                                <ul>
+                                    <li>Установить стеклянный стол с прокладками из фольги под проблемные зоны.</li>
+                                    <li>Использовать магнитную пластину с более жестким основанием.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Автокалибровка FlashForge 5M может давать погрешности. Рекомендуется дублировать ее ручной проверкой.</li>
+                                <li>При замене стола (например, на FR4) необходимо заново проводить калибровку.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Неправильная калибровка стола</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Стол имеет перепады высот (например, яма в центре до 1 мм). Возможны ошибки калибровки (E0011, E0017), неправильные показания тензодатчиков. Слои ложатся неравномерно, сопло царапает стол.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Калибровка весов и тензодатчиков:</strong> Выполнить процедуру калибровки через меню принтера. Проверить шлейфы и разъемы датчиков на повреждения.</li>
+                            <li><strong>Ручная регулировка винтов стола:</strong> Ослабить/затянуть регулировочные винты по углам стола, чтобы выровнять поверхность. Убедиться, что все винты имеют одинаковое количество витков (3-4 витка над гайкой).</li>
+                            <li><strong>Использование программных инструментов:</strong> Загрузить карту стола через Orca Slicer или сторонние утилиты (например, Анализатор уровня стола v1.1) для визуализации перекосов и точной настройки.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>При перекосе более 0.8 мм требуется регулировка ремней оси Z.</li>
+                                <li>После механической настройки всегда выполняйте программную калибровку через меню принтера.</li>
+                                <li>Карта стола может "зеркалиться" в ПО — проверьте соответствие данных в интерфейсе и реальной геометрии.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">"Слоновья нога" (элефантис)</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Избыточное расширение первого слоя, деформация нижних краев модели.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Уменьшить температуру стола на 5–10°C для первого слоя (например, с 60°C до 50°C для PLA).</li>
+                            <li>Включить компенсацию слоновьей ноги в слайсере (например, OrcaSlicer).</li>
+                            <li>Проверить уровень стола: неравномерный нагрев может вызывать локальные деформации.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Проблема часто связана с перетянутыми винтами крепления стола — ослабьте их до момента легкого сопротивления.</li>
+                                <li>Используйте термокамеру или ИК-термометр для проверки равномерности нагрева.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ПЛАСТИКИ СЕКЦИЯ -->
+        <section id="plastics" class="faq-section">
+            <h2>Пластики</h2>
+            
+            <!-- ABS подсекция -->
+            <h3 id="plastics-abs">ABS</h3>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Трещины и деформация деталей из-за усадки</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Детали трескаются, отрываются от стола из-за усадки, особенно при печати плашмя или под углом.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Контроль температуры:</strong>
+                                <ul>
+                                    <li>Сопло: 240-260°C.</li>
+                                    <li>Стол: 100-110°C (использовать адгезив типа ABS-клея или каптоновую ленту).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Закрытая камера:</strong> Печатать в закрытом корпусе для поддержания стабильной температуры.</li>
+                            <li><strong>Настройки слайсера:</strong>
+                                <ul>
+                                    <li>Уменьшить скорость печати до 40-60 мм/с.</li>
+                                    <li>Отключить обдув или установить его на 10-30% (только для мелких деталей).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>ABS требует минимальных сквозняков. Даже небольшой поток воздуха может вызвать деформацию.</li>
+                                <li>Для больших деталей рекомендуется использовать подогрев камеры (активную термокамеру).</li>
+                                <li>ABS чувствителен к сквознякам, даже в закрытой камере.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Артефакты на нависающих элементах (волосы, провисания)</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Нависающие части детали выглядят неровными или имеют "волосы".</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Настройки охлаждения:</strong>
+                                <ul>
+                                    <li>Отключить обдув для ABS (или установить на 10-15%).</li>
+                                    <li>Для ABS композитов использовать обдув 20-30%.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Калибровка ретракта:</strong>
+                                <ul>
+                                    <li>Уменьшить ретракт до 0.3-0.5 мм.</li>
+                                    <li>Скорость ретракта: 30-40 мм/с.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Адаптивный слой:</strong> Включить в слайсере для сложных участков.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>ABS почти не требует обдува, в отличие от PETG.</li>
+                                <li>"Волосы" могут быть особенностью материала — их легко удалить феном или ножом.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Низкая прочность деталей из ABS</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Готовые детали хрупкие или легко ломаются.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Температура печати:</strong>
+                                <ul>
+                                    <li>ABS: 240-260°C.</li>
+                                    <li>ABS-композиты (GF, CF): 260-280°C.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Настройки заполнения:</strong>
+                                <ul>
+                                    <li>Увеличить плотность заполнения до 30-50%.</li>
+                                    <li>Использовать паттерн "Gyroid" для равномерной прочности.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Постобработка:</strong> Отжиг деталей при 80-90°C (1 час на 1 мм толщины).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>ABS-композиты (например, ABS GF30) требуют сопла из закаленной стали.</li>
+                                <li>Низкая температура экструдера приводит к плохому спеканию слоев.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Ошибка E0011 (Host Error) при печати ABS через OrcaSlicer</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Ошибка возникает после 15-30 минут печати ABS, особенно при использовании OrcaSlicer. Проявляется случайными остановками печати, часто на разных этапах.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Откат версии OrcaSlicer до 1.8.1 (пользователи отмечают, что проблема началась с версии 1.9.1).</li>
+                            <li>Проверка контрольной суммы G-code: <code>sha256sum filename.gcode</code> (чтобы исключить повреждение файла при передаче).</li>
+                            <li>Отключение адаптивного мешинга (KAMP) в настройках слайсера.</li>
+                            <li>Использование FlashPrint как временное решение (хотя функционал слайсера ограничен).</li>
+                        </ul>
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Проблема может быть связана с перегревом электроники. Рекомендуется проверить обдув платы и вентиляцию камеры.</li>
+                                <li>В некоторых случаях помогает сброс принтера к заводским настройкам.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Плохая межслойная адгезия и хрупкость деталей из ABS</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Детали легко ломаются по слоям, особенно при печати на высоких скоростях или с недостаточным прогревом камеры.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Температура печати:</strong> 265–280°C для ABS, 105–110°C для стола.</li>
+                            <li><strong>Обдув:</strong>
+                                <ul>
+                                    <li>0% для основного слоя.</li>
+                                    <li>20–30% только для мостов и нависаний.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Прогрев камеры:</strong>
+                                <ul>
+                                    <li>Пассивный: закрытая камера с акриловыми панелями (температура внутри до 40–50°C).</li>
+                                    <li>Активный: установка дополнительного нагревателя (например, грелки 12В) с контролем температуры (PID).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Уменьшение скорости печати:</strong>
+                                <ul>
+                                    <li>Для периметров: 50–100 мм/с.</li>
+                                    <li>Для заполнения: 100–150 мм/с.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>ABS требует минимального обдува, иначе слои не спекаются.</li>
+                                <li>Для больших деталей обязательна закрытая камера, иначе коробление неизбежно.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PETG подсекция -->
+            <h3 id="plastics-petg">PETG</h3>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Низкое качество печати PETG</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> PETG печатается с дефектами (волны, пузыри, плохое спекание слоев).</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Сушка пластика:</strong> Сушить PETG при 50-60°C в течение 4-6 часов.</li>
+                            <li><strong>Настройка температуры:</strong> Использовать 240-260°C для сопла и 70-80°C для стола.</li>
+                            <li><strong>Калибровка потока и PA:</strong> Провести тесты потока и Pressure Advance.</li>
+                            <li><strong>Артефакты печати (недоэкструзия/переэкструзия):</strong> Отключить адаптивный Linear Advance (LA) в слайсере или использовать старую версию (например, 2.1.1), уменьшить ускорение на внешнем контуре до 1500.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>PETG чувствителен к влажности. Храните его в вакуумных пакетах.</li>
+                                <li>Избегайте резких перепадов температуры.</li>
+                                <li>Белый и черный PETG часто имеют проблемы с качеством из-за красителей. Попробуйте другой цвет или производителя.</li>
+                                <li>PETG критичен к настройкам ретракта и скорости.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Волосность (нити) при печати PETG</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Образование тонких нитей на поверхности детали, особенно при печати PETG.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Уменьшить ретракт до 0.3 мм.</li>
+                            <li>Откалибровать температуру печати (понизить, если материал перегревается).</li>
+                            <li>Обрабатывать детали строительным феном после печати.</li>
+                            <li>Перейти на ABS, если допустимо по требованиям к детали.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Волосность — особенность PETG, полностью устранить сложно.</li>
+                                <li>ABS дает более гладкую поверхность без нитей.</li>
+                                <li>Silk PLA и другие декоративные пластики более склонны к стрингингу. Может потребоваться более агрессивная настройка ретракта.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Неправильная калибровка Pressure Advance (PA)</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Пользователи отмечают, что откалиброванные значения PA не работают корректно, приводя к рваным швам или выпирающим углам. Особенно критично для PETG.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Использовать значения PA в диапазоне 0.025–0.04 для PETG (эмпирически подобранные, несмотря на калибровку).</li>
+                            <li>Включить "адаптивный PA" в Orca Slicer (настройки -> пруток -> Pressure Advance).</li>
+                            <li>Проверить настройки ускорений: снижение ускорений может усугубить проблему (парадоксально, но требует индивидуальной проверки).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>PA зависит от скорости и типа пластика. Для FlashForge 5M стоковые профили могут требовать ручной корректировки.</li>
+                                <li>Рекомендуется тестировать на моделях с углами (например, Orca Cube).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Плохое качество печати с PETG (нависания, недоэкструзия)</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Артефакты на нависающих элементах, «сопли», недостаточное заполнение.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Отключить замедление на нависаниях в Orca Slicer.</li>
+                            <li>Настроить Pressure Advance (PA) и объемный расход (например, 0.58 для PETG).</li>
+                            <li>Снизить ускорения до 1500 мм/с² для внешних контуров.</li>
+                            <li>Увеличить температуру экструдера (до 260°C для PETG) и уменьшить обдув (40%).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Проблема может усугубляться при использовании дешевого или влажного филамента.</li>
+                                <li>Рекомендуется провести полный цикл калибровок: температура, поток, ретракты.</li>
+                                <li>Для PETG рекомендуется скорость экструзии не более 25 мм³/с.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TPU подсекция -->
+            <h3 id="plastics-tpu">TPU</h3>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Затрудненная подача TPU в экструдер</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Мягкий TPU (особенно 75А по Шору) не захватывается шестернями фидера, застревает в тефлоновой трубке или скользит из-за смазки на зубьях.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Доработка фидера:</strong> Спилить ограничители в экструдере для лучшего захвата мягкого филамента.</li>
+                            <li><strong>Прямая подача:</strong> Подавать TPU напрямую в голову, минуя тефлоновую трубку (катушку размещать сверху принтера).</li>
+                            <li><strong>Очистка шестерен:</strong> Удалить смазку с зубьев фидера, если она мешает захвату.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>TPU 95А и выше менее капризен и может печататься через трубку.</li>
+                                <li>Для TPU 75А обязательна прямая подача и снижение скорости до 30–40 мм/с.</li>
+                                <li>Для TPU 75А обязательна доработка фидера и прямая подача.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Застревание TPU в экструдере или термобарьере</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Филамент застревает при загрузке или смене материалов, особенно после PETG/PLA.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Прогрев сопла:</strong> Нагреть сопло до 250°C и прочистить шомполом перед загрузкой TPU.</li>
+                            <li><strong>Колдпул:</strong> Использовать нейлоновую леску для выталкивания остатков предыдущего пластика.</li>
+                            <li><strong>Полная разборка:</strong> В сложных случаях разобрать экструдер, чтобы извлечь застрявший TPU.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>TPU не может продавить остатки жестких пластиков (PETG/PLA) — необходима тщательная очистка.</li>
+                                <li>Избегайте резких перегибов филамента при подаче.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Плохое качество печати TPU (бугры, провисания, недоэкструзия)</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Неровные слои, провисания на нависающих элементах, артефакты из-за неправильных настроек.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Настройки скорости:</strong> Снизить скорость до 30–50 мм/с (для 75А — до 20–30 мм/с).</li>
+                            <li><strong>Температура:</strong> Оптимальный диапазон — 220–235°C для сопла, 50–70°C для стола.</li>
+                            <li><strong>Обдув:</strong> Отключить для первого слоя, затем 100% (для TPU 95А). Для 75А обдув может ухудшить адгезию.</li>
+                            <li><strong>Поток:</strong> Увеличить до 105–110% для компенсации гибкости филамента.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>TPU сильно спекается — поддержки сложно удалять (рекомендуется зазор 0.2–0.3 мм).</li>
+                                <li>Высокие модели печатать с рёбрами жесткости.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Отлипание TPU от стола</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Края детали загибаются, первый слой отклеивается во время печати.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Очистка стола:</strong> Вымыть PEI-поверхность с моющим средством, избегать касаний руками.</li>
+                            <li><strong>Настройка Z-offset:</strong> Увеличить зазор, если сопло продавливает первый слой.</li>
+                            <li><strong>Клей/каптоновая лента:</strong> Использовать для улучшения адгезии (но TPU обычно хорошо липнет к PEI).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>TPU при остывании самопроизвольно отстает от стола при температуре ниже 40°C.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Застревание или плохая подача мягкого TPU (особенно FDPlast 75A)</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Мягкий TPU деформируется в экструдере, недостаточный прижим шестеренок, высокое трение в тефлоновой трубке.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Доработка экструдера:</strong> Подпилить ограничители на корпусе и лапке экструдера, чтобы увеличить прижим.</li>
+                            <li><strong>Прямая подача без трубки:</strong> Подавать филамент напрямую в голову, минуя тефлоновую трубку.</li>
+                            <li><strong>Снижение скорости и температуры:</strong> Установить объемную скорость 2-4 мм³/с и температуру 195-230°C.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Для TPU 75A требуется минимальное натяжение филамента. Рекомендуется подвешивать катушку над принтером или отрезать нужный кусок.</li>
+                                <li>При использовании сопла 0.4 мм объемная скорость не должна превышать 4 мм³/с. Для сопла 0.6 мм можно увеличить до 5-6 мм³/с.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PLA подсекция -->
+            <h3 id="plastics-pla">PLA</h3>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Плохая адгезия PLA к столу</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Модели отрываются от стола во время печати, особенно углы. Проблема встречается с разными марками PLA (НИТ, eSun, FDPlast).</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Температура стола:</strong> Увеличить до 60-70°C (для PLA Silk можно до 70°C).</li>
+                            <li><strong>Очистка стола:</strong> Мыть с жидким мылом и протирать изопропиловым спиртом. Избегать касания поверхности пальцами.</li>
+                            <li><strong>Клей/адгезив:</strong> Использовать родной клей FlashForge или лак для волос сильной фиксации.</li>
+                            <li><strong>Z-offset:</strong> Проверить и отрегулировать, чтобы первый слой немного прижимался к столу.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Некоторые PLA (например, матовые или Silk) требуют более высокой температуры стола.</li>
+                                <li>Адгезия может ухудшаться со временем из-за износа PEI-пластины.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Засорение сопла и пробки при печати PLA</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> PLA перестает поступать, экструдер щелкает, особенно с матовыми или Silk-пластиками.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Сушка пластика:</strong> Сушить PLA при 45-55°C в течение 4-6 часов (особенно для матовых и Silk-версий).</li>
+                            <li><strong>Температура печати:</strong> Повысить до 220-230°C для улучшения текучести.</li>
+                            <li><strong>Чистка сопла:</strong> Использовать шомпол или нейлон для холодного пулла (чистки).</li>
+                            <li><strong>Скорость печати:</strong> Снизить скорость потока до 20 мм³/s для сложных пластиков.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Матовые PLA часто содержат добавки, повышающие вязкость.</li>
+                                <li>Пробки могут возникать из-за перегрева термокамеры — рекомендуется печатать с открытой дверцей.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Дефекты нависаний и мостов</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Провисание слоев, "волны" на углах, плохое качество мостов (особенно с PETG и Silk PLA).</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Обдув:</strong> Увеличить мощность вентилятора до 100% для PLA, снизить до 50% для PETG.</li>
+                            <li><strong>Скорость печати:</strong> Замедлить скорость нависаний до 30-50 мм/с.</li>
+                            <li><strong>Температура:</strong> Снизить на 5-10°C для уменьшения провисания.</li>
+                            <li><strong>Плотность поддержек:</strong> Увеличить до 30-40% для сложных участков.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>PETG требует меньшего обдува, чем PLA, чтобы избежать расслоения.</li>
+                                <li>Silk PLA чувствителен к перегреву — лучше печатать на 210-220°C.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Низкое качество резьбы и мелких деталей</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Резьбовые соединения не совпадают, мелкие детали ломаются.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li><strong>Калибровка потока:</strong> Провести тест потока в OrcaSlicer и скорректировать множитель.</li>
+                            <li><strong>Точность размеров:</strong> Уменьшить допуск до 0.05 мм в настройках слайсера.</li>
+                            <li><strong>Температура:</strong> Для PLA — 210-220°C, для PETG — 240-250°C.</li>
+                            <li><strong>Охлаждение:</strong> Полный обдув для PLA, минимальный — для PETG.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Резьба требует точной калибровки PA (Pressure Advance).</li>
+                                <li>Мелкие детали лучше печатать с замедлением до 30 мм/с.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- МЕХАНИКА СЕКЦИЯ -->
+        <section id="mechanics" class="faq-section">
+            <h2>Механика</h2>
+            
+            <!-- Моторы подсекция -->
+            <h3 id="mechanics-motors">Моторы</h3>
+            <div class="subcategory">
+                <div class="faq-item">
+                    <div class="faq-question">Перегрев моторов</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Моторы перегреваются, особенно при длительной печати или в закрытой камере, что может приводить к пропуску шагов и снижению точности.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Уменьшить ток моторов до 0.7 (настройка в конфигурации).</li>
+                            <li>Установить дополнительное охлаждение (вентиляторы) для моторного отсека.</li>
+                            <li>Печатать с открытой камерой для улучшения вентиляции.</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Перегрев чаще возникает при высоких ускорениях и скоростях.</li>
+                                <li>Драйверы моторов также могут перегреваться, что усугубляет проблему.</li>
+                                <li>Температура поверхности мотора 80°C соответствует внутренней температуре 120-150°C.</li>
+                                <li>Мотор экструдера часто не имеет места для установки радиатора.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Пропуск шагов и стук моторов</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Моторы издают стук или пропускают шаги, особенно при печати мелких деталей или на высоких скоростях.</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Увеличить микрошаги с 16 до 32 (настройка в конфиге).</li>
+                            <li>Проверить натяжение ремней: они не должны быть перетянуты или ослаблены.</li>
+                            <li>Убедиться, что моторы не перекошены (исправить подкладками или регулировкой креплений).</li>
+                        </ul>
+                        
+                        <div class="tech-details">
+                            <h4>Технические нюансы:</h4>
+                            <ul>
+                                <li>Проблема часто связана с резонансом на определенных скоростях.</li>
+                                <li>Использование input shaper может помочь снизить вибрации.</li>
+                                <li>Шум может быть вызван неравномерным натяжением или перекосом портала.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Шум и вибрация моторов</div>
+                    <div class="faq-answer">
+                        <p><strong>Описание:</strong> Моторы издают гул или вибрацию на низких скоростях (20-60 мм/с).</p>
+                        
+                        <p><strong>Решения:</strong></p>
+                        <ul>
+                            <li>Проверить совместимость драйверов и моторов (возможна замена драйверов).</li>
+                            <li>Убедиться, что моторы не работают в резонансной зоне (изменить скорость или ускорение).</li>
+                            <li>Добавить демпфирующие прокладки под моторы.</li>
+                        </ul>
+
+                        <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Шум может быть вызван некачественными подшипниками или износом шкивов.</li>
+                                                        <li>Проблема чаще проявляется на определенных моделях моторов.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Сброс настроек шагов моторов после обновления прошивки</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> После обновления прошивки настройки шагов моторов сбрасываются на значения по умолчанию, что приводит к некорректной работе Z-офсета и другим проблемам.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Перепроверить и заново настроить шаги моторов после каждого обновления прошивки.</li>
+                                                    <li>Использовать резервные копии конфигурационных файлов для быстрого восстановления настроек.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Китайские прошивки могут изменять логику работы моторов без предупреждения.</li>
+                                                        <li>Рекомендуется документировать свои настройки перед обновлением.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Ремни подсекция -->
+                                    <h3 id="mechanics-belts">Ремни</h3>
+                                    <div class="subcategory">
+                                        <div class="faq-item">
+                                            <div class="faq-question">Неравномерное натяжение ремней, приводящее к перекосу осей</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Перекос осей (особенно X и Y) из-за разного натяжения ремней, что вызывает овальную печать кругов и смещение слоев.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Ослабить 8 винтов на задней стенке принтера (4 снаружи, 4 внутри), поводить печатающей головой по диагоналям для автоматического натяжения, затем затянуть винты.</li>
+                                                    <li>Проверить равномерность натяжения с помощью тюнера (рекомендуемая частота звука — 110–150 Гц для отрезка ремня длиной 150 мм).</li>
+                                                    <li>Использовать модельку для проверки натяжения или визуально контролировать положение ремней на шкивах.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Перетяжка ремней увеличивает вибрации и износ.</li>
+                                                        <li>Китайские винты могут быть перетянуты с завода — проверьте целостность пластиковых направляющих.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Проскальзывание ремня на шкивах или трение о корпус</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Ремни трутся о шкивы или корпус, вызывая скрип, щелчки или черный налет (износ ремня).</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Смазать гладкую сторону ремней комплектной смазкой White Grease.</li>
+                                                    <li>Проверить соосность шкивов и ленивцев, при необходимости отрегулировать их положение.</li>
+                                                    <li>Заменить ремни на качественные (например, Gates) при сильном износе.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Шкивы могут быть кривыми или иметь люфт — проверьте их геометрию.</li>
+                                                        <li>Ремни Noname в стоке склонны к быстрому износу.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Ошибки калибровки стола из-за перекоса ремней оси Z</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Стол имеет перепад высот (1–2 мм), что не компенсируется автоматической калибровкой.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Ослабить ремень в подвале принтера, перекинуть его на 1–2 зуба на проблемном валу (1 зуб ≈ 0.4 мм).</li>
+                                                    <li>После ручной регулировки запустить автокалибровку стола.</li>
+                                                    <li>Использовать штангенциркуль или бумагу для контроля зазора между соплом и столом.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Не трогайте винты под столом до выравнивания ремня — это может сбить калибровку тензодатчиков.</li>
+                                                        <li>Работайте при выключенном принтере, чтобы избежать повреждений.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Разная длина ремней X/Y</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Ремни осей X и Y имеют разную длину (разница до 18 мм), что приводит к печати овалов вместо кругов, смещению слоев и другим геометрическим искажениям.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Снять ремни, сравнить их длину, выложив "зуб в зуб", и подрезать более длинный ремень до одинакового размера (с запасом в 3-6 зубцов).</li>
+                                                    <li>Обратиться в поддержку FlashForge для замены ремней.</li>
+                                                    <li>Использовать шевронные ремни (например, POWGE), которые менее подвержены растяжению.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>После замены ремней необходимо повторно провести калибровку стола и шейперов.</li>
+                                                        <li>Разница более 5 мм критична и требует вмешательства.</li>
+                                                        <li>Ресурс стандартных ремней — около 2000 часов печати.</li>
+                                                        <li>Шевронные ремни менее шумные и более долговечные.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Печатающая головка подсекция -->
+                                    <h3 id="mechanics-head">Печатающая головка</h3>
+                                    <div class="subcategory">
+                                        <div class="faq-item">
+                                            <div class="faq-question">Нестабильное движение башки (ступенчатость, рывки)</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Башка двигается не плавно, особенно при печати первого слоя, что может привести к дефектам печати.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Провести полную калибровку принтера, включая шейперы и уровни стола.</li>
+                                                    <li>Проверить и при необходимости подтянуть ремни.</li>
+                                                    <li>Очистить и смазать направляющие.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Для точной калибровки рекомендуется использовать инженерное меню или специализированные макросы.</li>
+                                                        <li>Проблема часто проявляется при печати на ускорениях выше 10k.</li>
+                                                        <li>Рябь может быть вызвана не только ремнями, но и другими люфтами в механике.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Ошибка E0011 (падение связи с башкой)</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Принтер выдает ошибку E0011, связанную с потерей связи между башкой и материнской платой.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Проверить целостность кабеля башки и разъемов.</li>
+                                                    <li>Переподключить кабель, убедившись в надежном контакте.</li>
+                                                    <li>Заменить кабель или плату башки при необходимости.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Ошибка может возникать из-за наводок или плохого заземления. Рекомендуется проверить заземление корпуса принтера.</li>
+                                                        <li>Ошибка чаще всего страдают разъёмы на печатающей голове или материнской плате.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Самопроизвольное изменение оффсета башки</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Настройки оффсета башки меняются без видимых причин, что приводит к ухудшению качества печати.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Провести калибровку стола и сохранить настройки.</li>
+                                                    <li>Обновить прошивку принтера.</li>
+                                                    <li>Проверить механические соединения башки на предмет люфтов.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Для устранения проблемы может потребоваться ручная корректировка оффсета через инженерное меню.</li>
+                                                        <li>После обновления прошивки всегда перекалибровывайте стол.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Щелчки в башке при откатах</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Во время печати, особенно при откатах филамента, в башке слышны щелчки.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Проверить и устранить люфты в механизме экструдера.</li>
+                                                    <li>Очистить и смазать фидер.</li>
+                                                    <li>Настроить параметры отката в слайсере (уменьшить скорость или длину отката).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Щелчки могут быть связаны с использованием некачественного филамента или его перегибами при подаче.</li>
+                                                        <li>Шестерни могут слизываться неравномерно из-за перекоса оси.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Перегрев платы в башке</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Плата в башке перегревается, особенно при длительной печати на высоких температурах.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Установить дополнительный вентилятор для охлаждения платы.</li>
+                                                    <li>Проверить и заменить термопасту на плате.</li>
+                                                    <li>Уменьшить температуру печати, если возможно.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Для высокотемпературной печати рекомендуется использовать модификации башки с улучшенным охлаждением (например, бамбумод).</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                        
+                                <!-- ПО И ПРОШИВКА СЕКЦИЯ -->
+                                <section id="software" class="faq-section">
+                                    <h2>ПО и прошивка</h2>
+                                    
+                                    <!-- Klipper подсекция -->
+                                    <h3 id="software-klipper">Klipper</h3>
+                                    <div class="subcategory">
+                                        <div class="faq-item">
+                                            <div class="faq-question">Ошибки переполнения очереди команд (Move Queue Overflow)</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Ошибки типа "MCU shutdown: move queue overflow" или "Timer too close" возникают при высокой скорости печати или сложных G-кодах, когда хост не успевает обрабатывать команды.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Уменьшить скорость печати (особенно для сложных моделей).</li>
+                                                    <li>Снизить ускорения и рывки (рекомендуемые значения: ускорение 10k, рывок 10).</li>
+                                                    <li>Проверить подключение между хостом и MCU (шлейфы, контакты).</li>
+                                                    <li>Отключить интерполяцию шагов в конфигурации драйверов двигателей.</li>
+                                                    <li>Увеличить параметр max_duration в конфигурации Klipper (постепенно: 8, 32, 64, 128 мс).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Проблема чаще проявляется на слабом железе (ограниченная оперативная память хоста).</li>
+                                                        <li>Может быть связана с битыми G-кодами — проверять файлы перед отправкой.</li>
+                                                        <li>Проверить качество флеш-накопителя (использовать FAT32, избегать дешёвых носителей).</li>
+                                                        <li>Уменьшить сложность моделей или оптимизировать G-код (например, избегать спиральной заливки).</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Некорректный Z-offset после перехода на Klipper</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> После установки KlipperMod Z-offset сбрасывается или не сохраняется между печатями, что приводит к повреждению стола или плохому прилипанию первого слоя.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Вручную прописать Z-offset в макросе START_PRINT или слайсере.</li>
+                                                    <li>Использовать файл variables.cfg для автоматического сохранения значений (требуется правка конфигурации).</li>
+                                                    <li>Провести калибровку стола механически (регулировка гаек) перед использованием автоуровня.</li>
+                                                    <li>Добавить в printer.cfg перед блоком SAVE_CONFIG:
+                                                        <pre>[delayed_gcode bed_mesh_init]
+                        initial_duration: .01
+                        gcode:
+                          BED_MESH_PROFILE LOAD=auto</pre>
+                                                    </li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>На стоковой прошивке Z-offset определяется автоматически, в KlipperMod требуется ручная настройка.</li>
+                                                        <li>Пластиковые гайки оси Z могут иметь люфт, что влияет на точность.</li>
+                                                        <li>Проблема характерна для KlipperMod из-за особенностей работы с профилями сетки стола.</li>
+                                                        <li>На стоковой прошивке offset сохраняется корректно.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Зависания печати и случайные остановки</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Принтер зависает на середине печати без явных ошибок, особенно при длительных заданиях (более 3 часов).</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Обновить прошивку KlipperMod до актуальной версии (например, 0.0.5).</li>
+                                                    <li>Отключить датчик филамента (Detect Filament Sensor) в конфигурации.</li>
+                                                    <li>Печатать с флешки, а не через веб-интерфейс, чтобы снизить нагрузку на хост.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Проблема может быть связана с перегревом MCU или плохими контактами кабелей экструдера.</li>
+                                                        <li>На стоковой прошивке такие ошибки встречаются реже.</li>
+                                                        <li>На KlipperMod с веб-интерфейсом (Fluidd/Mainsail) ошибка проявляется чаще.</li>
+                                                        <li>Внешний хост требует перепрошивки контроллеров на STM32.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Низкая производительность хоста</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Нехватка оперативной памяти (30 Мб свободно) ограничивает функциональность (например, невозможность подключить камеру или ботов).</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Использовать облегченную версию KlipperMod (GuppyScreen вместо KlipperScreen).</li>
+                                                    <li>Отключить ненужные сервисы (например, таймлапсы).</li>
+                                                    <li>Установить внешний хост (Raspberry Pi, Orange Pi) для разгрузки встроенного железа.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Стоковая прошивка оптимизирована под железо FF 5M, но имеет ограниченные настройки.</li>
+                                                        <li>Для KlipperMod всегда используйте версию Lite, если не нужен GUI.</li>
+                                                        <li>Переполнение памяти (Move Queue Overflow, E0017) возникает при печати сложных моделей из-за нехватки оперативной памяти (128 МБ на стоке).</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Калибровка стола и некорректная работа BED_MESH</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Ошибки вида "Malformed command 'BED_MESH_CALIBRATE'" или неравномерная укладка первого слоя.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Проверить конфигурацию в printer.cfg (например, секцию [screws_tilt_adjust]).</li>
+                                                    <li>Использовать утилиту SCREWS_TILT_CALCULATE для ручной регулировки винтов стола.</li>
+                                                    <li>Для KlipperMod: добавить больше точек съёмки сетки (например, 7x7 вместо 5x5).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>На стоковой прошивке съёмка идёт по 25 точкам, но данные могут быть интерполированы.</li>
+                                                        <li>Механические проблемы (перекос ремней, люфты) могут имитировать ошибки калибровки.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Orca Slicer подсекция -->
+                                    <h3 id="software-orca">Orca Slicer</h3>
+                                    <div class="subcategory">
+                                        <div class="faq-item">
+                                            <div class="faq-question">Несовместимость с Orca Slicer</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Orca Slicer не отправляет файлы на печать или некорректно передает параметры (температура, скорость).</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>В настройках принтера в Orca Slicer указать:
+                                                        <ul>
+                                                            <li>Host Type: Octo/Klipper.</li>
+                                                            <li>Hostname: IP_принтера:7125.</li>
+                                                            <li>Device UI: IP_принтера:4000 (для Mainsail) или 4001 (для Fluidd).</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Проверить кодировку файлов (избегать кириллицы в именах).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Проблема актуальна только для KlipperMod. Стоковая прошивка работает через FlashPrint.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Ошибки при передаче файлов через Orca Slicer</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Пользователи сталкиваются с ошибками при отправке файлов на печать через Orca Slicer по Wi-Fi (например, "ошибка при отправке на хост печати"). Файлы большого размера (более 5 МБ) часто не передаются, вызывая тайм-аут.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Использовать Orca-FlashForge (Orca FF) для отправки файлов через облако (менее подвержено ошибкам).</li>
+                                                    <li>Для больших файлов:
+                                                        <ul>
+                                                            <li>Записывать на USB-флешку.</li>
+                                                            <li>Использовать Moonraker или другие альтернативные методы передачи.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Проверить настройки сети: убедиться, что принтер и компьютер находятся в одной сети, перезагрузить роутер.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Orca Slicer не поддерживает управление принтером напрямую (только отправку файлов). Для управления требуется Orca FF или клиппермод.</li>
+                                                        <li>Проблемы с Wi-Fi могут быть вызваны помехами в сети (особенно в многоквартирных домах).</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Неточное определение времени печати в Orca Slicer</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Orca показывает время печати на 10–30% дольше, чем фактическое, особенно для сложных моделей.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Переустановить Orca Slicer (версии 2.1.1 стабильнее 2.2.0).</li>
+                                                    <li>Отключить "Арахне" (Arachne) для простых моделей.</li>
+                                                    <li>Проверить настройки "малых периметров" (должны быть включены для точного расчета).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Ошибка связана с алгоритмом расчета перемещений для мелких деталей.</li>
+                                                        <li>Разница во времени не влияет на качество печати.</li>
+                                                        <li>Актуальные версии Orca Slicer (2.1.1) стабильнее новейших бета-релизов.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Сложности с добавлением профилей материалов в Orca Slicer</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Пользователи не могут добавить профили для ABS или других материалов. Готовые профили из чатов или сайтов не импортируются.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li><strong>Ручное создание профиля:</strong>
+                                                        <ul>
+                                                            <li>Скопировать настройки из Generic PLA/PETG и изменить температуру, скорость и другие параметры.</li>
+                                                            <li>Для ABS: температура сопла 240–260°C, стол 100–110°C.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><strong>Импорт профилей:</strong>
+                                                        <ul>
+                                                            <li>Убедиться, что файл профиля имеет правильный формат (обычно .json или .ini).</li>
+                                                            <li>Проверить, что Orca Slicer поддерживает версию профиля (для Orca FF используются старые форматы).</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Orca FF основана на более старой версии Orca Slicer, поэтому некоторые функции могут отсутствовать.</li>
+                                                        <li>Проблемы с локализацией: в русской версии Orca FF часть текста может отображаться как "????".</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Отсутствие русского языка в Orca-Flashforge</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Интерфейс Orca-Flashforge частично или полностью не переведен.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Скачать русификатор из сообщества (файлы .mo).</li>
+                                                    <li>Вручную заменить файл локализации в папке resources/localization.</li>
+                                                    <li>Проверить настройки конфигурационного файла (должно быть ru-RU).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Проблема характерна для неофициальных сборок Orca-Flashforge.</li>
+                                                        <li>В некоторых версиях русский язык включен по умолчанию, но требует ручной активации в настройках.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Прошивка подсекция -->
+                                    <h3 id="software-firmware">Прошивка</h3>
+                                    <div class="subcategory">
+                                        <div class="faq-item">
+                                            <div class="faq-question">Ошибка E0017 (Z-Hope, переполнение буфера)</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Ошибка связана с переполнением буфера при передаче G-кода, особенно при использовании Orca Slicer.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Изменить разрешение при слайсинге в Orca-Flashforge: 0.024 или 0.048.</li>
+                                                    <li>Отключить аппроксимацию дугами (G2/G3) в настройках слайсера:
+                                                        <ul>
+                                                            <li>Профиль процесса → Аппроксимация дугами → Убрать галочку.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Использовать билды Orca Slicer с увеличенными таймаутами (например, версии 2.2.0).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Проблема чаще возникает при печати сложных моделей с высоким разрешением.</li>
+                                                        <li>Поддержка Flashforge рекомендует изменение разрешения как основной способ решения.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Навязчивые обновления прошивки</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Принтер постоянно запрашивает обновления прошивки, что мешает работе, особенно при использовании камеры и интернета.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Блокировка адреса обновления: Закрыть доступ к https://update.sz3dp.com:10443 через роутер.</li>
+                                                    <li>Отключение облачных сервисов: Использовать режим "LAN only" или настройки в документации Z-MOD для отключения облачных сервисов.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Блокировка адреса не влияет на основные функции принтера, но предотвращает автоматические обновления.</li>
+                                                        <li>Режим "LAN only" может ограничить некоторые функции, зависящие от облачных сервисов.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Ошибка E0011 (перезагрузка во время печати)</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Принтер перезагружается во время печати, особенно на больших моделях.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Проверка нагревателя и сопла: Заменить сопло или проверить сопротивление нагревателя.</li>
+                                                    <li>Откат прошивки: Установить более стабильную версию прошивки (например, 3.1.4 вместо 3.1.5).</li>
+                                                    <li>Увеличение ОЗУ: Убедиться, что свободной памяти достаточно (минимум 20 МБ).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Ошибка может быть вызвана как аппаратными (неисправный нагреватель), так и программными (нехватка памяти) проблемами.</li>
+                                                        <li>Версия прошивки 3.1.5 известна проблемами с E0011.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Неподключение Orca Slicer по Wi-Fi</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Orca Slicer не обнаруживает принтер в сети или выдает ошибки при передаче файлов.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Перезагрузить принтер и роутер, проверить IP-адрес вручную.</li>
+                                                    <li>Добавить IP-адрес роутера в настройках Orca (помимо IP принтера).</li>
+                                                    <li>Обновить прошивку принтера и проверить совместимость с версией Orca.</li>
+                                                    <li>Использовать облачное подключение через Flashmaker (сканирование QR-кода с экрана принтера).</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Проблема может возникать после обновления прошивки принтера.</li>
+                                                        <li>Большие файлы (>20 МБ) часто вызывают ошибки передачи — рекомендуется разбивать модели или использовать USB.</li>
+                                                        <li>При проблемах с Wi-Fi на KlipperMod создавайте гостевую сеть без спецсимволов в пароле.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Невозможность сброса до заводских настроек</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> При попытке сбросить настройки через Factory-прошивку изменения не применяются.</p>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Использование UART-адаптера: Подключиться к принтеру через UART (3.3В) и выполнить сброс вручную.</li>
+                                                    <li>Восстановление через FEL: Использовать режим FEL для загрузки дампа прошивки.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Для UART-подключения требуется адаптер с уровнем 3.3В (5В может повредить плату).</li>
+                                                        <li>Восстановление через FEL требует дампа прошивки, который можно запросить у сообщества.</li>
+                                                        <li>Перед изменением конфигов делайте бэкап через SAVE_CONFIG.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                        
+                                <!-- ДАТЧИКИ СЕКЦИЯ -->
+                                <section id="sensors" class="faq-section">
+                                    <h2>Датчики</h2>
+                                    
+                                    <!-- Термистор подсекция -->
+                                    <h3 id="sensors-thermistor">Термистор</h3>
+                                    <div class="subcategory">
+                                        <div class="faq-item">
+                                            <div class="faq-question">Термистор показывает некорректную температуру или скачет</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Температура на экране принтера скачет, показывает нереалистичные значения (например, -70°C или 5000°C), либо нестабильна.</p>
+                                                
+                                                <p><strong>Причины:</strong></p>
+                                                <ul>
+                                                    <li>Плохой контакт термистора в разъеме или на плате.</li>
+                                                    <li>Повреждение проводов термистора (обрыв или КЗ).</li>
+                                                    <li>Неправильное расположение термистора (например, слишком близко к нагревателю).</li>
+                                                    <li>Использование некачественного или несовместимого термистора.</li>
+                                                </ul>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Проверить и переподключить контакты термистора, зачистить или подпаять провода.</li>
+                                                    <li>Заменить термистор на совместимый (например, PT1000 или GT104).</li>
+                                                    <li>Убедиться, что термистор правильно установлен и не касается нагревателя.</li>
+                                                    <li>Добавить термопасту или гильзу для улучшения теплопередачи.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Для замены термистора может потребоваться калибровка PID.</li>
+                                                        <li>Некоторые термисторы (например, PT1000) более стабильны при высоких температурах.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Ошибки E0011 или E0015 (потеря связи с хостом или неисправность термистора)</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Принтер выдает ошибки, связанные с термистором, и останавливает печать.</p>
+                                                
+                                                <p><strong>Причины:</strong></p>
+                                                <ul>
+                                                    <li>Обрыв или КЗ в цепи термистора.</li>
+                                                    <li>Проблемы с кабелем или шлейфом головы.</li>
+                                                    <li>Неисправность платы управления.</li>
+                                                </ul>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Прозвонить цепь термистора мультиметром.</li>
+                                                    <li>Проверить шлейфы и разъемы на предмет повреждений.</li>
+                                                    <li>Заменить термистор или плату головы при необходимости.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Ошибка E0011 может быть вызвана не только термистором, но и другими проблемами (например, скачками напряжения).</li>
+                                                        <li>Для диагностики полезно использовать инженерное меню принтера.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Термистор выходит из строя при высоких температурах</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Термистор перестает работать после длительного использования при температурах выше 300°C.</p>
+                                                
+                                                <p><strong>Причины:</strong></p>
+                                                <ul>
+                                                    <li>Низкое качество термистора (например, 3950-й тип не рассчитан на длительный нагрев).</li>
+                                                    <li>Перегрев из-за неправильной установки или отсутствия термопасты.</li>
+                                                </ul>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Заменить термистор на более термостойкий (например, PT1000).</li>
+                                                    <li>Установить гильзу для термистора.</li>
+                                                    <li>Убедиться, что термопаста нанесена равномерно.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>Для высокотемпературной печати рекомендуется использовать специализированные термисторы.</li>
+                                                        <li>При замене термистора может потребоваться обновление прошивки.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Плохой контакт термистора в хотенде</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Температура скачет из-за ненадежного крепления термистора в хотенде.</p>
+                                                
+                                                <p><strong>Причины:</strong></p>
+                                                <ul>
+                                                    <li>Ослабление крепления термистора.</li>
+                                                    <li>Отсутствие термопасты или ее высыхание.</li>
+                                                </ul>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Разобрать хотенд, проверить контакт термистора и подтянуть крепление.</li>
+                                                    <li>Нанести свежую термопасту.</li>
+                                                    <li>Использовать гильзу для фиксации термистора.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>При разборке хотенда важно не повредить термобарьер.</li>
+                                                        <li>Гильза 3 мм — оптимальный вариант для надежной фиксации.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="faq-item">
+                                            <div class="faq-question">Термистор показывает заниженную температуру</div>
+                                            <div class="faq-answer">
+                                                <p><strong>Описание:</strong> Принтер не достигает заданной температуры или греет медленнее обычного.</p>
+                                                
+                                                <p><strong>Причины:</strong></p>
+                                                <ul>
+                                                    <li>Термистор плохо передает тепло из-за недостатка термопасты.</li>
+                                                    <li>Неправильная калибровка термистора.</li>
+                                                </ul>
+                                                
+                                                <p><strong>Решения:</strong></p>
+                                                <ul>
+                                                    <li>Проверить количество и качество термопасты.</li>
+                                                    <li>Выполнить PID-калибровку.</li>
+                                                    <li>Заменить термистор, если проблема не устраняется.</li>
+                                                </ul>
+                                                
+                                                <div class="tech-details">
+                                                    <h4>Технические нюансы:</h4>
+                                                    <ul>
+                                                        <li>PID-калибровка должна выполняться после замены термистора или нагревателя.</li>
+                                                        <li>Для точных измерений рекомендуется использовать внешний термометр.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </main>
+                        
+                            <div class="back-to-top" id="backToTop">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        
+                            <footer>
+                                <div class="container">
+                                    <ul class="footer-links">
+                                        <li><a href="#soplemod">Соплемод</a></li>
+                                        <li><a href="#nozzle">Сопла</a></li>
+                                        <li><a href="#extruder">Экструдер</a></li>
+                                        <li><a href="#bed">Стол</a></li>
+                                        <li><a href="#plastics">Пластики</a></li>
+                                        <li><a href="#mechanics">Механика</a></li>
+                                        <li><a href="#software">ПО и прошивка</a></li>
+                                    </ul>
+                                    <div class="copyright">
+                                        &copy; 2025 FlashForge 5M База знаний | Создано сообществом пользователей
+                                    </div>
+                                </div>
+                            </footer>
+                        
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+    // FAQ accordion functionality
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            // Check if this item is already active
+            const isActive = item.classList.contains('active');
+            
+            // First, close all items
+            faqItems.forEach(faqItem => {
+                faqItem.classList.remove('active');
+            });
+            
+            // Then, if the clicked item wasn't already active, open it
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            let foundMatches = 0;
+            
+            // If search term is empty, show all items and reset everything
+            if (searchTerm.trim() === '') {
+                faqItems.forEach(item => {
+                    item.style.display = 'block';
+                    item.classList.remove('active');
+                    
+                    // Remove any highlighting
+                    const question = item.querySelector('.faq-question');
+                    if (question) {
+                        question.innerHTML = question.innerHTML.replace(/<span class="highlighted">(.*?)<\/span>/g, '$1');
+                    }
+                    
+                    const answer = item.querySelector('.faq-answer');
+                    if (answer) {
+                        answer.innerHTML = answer.innerHTML.replace(/<span class="highlighted">(.*?)<\/span>/g, '$1');
+                    }
+                });
+                
+                // Hide no results message
+                const noResultsMessage = document.getElementById('noResultsMessage');
+                if (noResultsMessage) {
+                    noResultsMessage.style.display = 'none';
+                }
+                
+                // Hide search results counter
+                const searchResultsDiv = document.getElementById('searchResults');
+                if (searchResultsDiv) {
+                    searchResultsDiv.style.display = 'none';
+                }
+                
+                return;
+            }
+            
+            // Search in questions and answers
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                if (!question || !answer) return;
+                
+                const questionText = question.textContent.toLowerCase();
+                const answerText = answer.textContent.toLowerCase();
+                
+                // If search term is found in question or answer, show the item
+                if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    item.classList.add('active'); // Expand the item
+                    foundMatches++;
+                    
+                    try {
+                        // Safely escape special characters in search term
+                        const safeSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        const regex = new RegExp(safeSearchTerm, 'gi');
+                        
+                        // Highlight the search term in question
+                        let questionHTML = question.innerHTML;
+                        questionHTML = questionHTML.replace(/<span class="highlighted">(.*?)<\/span>/g, '$1');
+                        questionHTML = questionHTML.replace(regex, match => `<span class="highlighted">${match}</span>`);
+                        question.innerHTML = questionHTML;
+                        
+                        // Highlight the search term in answer
+                        let answerHTML = answer.innerHTML;
+                        answerHTML = answerHTML.replace(/<span class="highlighted">(.*?)<\/span>/g, '$1');
+                        answerHTML = answerHTML.replace(regex, match => `<span class="highlighted">${match}</span>`);
+                        answer.innerHTML = answerHTML;
+                    } catch (error) {
+                        console.error('Ошибка при подсветке: ', error);
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Update search results counter
+            const searchResultsDiv = document.getElementById('searchResults');
+            const resultsCountSpan = document.getElementById('resultsCount');
+            
+            if (searchResultsDiv && resultsCountSpan) {
+                searchResultsDiv.style.display = 'block';
+                resultsCountSpan.textContent = foundMatches;
+            }
+            
+            // Show no results message if needed
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            if (noResultsMessage) {
+                if (foundMatches > 0) {
+                    noResultsMessage.style.display = 'none';
+                } else {
+                    noResultsMessage.style.display = 'block';
+                }
+            }
+        });
+    }
+    
+    // Back to top button
+    const backToTopButton = document.getElementById('backToTop');
+    
+    if (backToTopButton) {
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        // Scroll to top when button is clicked
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70, // Offset for header
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+                            </script>
+                        </body>
+                        </html>
+                        
