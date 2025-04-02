@@ -1,113 +1,8 @@
 // ========== КОНФИГУРАЦИЯ ==========
 const config = {
     itemsPerPage: 12,      // Количество карточек на странице
-    visiblePageLinks: 5    // Видимых номеров страниц в пагинации
-};
-
-// ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
-let allFilaments = [];       // Все филаменты из JSON
-let filteredFilaments = [];  // Отфильтрованные филаменты
-let paginatedFilaments = []; // Филаменты для текущей страницы
-let currentPage = 1;         // Текущая страница
-let totalPages = 1;          // Всего страниц
-
-// ========== ИНИЦИАЛИЗАЦИЯ ==========
-document.addEventListener('DOMContentLoaded', async () => {
-    await loadData();
-    setupEventListeners();
-    renderFilters();
-    applyFilters();
-});
-
-// ========== ЗАГРУЗКА ДАННЫХ ==========
-async function loadData() {
-    try {
-        const response = await fetch('data/filaments.json');
-        if (!response.ok) throw new Error('Ошибка загрузки');
-        const data = await response.json();
-        allFilaments = data.filaments.map(filament => ({
-            ...filament,
-            // Добавляем обязательные поля, если их нет
-            name: filament.name || filament.manufacturer || 'Без названия',
-            type: filament.type || 'PLA', // Укажите тип по умолчанию
-            rating: filament.rating || Math.round((Math.random() * 2 + 3) * 10) / 10,
-            price: filament.price || Math.round(Math.random() * 2000 + 500),
-            spoolWeight: filament.weight_g || null,
-            diameter: filament.diameter_mm || null,
-            spoolDiameter: filament.diameter_mm || null,
-            spoolWidth: filament.width_mm || null,
-            spoolInnerDiameter: filament.inner_diameter_mm || null,
-            filamentDiameter: filament.filament_diameter_mm || null
-        }));
-        
-        // После загрузки данных применяем фильтры
-        applyFilters();
-    } catch (error) {
-        console.error('Ошибка загрузки данных:', error);
-        showError('Не удалось загрузить данные. Попробуйте позже.');
-    }
-}
-
-// ========== ФИЛЬТРАЦИЯ И СОРТИРОВКА ==========
-function applyFilters() {
-    // Получаем выбранные фильтры
-    const materialFilters = getSelectedValues('material');
-    const manufacturerFilters = getSelectedValues('manufacturer');
-    const weightFilters = getSelectedValues('weight');
-    const ratingFilter = getRatingFilter();
-    const searchQuery = document.getElementById('search-input').value.toLowerCase();
-    const sortBy = document.getElementById('sort-select').value;
-
-    // Фильтрация
-    filteredFilaments = allFilaments.filter(filament => {
-        // Проверка поискового запроса
-        const matchesSearch = searchQuery === '' || 
-            (filament.name && filament.name.toLowerCase().includes(searchQuery)) || 
-            (filament.manufacturer && filament.manufacturer.toLowerCase().includes(searchQuery));
-        
-        // Проверка фильтров материала
-        const matchesMaterial = materialFilters.length === 0 || 
-            materialFilters.includes('all') || 
-            (filament.type && materialFilters.includes(filament.type));
-        
-        // Проверка фильтров производителя
-        const matchesManufacturer = manufacturerFilters.length === 0 || 
-            manufacturerFilters.includes('all') || 
-            (filament.manufacturer && manufacturerFilters.includes(filament.manufacturer));
-        
-        // Проверка фильтров веса
-        const matchesWeight = weightFilters.length === 0 || 
-            weightFilters.includes('all') || 
-            (filament.weight && checkWeightFilter(filament.weight, weightFilters));
-        
-        // Проверка рейтинга
-        const matchesRating = ratingFilter === 0 || 
-            (filament.rating && filament.rating >= ratingFilter);
-        
-        return matchesSearch && matchesMaterial && matchesManufacturer && matchesWeight && matchesRating;
-    });
-
-    // Сортировка
-    sortFilaments(sortBy);
-
-    // Пагинация
-    currentPage = 1;
-    updatePagination();
-    renderFilaments();
-}
-
-// Проверка фильтра веса
-function checkWeightFilter(weight, filters) {
-    return filters.some(filter => {
-        switch(filter) {
-            case '0.5': return weight === 500;
-            case '0.75': return weight === 750;
-            case '1': return weight === 1000;
-            case '2': return weight >= 2000;
-            default: return false;
-        }
-    });
-}
+    visiblePageLinks: 5,   // Видимых номеров страниц в пагинации
+    storageKey: 'filaments_reviews' // Ключ для хранения отзывов в localStorage
 
 // Получение фильтра рейтинга
 function getRatingFilter() {
@@ -260,17 +155,17 @@ function generateFilamentCard(filament) {
                 <li>
                     <i class="fas fa-weight-hanging"></i>
                     <span>Вес филамента:</span>
-                    <span class="specs-value">${filament.weight ? filament.weight + 'г' : '-'}</span>
+                    <span class="specs-value">${filament.weight ? filament.weight : '-'}</span>
                 </li>
                 <li>
                     <i class="fas fa-ruler-combined"></i>
-                    <span>Диаметр:</span>
-                    <span class="specs-value">${filament.diameter ? filament.diameter + 'мм' : '-'}</span>
+                    <span>Диаметр катушки:</span>
+                    <span class="specs-value">${filament.diameter_mm ? filament.diameter_mm + 'мм' : '-'}</span>
                 </li>
                 <li>
                     <i class="fas fa-circle-notch"></i>
-                    <span>Катушка:</span>
-                    <span class="specs-value">${filament.spoolWeight ? filament.spoolWeight + 'г' : '-'}</span>
+                    <span>Толщина нити:</span>
+                    <span class="specs-value">1.75мм</span>
                 </li>
                 <li>
                     <i class="fas fa-star"></i>
@@ -284,12 +179,14 @@ function generateFilamentCard(filament) {
                 </li>
             </ul>
             <div class="profiles-section">
-                <h4>Профили печати:</h4>
-                <div class="profiles-links">${profilesLinks}</div>
+                <h4>Где купить:</h4>
+                <div class="profiles-links">${marketplaceLinks}</div>
             </div>
         </div>
         <div class="card-footer">
-            <div class="marketplace-links">${marketplaceLinks}</div>
+            <button class="review-button" data-id="${filament.id}">
+                <i class="fas fa-comments"></i> Отзывы
+            </button>
             <button class="details-button" data-id="${filament.id}">
                 Подробнее <i class="fas fa-chevron-right"></i>
             </button>
@@ -353,6 +250,11 @@ function renderFilters() {
     const manufacturers = [...new Set(allFilaments.map(f => f.manufacturer).filter(Boolean))];
     const container = document.getElementById('manufacturers-filter');
     
+    // Очистка контейнера перед добавлением чекбоксов
+    while (container.children.length > 1) {
+        container.removeChild(container.lastChild);
+    }
+    
     manufacturers.forEach(manufacturer => {
         const checkbox = document.createElement('div');
         checkbox.className = 'checkbox-group';
@@ -375,6 +277,102 @@ function showError(message) {
             <p>${message}</p>
         </div>
     `;
+}
+
+// ========== ФУНКЦИИ РАБОТЫ С ОТЗЫВАМИ ==========
+// Загрузка отзывов из localStorage
+function loadReviews() {
+    const savedReviews = localStorage.getItem(config.storageKey);
+    if (savedReviews) {
+        reviews = JSON.parse(savedReviews);
+    }
+}
+
+// Сохранение отзывов в localStorage
+function saveReviews() {
+    localStorage.setItem(config.storageKey, JSON.stringify(reviews));
+}
+
+// Добавление нового отзыва
+function addReview(filamentId, author, rating, text) {
+    if (!reviews[filamentId]) {
+        reviews[filamentId] = [];
+    }
+    
+    const review = {
+        id: Date.now(), // Уникальный ID отзыва
+        author,
+        rating,
+        text,
+        date: new Date().toISOString()
+    };
+    
+    reviews[filamentId].push(review);
+    saveReviews();
+    
+    // Обновляем рейтинг филамента в списке
+    const filament = allFilaments.find(f => f.id === filamentId);
+    if (filament) {
+        filament.rating = calculateRating(filamentId);
+    }
+    
+    return review;
+}
+
+// Расчет среднего рейтинга по отзывам
+function calculateRating(filamentId) {
+    if (!reviews[filamentId] || reviews[filamentId].length === 0) {
+        return 0;
+    }
+    
+    const sum = reviews[filamentId].reduce((total, review) => total + review.rating, 0);
+    return Math.round((sum / reviews[filamentId].length) * 10) / 10;
+}
+
+// Получение всех отзывов для филамента
+function getFilamentReviews(filamentId) {
+    return reviews[filamentId] || [];
+}
+
+// Отрисовка отзывов
+function renderReviews(filamentId) {
+    const filamentReviews = getFilamentReviews(filamentId);
+    const reviewList = document.getElementById('review-list');
+    reviewList.innerHTML = '';
+    
+    if (filamentReviews.length === 0) {
+        reviewList.innerHTML = `
+            <div class="no-reviews">
+                <i class="fas fa-comment-slash"></i>
+                <p>Пока нет отзывов. Будьте первым!</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Сортировка отзывов от новых к старым
+    filamentReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    filamentReviews.forEach(review => {
+        const reviewItem = document.createElement('div');
+        reviewItem.className = 'review-item';
+        
+        const date = new Date(review.date);
+        const formattedDate = `${date.toLocaleDateString()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        
+        reviewItem.innerHTML = `
+            <div class="review-header">
+                <span class="review-author">${review.author}</span>
+                <span class="review-date">${formattedDate}</span>
+            </div>
+            <div class="review-rating">
+                ${generateRatingStars(review.rating)}
+            </div>
+            <div class="review-text">${review.text}</div>
+        `;
+        
+        reviewList.appendChild(reviewItem);
+    });
 }
 
 // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
@@ -409,88 +407,23 @@ function setupEventListeners() {
         }
     });
     
-    // Модальное окно
+    // Кнопки отзывов и подробностей
     document.addEventListener('click', (e) => {
         if (e.target.closest('.details-button')) {
             const id = parseInt(e.target.closest('.details-button').dataset.id);
             openModal(id);
         }
         
+        if (e.target.closest('.review-button')) {
+            const id = parseInt(e.target.closest('.review-button').dataset.id);
+            openReviewsModal(id);
+        }
+        
         if (e.target.closest('.modal-close') || e.target.classList.contains('modal')) {
             closeModal();
+            closeReviewsModal();
         }
     });
-    
-    // Форма отзыва
-    const reviewBtn = document.getElementById('add-review-btn');
-    const reviewForm = document.getElementById('review-form');
-    
-    if (reviewBtn && reviewForm) {
-        reviewBtn.addEventListener('click', function() {
-            reviewForm.style.display = reviewForm.style.display === 'block' ? 'none' : 'block';
-        });
-    }
-    
-    // Рейтинг в форме
-    const ratingInput = document.getElementById('rating-input');
-    if (ratingInput) {
-        const stars = ratingInput.querySelectorAll('i');
-        let currentRating = 0;
-        
-        stars.forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = parseInt(this.getAttribute('data-rating'));
-                currentRating = rating;
-                
-                stars.forEach((s, index) => {
-                    if (index < rating) {
-                        s.classList.add('active');
-                    } else {
-                        s.classList.remove('active');
-                    }
-                });
-            });
-            
-            star.addEventListener('mouseover', function() {
-                const rating = parseInt(this.getAttribute('data-rating'));
-                
-                stars.forEach((s, index) => {
-                    if (index < rating) {
-                        s.classList.add('hover');
-                    } else {
-                        s.classList.remove('hover');
-                    }
-                });
-            });
-            
-            star.addEventListener('mouseout', function() {
-                stars.forEach(s => s.classList.remove('hover'));
-            });
-        });
-    }
-    
-    // Отправка отзыва
-    const submitBtn = document.getElementById('submit-review-btn');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', function() {
-            const author = document.getElementById('review-author').value;
-            const text = document.getElementById('review-text').value;
-            const rating = document.querySelectorAll('#rating-input i.active').length;
-            
-            if (!author || !text || rating === 0) {
-                alert('Пожалуйста, заполните все поля и поставьте оценку');
-                return;
-            }
-            
-            addNewReview(author, text, rating);
-            
-            // Очистка формы
-            document.getElementById('review-author').value = '';
-            document.getElementById('review-text').value = '';
-            document.querySelectorAll('#rating-input i').forEach(s => s.classList.remove('active'));
-            document.getElementById('review-form').style.display = 'none';
-        });
-    }
     
     // Кнопка "Наверх"
     const backToTop = document.getElementById('back-to-top');
@@ -538,7 +471,7 @@ function debounce(func, wait) {
     };
 }
 
-// ========== МОДАЛЬНОЕ ОКНО ==========
+// ========== МОДАЛЬНОЕ ОКНО ФИЛАМЕНТА ==========
 function openModal(id) {
     const filament = allFilaments.find(f => f.id === id);
     if (!filament) return;
@@ -557,31 +490,31 @@ function openModal(id) {
     const specsHtml = `
         <tr>
             <th>Вес филамента</th>
-            <td>${filament.weight ? filament.weight + 'г' : '-'}</td>
+            <td>${filament.weight || '-'}</td>
         </tr>
         <tr>
-            <th>Диаметр</th>
-            <td>${filament.diameter ? filament.diameter + 'мм' : '-'}</td>
+            <th>Диаметр нити</th>
+            <td>1.75мм</td>
         </tr>
         <tr>
             <th>Вес катушки</th>
-            <td>${filament.spoolWeight ? filament.spoolWeight + 'г' : '-'}</td>
+            <td>${filament.weight_g ? filament.weight_g + 'г' : '-'}</td>
         </tr>
         <tr>
             <th>Диаметр катушки</th>
-            <td>${filament.spoolDiameter ? filament.spoolDiameter + 'мм' : '-'}</td>
+            <td>${filament.diameter_mm ? filament.diameter_mm + 'мм' : '-'}</td>
         </tr>
         <tr>
             <th>Ширина катушки</th>
-            <td>${filament.spoolWidth ? filament.spoolWidth + 'мм' : '-'}</td>
+            <td>${filament.width_mm ? filament.width_mm + 'мм' : '-'}</td>
         </tr>
         <tr>
             <th>Внутренний диаметр</th>
-            <td>${filament.spoolInnerDiameter ? filament.spoolInnerDiameter + 'мм' : '-'}</td>
+            <td>${filament.inner_diameter_mm ? filament.inner_diameter_mm + 'мм' : '-'}</td>
         </tr>
         <tr>
-            <th>Диаметр филамента</th>
-            <td>${filament.filamentDiameter ? filament.filamentDiameter + 'мм' : '-'}</td>
+            <th>Диаметр области под филамент</th>
+            <td>${filament.filament_diameter_mm ? filament.filament_diameter_mm + 'мм' : '-'}</td>
         </tr>
         <tr>
             <th>Рейтинг</th>
@@ -595,16 +528,29 @@ function openModal(id) {
     
     document.getElementById('modal-specs').innerHTML = specsHtml;
     
-    // Заполнение профилей
-    const profilesHtml = filament.printProfiles && filament.printProfiles.length > 0 ? 
-        filament.printProfiles.map(p => `
+    // Заполнение профилей печати
+    const profilesHtml = `
+        <div class="printing-profiles">
             <div class="profile-item">
-                <a href="${p.url}" target="_blank" class="profile-link">
-                    <i class="fas fa-file-alt"></i> ${p.name}
-                </a>
-                ${p.temp ? `<span class="profile-temp">${p.temp}</span>` : ''}
+                <h4>Настройки для PrusaSlicer</h4>
+                <ul>
+                    <li>Температура печати: ${filament.type === 'PLA' ? '190-210°C' : filament.type === 'PETG' ? '230-250°C' : filament.type === 'ABS' ? '230-250°C' : '200-230°C'}</li>
+                    <li>Температура стола: ${filament.type === 'PLA' ? '50-60°C' : filament.type === 'PETG' ? '70-90°C' : filament.type === 'ABS' ? '90-110°C' : '60-80°C'}</li>
+                    <li>Скорость печати: 40-60 мм/с</li>
+                    <li>Охлаждение: ${filament.type === 'ABS' ? 'Отключено или 0-20%' : '80-100%'}</li>
+                </ul>
             </div>
-        `).join('') : '<p>Нет доступных профилей</p>';
+            <div class="profile-item">
+                <h4>Настройки для Cura</h4>
+                <ul>
+                    <li>Температура печати: ${filament.type === 'PLA' ? '195-215°C' : filament.type === 'PETG' ? '235-255°C' : filament.type === 'ABS' ? '235-255°C' : '205-235°C'}</li>
+                    <li>Температура стола: ${filament.type === 'PLA' ? '55-65°C' : filament.type === 'PETG' ? '75-95°C' : filament.type === 'ABS' ? '95-115°C' : '65-85°C'}</li>
+                    <li>Скорость печати: 40-60 мм/с</li>
+                    <li>Охлаждение: ${filament.type === 'ABS' ? 'Отключено или 0-20%' : '80-100%'}</li>
+                </ul>
+            </div>
+        </div>
+    `;
     
     document.getElementById('modal-profiles').innerHTML = profilesHtml;
     
@@ -614,6 +560,7 @@ function openModal(id) {
             <a href="${link.url}" target="_blank" class="marketplace-link ${link.type}-link">
                 <i class="fas ${link.type === 'ozon' ? 'fa-shopping-cart' : 
                                 link.type === 'wildberries' ? 'fa-shopping-bag' : 
+                                link.type === 'ali' ? 'fa-truck' : 
                                 'fa-external-link-alt'}"></i> ${link.type === 'website' ? 'Сайт производителя' : link.type}
             </a>
         `).join('') : '<p>Нет доступных ссылок</p>';
@@ -622,34 +569,283 @@ function openModal(id) {
 }
 
 function closeModal() {
-    document.getElementById('filament-modal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const modal = document.getElementById('filament-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
-// ========== ОТЗЫВЫ ==========
-function addNewReview(author, text, rating) {
-    const reviewList = document.getElementById('review-list');
-    const noReviews = reviewList.querySelector('.no-reviews');
+// ========== МОДАЛЬНОЕ ОКНО ОТЗЫВОВ ==========
+function openReviewsModal(id) {
+    const filament = allFilaments.find(f => f.id === id);
+    if (!filament) return;
     
-    if (noReviews) {
-        noReviews.remove();
+    // Создаем модальное окно, если его нет
+    if (!document.getElementById('reviews-modal')) {
+        const modal = document.createElement('div');
+        modal.id = 'reviews-modal';
+        modal.className = 'modal';
+        
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" id="reviews-modal-title">
+                        <h2>Отзывы</h2>
+                        <p></p>
+                    </div>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="review-list" id="review-list">
+                        <!-- Здесь будут отзывы -->
+                    </div>
+                    
+                    <div class="review-form">
+                        <h3>Добавить отзыв</h3>
+                        <div class="form-group">
+                            <label for="review-author">Ваше имя:</label>
+                            <input type="text" id="review-author" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ваша оценка:</label>
+                            <div class="rating-input" id="rating-input">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="review-text">Ваш отзыв:</label>
+                            <textarea id="review-text" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="button" class="submit-review-btn" id="submit-review-btn" data-id="${id}">Отправить отзыв</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Добавляем обработчики событий для рейтинга
+        const ratingInput = modal.querySelector('#rating-input');
+        let currentRating = 0;
+        
+        ratingInput.querySelectorAll('i').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                currentRating = rating;
+                
+                ratingInput.querySelectorAll('i').forEach((s, index) => {
+                    if (index < rating) {
+                        s.className = 'fas fa-star';
+                    } else {
+                        s.className = 'far fa-star';
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseover', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                
+                ratingInput.querySelectorAll('i').forEach((s, index) => {
+                    if (index < rating) {
+                        s.className = 'fas fa-star hover';
+                    } else {
+                        s.className = 'far fa-star';
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseout', function() {
+                ratingInput.querySelectorAll('i').forEach((s, index) => {
+                    if (index < currentRating) {
+                        s.className = 'fas fa-star';
+                    } else {
+                        s.className = 'far fa-star';
+                    }
+                });
+            });
+        });
+        
+        // Обработчик нажатия на кнопку "Отправить отзыв"
+        modal.querySelector('#submit-review-btn').addEventListener('click', function() {
+            const filamentId = parseInt(this.getAttribute('data-id'));
+            const author = modal.querySelector('#review-author').value.trim();
+            const text = modal.querySelector('#review-text').value.trim();
+            const rating = currentRating;
+            
+            if (!author || !text || rating === 0) {
+                alert('Пожалуйста, заполните все поля и поставьте оценку');
+                return;
+            }
+            
+            // Добавляем отзыв
+            addReview(filamentId, author, rating, text);
+            
+            // Очищаем форму
+            modal.querySelector('#review-author').value = '';
+            modal.querySelector('#review-text').value = '';
+            currentRating = 0;
+            ratingInput.querySelectorAll('i').forEach(s => {
+                s.className = 'far fa-star';
+            });
+            
+            // Обновляем список отзывов
+            renderReviews(filamentId);
+            
+            // Обновляем рейтинг в карточке
+            applyFilters();
+        });
     }
     
-    const now = new Date();
-    const dateStr = now.toLocaleDateString('ru-RU') + ' ' + now.toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'});
+    // Обновляем заголовок
+    const modalTitle = document.querySelector('#reviews-modal-title');
+    modalTitle.querySelector('h2').textContent = `Отзывы: ${filament.name}`;
+    modalTitle.querySelector('p').textContent = `${filament.manufacturer} • ${filament.type}`;
     
-    const reviewItem = document.createElement('div');
-    reviewItem.className = 'review-item';
-    reviewItem.innerHTML = `
-        <div class="review-header">
-            <span class="review-author">${author}</span>
-            <span class="review-date">${dateStr}</span>
-        </div>
-        <div class="review-rating">
-            ${'<i class="fas fa-star"></i>'.repeat(rating)}${'<i class="far fa-star"></i>'.repeat(5 - rating)}
-        </div>
-        <div class="review-text">${text}</div>
-    `;
+    // Обновляем ID кнопки отправки
+    document.querySelector('#submit-review-btn').setAttribute('data-id', id);
     
-    reviewList.prepend(reviewItem);
+    // Отображаем отзывы
+    renderReviews(id);
+    
+    // Показываем модальное окно
+    const modal = document.getElementById('reviews-modal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
 }
+
+function closeReviewsModal() {
+    const modal = document.getElementById('reviews-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+};
+
+// ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+let allFilaments = [];       // Все филаменты из JSON
+let filteredFilaments = [];  // Отфильтрованные филаменты
+let paginatedFilaments = []; // Филаменты для текущей страницы
+let currentPage = 1;         // Текущая страница
+let totalPages = 1;          // Всего страниц
+let reviews = {};            // Объект для хранения отзывов по ID филамента
+
+// ========== ИНИЦИАЛИЗАЦИЯ ==========
+document.addEventListener('DOMContentLoaded', async () => {
+    // Загрузка отзывов из localStorage
+    loadReviews();
+    
+    await loadData();
+    setupEventListeners();
+    renderFilters();
+    applyFilters();
+});
+
+// ========== ЗАГРУЗКА ДАННЫХ ==========
+async function loadData() {
+    try {
+        const response = await fetch('data/filaments.json');
+        if (!response.ok) throw new Error('Ошибка загрузки');
+        const data = await response.json();
+        allFilaments = data.filaments.map(filament => ({
+            ...filament,
+            // Добавляем обязательные поля, если их нет
+            name: filament.name || filament.manufacturer || 'Без названия',
+            type: filament.type || 'PLA', // Укажите тип по умолчанию
+            rating: filament.rating || calculateRating(filament.id),  // Расчет рейтинга на основе отзывов
+            price: filament.price || Math.round(Math.random() * 2000 + 500),
+            spoolWeight: filament.weight_g || null,
+            diameter: filament.diameter_mm || null,
+            spoolDiameter: filament.diameter_mm || null,
+            spoolWidth: filament.width_mm || null,
+            spoolInnerDiameter: filament.inner_diameter_mm || null,
+            filamentDiameter: filament.filament_diameter_mm || null
+        }));
+        
+        // После загрузки данных применяем фильтры
+        applyFilters();
+    } catch (error) {
+        console.error('Ошибка загрузки данных:', error);
+        showError('Не удалось загрузить данные. Попробуйте позже.');
+    }
+}
+
+// ========== ФИЛЬТРАЦИЯ И СОРТИРОВКА ==========
+function applyFilters() {
+    // Получаем выбранные фильтры
+    const materialFilters = getSelectedValues('material');
+    const manufacturerFilters = getSelectedValues('manufacturer');
+    const weightFilters = getSelectedValues('weight');
+    const ratingFilter = getRatingFilter();
+    const searchQuery = document.getElementById('search-input').value.toLowerCase();
+    const sortBy = document.getElementById('sort-select').value;
+
+    // Фильтрация
+    filteredFilaments = allFilaments.filter(filament => {
+        // Проверка поискового запроса
+        const matchesSearch = searchQuery === '' || 
+            (filament.name && filament.name.toLowerCase().includes(searchQuery)) || 
+            (filament.manufacturer && filament.manufacturer.toLowerCase().includes(searchQuery));
+        
+        // Проверка фильтров материала
+        const matchesMaterial = materialFilters.length === 0 || 
+            materialFilters.includes('all') || 
+            (filament.type && materialFilters.includes(filament.type));
+        
+        // Проверка фильтров производителя
+        const matchesManufacturer = manufacturerFilters.length === 0 || 
+            manufacturerFilters.includes('all') || 
+            (filament.manufacturer && manufacturerFilters.includes(filament.manufacturer));
+        
+        // Проверка фильтров веса
+        const matchesWeight = weightFilters.length === 0 || 
+            weightFilters.includes('all') || 
+            (filament.weight && checkWeightFilter(filament.weight, weightFilters));
+        
+        // Проверка рейтинга
+        const matchesRating = ratingFilter === 0 || 
+            (filament.rating && filament.rating >= ratingFilter);
+        
+        return matchesSearch && matchesMaterial && matchesManufacturer && matchesWeight && matchesRating;
+    });
+
+    // Сортировка
+    sortFilaments(sortBy);
+
+    // Пагинация
+    currentPage = 1;
+    updatePagination();
+    renderFilaments();
+}
+
+// Проверка фильтра веса
+function checkWeightFilter(weight, filters) {
+    const weightNum = parseFloat(weight);
+    if (isNaN(weightNum)) {
+        // Если вес указан как строка (например, "750 г")
+        return filters.some(filter => {
+            switch(filter) {
+                case '0.5': return weight.includes('500');
+                case '0.75': return weight.includes('750');
+                case '1': return weight.includes('1000');
+                case '2': return weight.includes('2000') || weight.includes('2500');
+                default: return false;
+            }
+        });
+    }
+} else {
+        // Если вес указан как число
+        return filters.some(filter => {
+            switch(filter) {
+                case '0.5': return weightNum <= 500;
+                case '0.75': return weightNum > 500 && weightNum <= 750;
+                case '1': return weightNum > 750 && weightNum <= 1000;
+                case '2': return weightNum > 1000;
+                default: return false;
