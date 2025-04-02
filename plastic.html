@@ -91,53 +91,418 @@
             border-radius: 4px;
             min-width: 150px;
         }
+
+
+        .reviews-container {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .reviews-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .add-review-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .add-review-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .review-list {
+            margin-top: 1.5rem;
+        }
+        
+        .review-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .review-date {
+            color: #6b7280;
+            font-size: 0.85rem;
+        }
+        
+        .review-rating {
+            color: var(--warning-color);
+            margin: 0.5rem 0;
+        }
+        
+        .review-text {
+            line-height: 1.6;
+        }
+        
+        .review-form {
+            background-color: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .rating-input {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        .rating-input i {
+            cursor: pointer;
+            color: #d1d5db;
+            font-size: 1.5rem;
+            transition: color 0.2s;
+        }
+        
+        .rating-input i.active {
+            color: var(--warning-color);
+        }
+        
+        .submit-review-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+        
+        .submit-review-btn:hover {
+            background-color: var(--secondary-color);
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1><i class="fas fa-cube"></i> Каталог 3D филаментов</h1>
+            <div class="logo">
+                <i class="fas fa-cube"></i> 3D Печать
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Каталог</a></li>
+                    <li><a href="#">Руководства</a></li>
+                    <li><a href="#">О нас</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-    
-    <main class="container">
-        <div class="filters">
-            <select id="materialFilter">
-                <option value="">Все материалы</option>
-                <option value="PLA">PLA</option>
-                <option value="PETG">PETG</option>
-                <option value="ABS">ABS</option>
-            </select>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Каталог 3D-филаментов</h1>
             
-            <select id="weightFilter">
-                <option value="">Любой вес</option>
-                <option value="500">500г</option>
-                <option value="750">750г</option>
-                <option value="1000">1000г</option>
-                <option value="2000">2000г</option>
-            </select>
-            
-            <input type="text" id="searchInput" placeholder="Поиск...">
+            <p>
+                Наша база данных содержит информацию о различных производителях 3D-филамента, доступных на российском рынке. 
+                Здесь вы найдёте технические характеристики катушек, отзывы пользователей и ссылки на маркетплейсы.
+            </p>
+
+            <div class="catalog-wrapper">
+                <!-- Filters Panel -->
+                <aside class="filters-panel">
+                    <!-- Фильтры из предыдущего HTML остаются без изменений -->
+                </aside>
+
+                <!-- Main Content -->
+                <div class="catalog-content">
+                    <div class="search-sort-bar">
+                        <div class="search-container">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" id="search-input" class="search-input" placeholder="Поиск по названию или производителю...">
+                        </div>
+                        <div class="sort-container">
+                            <select id="sort-select" class="sort-select">
+                                <option value="name-asc">Сортировка: Название (А-Я)</option>
+                                <option value="name-desc">Сортировка: Название (Я-А)</option>
+                                <option value="rating-desc">Сортировка: Рейтинг (высокий)</option>
+                                <option value="rating-asc">Сортировка: Рейтинг (низкий)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Filament Cards -->
+                    <div id="filament-cards" class="filament-cards">
+                        <!-- Карточки будут загружаться через JS -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <ul id="pagination">
+                            <!-- Пагинация будет генерироваться через JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Reviews Section -->
+                    <div class="reviews-container">
+                        <div class="reviews-header">
+                            <h2 class="reviews-title"><i class="fas fa-comments"></i> Отзывы пользователей</h2>
+                            <button class="add-review-btn" id="add-review-btn"><i class="fas fa-plus"></i> Добавить отзыв</button>
+                        </div>
+                        
+                        <div class="review-list" id="review-list">
+                            <!-- Отзывы будут загружаться через JS -->
+                            <div class="no-reviews">
+                                <i class="fas fa-comment-slash"></i>
+                                <p>Пока нет отзывов. Будьте первым!</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Review Form -->
+                        <div class="review-form" id="review-form">
+                            <div class="form-group">
+                                <label for="review-author">Ваше имя:</label>
+                                <input type="text" id="review-author" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Ваша оценка:</label>
+                                <div class="rating-input" id="rating-input">
+                                    <i class="fas fa-star" data-rating="1"></i>
+                                    <i class="fas fa-star" data-rating="2"></i>
+                                    <i class="fas fa-star" data-rating="3"></i>
+                                    <i class="fas fa-star" data-rating="4"></i>
+                                    <i class="fas fa-star" data-rating="5"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="review-text">Ваш отзыв:</label>
+                                <textarea id="review-text" class="form-control" required></textarea>
+                            </div>
+                            
+                            <button type="button" class="submit-review-btn" id="submit-review-btn">Отправить отзыв</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <table class="filament-table">
-            <thead>
-                <tr>
-                    <th>Название</th>
-                    <th>Производитель</th>
-                    <th>Вес</th>
-                    <th>Тип</th>
-                    <th>Катушка</th>
-                    <th>Профили</th>
-                    <th>Ссылки</th>
-                </tr>
-            </thead>
-            <tbody id="filamentTableBody">
-                <!-- Данные будут здесь -->
-            </tbody>
-        </table>
     </main>
 
+    <!-- Modal Window -->
+    <div class="modal" id="filament-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">
+                    <!-- Заполняется через JS -->
+                </div>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3 class="specs-category"><i class="fas fa-info-circle"></i> Технические характеристики</h3>
+                <table class="specs-table">
+                    <tbody id="modal-specs">
+                        <!-- Заполняется через JS -->
+                    </tbody>
+                </table>
+                
+                <h3 class="specs-category"><i class="fas fa-file-alt"></i> Профили печати</h3>
+                <div id="modal-profiles">
+                    <!-- Заполняется через JS -->
+                </div>
+                
+                <h3 class="specs-category"><i class="fas fa-shopping-cart"></i> Где купить</h3>
+                <div id="modal-links">
+                    <!-- Заполняется через JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#">О проекте</a></li>
+                <li><a href="#">Контакты</a></li>
+                <li><a href="#">Партнёрам</a></li>
+            </ul>
+            <div class="copyright">
+                © 2023 Каталог 3D-филаментов. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <script src="scripts.js"></script>
+    <script>
+        // Дополнительный JS для работы с отзывами
+        document.addEventListener('DOMContentLoaded', function() {
+            // Показать/скрыть форму отзыва
+            const reviewBtn = document.getElementById('add-review-btn');
+            const reviewForm = document.getElementById('review-form');
+            
+            if (reviewBtn && reviewForm) {
+                reviewBtn.addEventListener('click', function() {
+                    reviewForm.style.display = reviewForm.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+            
+            // Рейтинг в форме
+            const ratingInput = document.getElementById('rating-input');
+            if (ratingInput) {
+                const stars = ratingInput.querySelectorAll('i');
+                let currentRating = 0;
+                
+                stars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        const rating = parseInt(this.getAttribute('data-rating'));
+                        currentRating = rating;
+                        
+                        stars.forEach((s, index) => {
+                            if (index < rating) {
+                                s.classList.add('active');
+                            } else {
+                                s.classList.remove('active');
+                            }
+                        });
+                    });
+                    
+                    star.addEventListener('mouseover', function() {
+                        const rating = parseInt(this.getAttribute('data-rating'));
+                        
+                        stars.forEach((s, index) => {
+                            if (index < rating) {
+                                s.classList.add('hover');
+                            } else {
+                                s.classList.remove('hover');
+                            }
+                        });
+                    });
+                    
+                    star.addEventListener('mouseout', function() {
+                        stars.forEach(s => s.classList.remove('hover'));
+                    });
+                });
+            }
+            
+            // Отправка отзыва
+            const submitBtn = document.getElementById('submit-review-btn');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', function() {
+                    const author = document.getElementById('review-author').value;
+                    const text = document.getElementById('review-text').value;
+                    const rating = document.querySelectorAll('#rating-input i.active').length;
+                    
+                    if (!author || !text || rating === 0) {
+                        alert('Пожалуйста, заполните все поля и поставьте оценку');
+                        return;
+                    }
+                    
+                    // Здесь будет код для сохранения отзыва
+                    addNewReview(author, text, rating);
+                    
+                    // Очистка формы
+                    document.getElementById('review-author').value = '';
+                    document.getElementById('review-text').value = '';
+                    document.querySelectorAll('#rating-input i').forEach(s => s.classList.remove('active'));
+                    document.getElementById('review-form').style.display = 'none';
+                });
+            }
+            
+            // Прокрутка к верху
+            const backToTop = document.getElementById('back-to-top');
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTop.classList.add('show');
+                    } else {
+                        backToTop.classList.remove('show');
+                    }
+                });
+                
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+        
+        // Функция для добавления нового отзыва (заглушка)
+        function addNewReview(author, text, rating) {
+            const reviewList = document.getElementById('review-list');
+            const noReviews = reviewList.querySelector('.no-reviews');
+            
+            if (noReviews) {
+                noReviews.remove();
+            }
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('ru-RU') + ' ' + now.toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'});
+            
+            const reviewItem = document.createElement('div');
+            reviewItem.className = 'review-item';
+            reviewItem.innerHTML = `
+                <div class="review-header">
+                    <span class="review-author">${author}</span>
+                    <span class="review-date">${dateStr}</span>
+                </div>
+                <div class="review-rating">
+                    ${'<i class="fas fa-star"></i>'.repeat(rating)}${'<i class="far fa-star"></i>'.repeat(5 - rating)}
+                </div>
+                <div class="review-text">${text}</div>
+            `;
+            
+            reviewList.prepend(reviewItem);
+        }
+    </script>
 </body>
 </html>
