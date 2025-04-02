@@ -647,6 +647,213 @@
             visibility: visible;
         }
         
+        /* Стили для модальных окон отзывов */
+        #reviews-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        #reviews-modal .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        #reviews-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #reviews-modal .modal-title h2 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        #reviews-modal .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        #reviews-modal .review-list {
+            margin-bottom: 30px;
+        }
+
+        #reviews-modal .review-item {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        #reviews-modal .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #reviews-modal .review-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        #reviews-modal .review-date {
+            color: #6b7280;
+            font-size: 0.85rem;
+        }
+
+        #reviews-modal .review-rating {
+            color: var(--warning-color);
+            margin: 10px 0;
+        }
+
+        #reviews-modal .review-text {
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        #reviews-modal .no-reviews {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+
+        #reviews-modal .no-reviews i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        #reviews-modal .review-form {
+            background-color: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: block;
+        }
+
+        #reviews-modal .review-form h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        #reviews-modal .form-group {
+            margin-bottom: 15px;
+        }
+
+        #reviews-modal .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        #reviews-modal .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        #reviews-modal textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        #reviews-modal .rating-input {
+            display: flex;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        #reviews-modal .rating-input i {
+            cursor: pointer;
+            color: #d1d5db;
+            font-size: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        #reviews-modal .rating-input i.fas {
+            color: var(--warning-color);
+        }
+
+        #reviews-modal .rating-input i.hover {
+            opacity: 0.8;
+        }
+
+        #reviews-modal .submit-review-btn {
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        #reviews-modal .submit-review-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Стили для карточек филаментов */
+        .filament-card .review-button {
+            padding: 8px 15px;
+            background: var(--gray);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .filament-card .review-button:hover {
+            background: var(--dark);
+        }
+
+        .printing-profiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .profile-item {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .profile-item h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .profile-item ul {
+            padding-left: 20px;
+        }
+
+        .profile-item li {
+            margin-bottom: 8px;
+        }
+        
         @media (max-width: 768px) {
             .catalog-wrapper {
                 flex-direction: column;
@@ -669,6 +876,16 @@
             .modal-content {
                 width: 95%;
                 padding: 20px;
+            }
+            
+            #reviews-modal .modal-content {
+                width: 95%;
+                margin: 3% auto;
+                padding: 15px;
+            }
+            
+            .printing-profiles {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -778,6 +995,8 @@
                             <option value="name-desc">Сортировка: Название (Я-А)</option>
                             <option value="rating-desc">Сортировка: Рейтинг (высокий)</option>
                             <option value="rating-asc">Сортировка: Рейтинг (низкий)</option>
+                            <option value="price-asc">Сортировка: Цена (низкая)</option>
+                            <option value="price-desc">Сортировка: Цена (высокая)</option>
                         </select>
                     </div>
                 </div>
@@ -797,53 +1016,11 @@
                         <!-- Пагинация будет генерироваться через JS -->
                     </ul>
                 </div>
-
-                <!-- Reviews Section -->
-                <div class="reviews-container">
-                    <div class="reviews-header">
-                        <h2 class="reviews-title"><i class="fas fa-comments"></i> Отзывы пользователей</h2>
-                        <button class="add-review-btn" id="add-review-btn"><i class="fas fa-plus"></i> Добавить отзыв</button>
-                    </div>
-                    
-                    <div class="review-list" id="review-list">
-                        <!-- Отзывы будут загружаться через JS -->
-                        <div class="no-reviews">
-                            <i class="fas fa-comment-slash"></i>
-                            <p>Пока нет отзывов. Будьте первым!</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Review Form -->
-                    <div class="review-form" id="review-form">
-                        <div class="form-group">
-                            <label for="review-author">Ваше имя:</label>
-                            <input type="text" id="review-author" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Ваша оценка:</label>
-                            <div class="rating-input" id="rating-input">
-                                <i class="fas fa-star" data-rating="1"></i>
-                                <i class="fas fa-star" data-rating="2"></i>
-                                <i class="fas fa-star" data-rating="3"></i>
-                                <i class="fas fa-star" data-rating="4"></i>
-                                <i class="fas fa-star" data-rating="5"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="review-text">Ваш отзыв:</label>
-                            <textarea id="review-text" class="form-control" required></textarea>
-                        </div>
-                        
-                        <button type="button" class="submit-review-btn" id="submit-review-btn">Отправить отзыв</button>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
 
-    <!-- Modal Window -->
+    <!-- Модальное окно с информацией о филаменте -->
     <div class="modal" id="filament-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -873,6 +1050,8 @@
         </div>
     </div>
 
+    <!-- Модальное окно отзывов будет создано динамически через JS -->
+
     <footer>
         <div class="container">
             <ul class="footer-links">
@@ -881,7 +1060,7 @@
                 <li><a href="#">Партнёрам</a></li>
             </ul>
             <div class="copyright">
-                © 2023 Каталог 3D-филаментов. Все права защищены.
+                © 2023-2025 Каталог 3D-филаментов. Все права защищены.
             </div>
         </div>
     </footer>
