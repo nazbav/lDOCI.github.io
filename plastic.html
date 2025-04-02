@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог 3D филаментов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            padding: 0 20px;
+        }
+        
+        /* Остальные стили из предыдущего кода */
+        .filament-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .filament-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .filament-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .filament-table tr:hover {
+            background: #f1f5f9;
+        }
+        
+        .store-link {
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 5px;
+            padding: 3px 8px;
+            background: #e0f2fe;
+            border-radius: 4px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        select, input {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            min-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-cube"></i> Каталог 3D филаментов</h1>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="filters">
+            <select id="materialFilter">
+                <option value="">Все материалы</option>
+                <option value="PLA">PLA</option>
+                <option value="PETG">PETG</option>
+                <option value="ABS">ABS</option>
+            </select>
+            
+            <select id="weightFilter">
+                <option value="">Любой вес</option>
+                <option value="500">500г</option>
+                <option value="750">750г</option>
+                <option value="1000">1000г</option>
+                <option value="2000">2000г</option>
+            </select>
+            
+            <input type="text" id="searchInput" placeholder="Поиск...">
+        </div>
+        
+        <table class="filament-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Производитель</th>
+                    <th>Вес</th>
+                    <th>Тип</th>
+                    <th>Катушка</th>
+                    <th>Профили</th>
+                    <th>Ссылки</th>
+                </tr>
+            </thead>
+            <tbody id="filamentTableBody">
+                <!-- Данные будут здесь -->
+            </tbody>
+        </table>
+    </main>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
