@@ -22,16 +22,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ========== ЗАГРУЗКА ДАННЫХ ==========
 async function loadData() {
     try {
-        const response = await fetch('/data/filaments.json');
+        const response = await fetch('data/filaments.json');
         if (!response.ok) throw new Error('Ошибка загрузки');
         const data = await response.json();
         allFilaments = data.filaments.map(filament => ({
             ...filament,
-            // Добавляем случайный рейтинг, если его нет в данных
+            // Добавляем обязательные поля, если их нет
+            name: filament.name || filament.manufacturer || 'Без названия',
+            type: filament.type || 'PLA', // Укажите тип по умолчанию
             rating: filament.rating || Math.round((Math.random() * 2 + 3) * 10) / 10,
-            // Добавляем случайную цену, если ее нет в данных
-            price: filament.price || Math.round(Math.random() * 2000 + 500)
+            price: filament.price || Math.round(Math.random() * 2000 + 500),
+            spoolWeight: filament.weight_g || null,
+            diameter: filament.diameter_mm || null,
+            spoolDiameter: filament.diameter_mm || null,
+            spoolWidth: filament.width_mm || null,
+            spoolInnerDiameter: filament.inner_diameter_mm || null,
+            filamentDiameter: filament.filament_diameter_mm || null
         }));
+        
+        // После загрузки данных применяем фильтры
+        applyFilters();
     } catch (error) {
         console.error('Ошибка загрузки данных:', error);
         showError('Не удалось загрузить данные. Попробуйте позже.');
