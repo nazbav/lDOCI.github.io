@@ -368,160 +368,6 @@
             color: var(--gray);
         }
         
-        .reviews-container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 30px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .reviews-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary);
-        }
-        
-        .reviews-title {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .reviews-title i {
-            margin-right: 10px;
-        }
-        
-        .add-review-btn {
-            padding: 8px 16px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .add-review-btn:hover {
-            background-color: var(--secondary);
-        }
-        
-        .add-review-btn i {
-            margin-right: 5px;
-        }
-        
-        .review-list {
-            margin-top: 20px;
-        }
-        
-        .review-item {
-            padding: 20px;
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 15px;
-        }
-        
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .review-author {
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .review-date {
-            color: #6b7280;
-            font-size: 0.85rem;
-        }
-        
-        .review-rating {
-            color: var(--warning-color);
-            margin: 10px 0;
-        }
-        
-        .review-text {
-            line-height: 1.6;
-        }
-        
-        .no-reviews {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--gray);
-        }
-        
-        .no-reviews i {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-        
-        .review-form {
-            background-color: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .rating-input {
-            display: flex;
-            gap: 5px;
-            margin: 10px 0;
-        }
-        
-        .rating-input i {
-            cursor: pointer;
-            color: #d1d5db;
-            font-size: 1.5rem;
-            transition: color 0.2s;
-        }
-        
-        .rating-input i.active {
-            color: var(--warning-color);
-        }
-        
-        .submit-review-btn {
-            padding: 10px 20px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.2s;
-        }
-        
-        .submit-review-btn:hover {
-            background-color: var(--secondary);
-        }
-        
         .modal {
             display: none;
             position: fixed;
@@ -568,6 +414,8 @@
         .specs-category {
             margin: 25px 0 15px;
             color: var(--primary);
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
         }
         
         .specs-category i {
@@ -590,8 +438,31 @@
             color: var(--gray);
         }
         
+        .printing-profiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
         .profile-item {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
             margin-bottom: 10px;
+        }
+        
+        .profile-item h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .profile-item ul {
+            padding-left: 20px;
+        }
+        
+        .profile-item li {
+            margin-bottom: 8px;
         }
         
         footer {
@@ -647,158 +518,131 @@
             visibility: visible;
         }
         
-        /* Стили для модальных окон отзывов */
-        #reviews-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            overflow-y: auto;
+        /* Стили для отзывов */
+        .reviews-section {
+            margin-top: 30px;
         }
-
-        #reviews-modal .modal-content {
-            background: white;
-            margin: 5% auto;
-            padding: 30px;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        #reviews-modal .modal-header {
+        
+        .reviews-title {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e2e8f0;
         }
-
-        #reviews-modal .modal-title h2 {
-            margin-bottom: 5px;
+        
+        .reviews-title i {
+            margin-right: 10px;
             color: var(--primary);
         }
-
-        #reviews-modal .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
+        
+        .review-list {
+            margin-bottom: 25px;
         }
-
-        #reviews-modal .review-list {
-            margin-bottom: 30px;
-        }
-
-        #reviews-modal .review-item {
+        
+        .review-item {
             background: #f9fafb;
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 15px;
         }
-
-        #reviews-modal .review-header {
+        
+        .review-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
-
-        #reviews-modal .review-author {
+        
+        .review-author {
             font-weight: 600;
             color: var(--primary);
         }
-
-        #reviews-modal .review-date {
+        
+        .review-date {
             color: #6b7280;
             font-size: 0.85rem;
         }
-
-        #reviews-modal .review-rating {
+        
+        .review-rating {
             color: var(--warning-color);
             margin: 10px 0;
         }
-
-        #reviews-modal .review-text {
+        
+        .review-text {
             line-height: 1.6;
             white-space: pre-line;
         }
-
-        #reviews-modal .no-reviews {
+        
+        .no-reviews {
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
             color: var(--gray);
+            background: #f9fafb;
+            border-radius: 8px;
         }
-
-        #reviews-modal .no-reviews i {
+        
+        .no-reviews i {
             font-size: 2rem;
             margin-bottom: 15px;
+            display: block;
         }
-
-        #reviews-modal .review-form {
+        
+        .review-form {
             background-color: #f9fafb;
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
-            display: block;
         }
-
-        #reviews-modal .review-form h3 {
+        
+        .review-form h3 {
             margin-bottom: 15px;
             color: var(--primary);
         }
-
-        #reviews-modal .form-group {
+        
+        .form-group {
             margin-bottom: 15px;
         }
-
-        #reviews-modal .form-group label {
+        
+        .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
         }
-
-        #reviews-modal .form-control {
+        
+        .form-control {
             width: 100%;
             padding: 10px;
             border: 1px solid #e5e7eb;
             border-radius: 4px;
             font-size: 1rem;
         }
-
-        #reviews-modal textarea.form-control {
+        
+        textarea.form-control {
             min-height: 120px;
             resize: vertical;
         }
-
-        #reviews-modal .rating-input {
+        
+        .rating-input {
             display: flex;
             gap: 5px;
             margin: 10px 0;
         }
-
-        #reviews-modal .rating-input i {
+        
+        .rating-input i {
             cursor: pointer;
             color: #d1d5db;
             font-size: 1.5rem;
             transition: color 0.2s;
         }
-
-        #reviews-modal .rating-input i.fas {
+        
+        .rating-input i.fas {
             color: var(--warning-color);
         }
-
-        #reviews-modal .rating-input i.hover {
+        
+        .rating-input i.hover {
             opacity: 0.8;
         }
-
-        #reviews-modal .submit-review-btn {
+        
+        .submit-review-btn {
             padding: 10px 20px;
             background-color: var(--primary);
             color: white;
@@ -808,50 +652,36 @@
             font-size: 1rem;
             transition: background-color 0.2s;
         }
-
-        #reviews-modal .submit-review-btn:hover {
+        
+        .submit-review-btn:hover {
             background-color: var(--secondary);
         }
-
-        /* Стили для карточек филаментов */
-        .filament-card .review-button {
-            padding: 8px 15px;
-            background: var(--gray);
-            color: white;
-            border: none;
-            border-radius: 4px;
+        
+        .modal-tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+        
+        .modal-tab {
+            padding: 10px 15px;
             cursor: pointer;
-            transition: background 0.3s;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
         }
-
-        .filament-card .review-button:hover {
-            background: var(--dark);
-        }
-
-        .printing-profiles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 15px;
-        }
-
-        .profile-item {
-            background: #f9fafb;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .profile-item h4 {
-            margin-bottom: 10px;
+        
+        .modal-tab.active {
+            border-bottom-color: var(--primary);
             color: var(--primary);
         }
-
-        .profile-item ul {
-            padding-left: 20px;
+        
+        .modal-tab-content {
+            display: none;
         }
-
-        .profile-item li {
-            margin-bottom: 8px;
+        
+        .modal-tab-content.active {
+            display: block;
         }
         
         @media (max-width: 768px) {
@@ -878,14 +708,12 @@
                 padding: 20px;
             }
             
-            #reviews-modal .modal-content {
-                width: 95%;
-                margin: 3% auto;
-                padding: 15px;
-            }
-            
             .printing-profiles {
                 grid-template-columns: 1fr;
+            }
+            
+            .modal-tabs {
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -1020,7 +848,7 @@
         </div>
     </main>
 
-    <!-- Модальное окно с информацией о филаменте -->
+    <!-- Модальное окно с информацией о филаменте с встроенными отзывами -->
     <div class="modal" id="filament-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1029,7 +857,11 @@
                 </div>
                 <button class="modal-close">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-tabs">
+                <div class="modal-tab active" data-tab="specs">Характеристики</div>
+                <div class="modal-tab" data-tab="reviews">Отзывы</div>
+            </div>
+            <div class="modal-tab-content active" id="tab-specs">
                 <h3 class="specs-category"><i class="fas fa-info-circle"></i> Технические характеристики</h3>
                 <table class="specs-table">
                     <tbody id="modal-specs">
@@ -1047,10 +879,44 @@
                     <!-- Заполняется через JS -->
                 </div>
             </div>
+            <div class="modal-tab-content" id="tab-reviews">
+                <div class="reviews-section">
+                    <h3 class="specs-category">
+                        <i class="fas fa-comments"></i> Отзывы пользователей
+                    </h3>
+                    <div class="review-list" id="review-list">
+                        <!-- Здесь будут отзывы -->
+                    </div>
+                    
+                    <div class="review-form">
+                        <h3>Добавить отзыв</h3>
+                        <div class="form-group">
+                            <label for="review-author">Ваше имя:</label>
+                            <input type="text" id="review-author" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ваша оценка:</label>
+                            <div class="rating-input" id="rating-input">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="review-text">Ваш отзыв:</label>
+                            <textarea id="review-text" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="button" class="submit-review-btn" id="submit-review-btn">Отправить отзыв</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- Модальное окно отзывов будет создано динамически через JS -->
 
     <footer>
         <div class="container">
