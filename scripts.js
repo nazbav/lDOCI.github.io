@@ -1,189 +1,487 @@
-// ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
-let filaments = []; // Все филаменты
-let filteredFilaments = []; // Отфильтрованные филаменты
-
-// ========== ЗАГРУЗКА ДАННЫХ ==========
-async function loadFilaments() {
+// ========== КОНФИГУРАЦИЯ ==========
+const config = {
+    itemsPerPage: 12,      // Количество карточек на странице
+    visiblePageLinks: 5    // Видимых номеров страниц в пагинации
+  };
+  
+  // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+  let allFilaments = [];       // Все филаменты из JSON
+  let filteredFilaments = [];  // Отфильтрованные филаменты
+  let paginatedFilaments = []; // Филаменты для текущей страницы
+  let currentPage = 1;         // Текущая страница
+  let totalPages = 1;          // Всего страниц
+  
+  // ========== ИНИЦИАЛИЗАЦИЯ ==========
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadData();
+    setupEventListeners();
+    renderFilters();
+    applyFilters();
+  });
+  
+  // ========== ЗАГРУЗКА ДАННЫХ ==========
+  async function loadData() {
     try {
-        const response = await fetch('data/filaments.json');
-        if (!response.ok) throw new Error('Ошибка загрузки данных');
-        const data = await response.json();
-        filaments = data.filaments;
-        filteredFilaments = [...filaments];
-        renderTable();
-        updateFilters();
+      const response = await fetch('data/filaments.json');
+      if (!response.ok) throw new Error('Ошибка загрузки');
+      const data = await response.json();
+      allFilaments = data.filaments;
     } catch (error) {
-        console.error('Ошибка:', error);
-        showError('Не удалось загрузить данные. Попробуйте позже.');
+      console.error('Ошибка загрузки данных:', error);
+      showError('Не удалось загрузить данные. Попробуйте позже.');
     }
-}
-
-// ========== ОТОБРАЖЕНИЕ ТАБЛИЦЫ ==========
-function renderTable() {
-    const tableBody = document.getElementById('filamentTableBody');
-    tableBody.innerHTML = '';
-
-    if (filteredFilaments.length === 0) {
-        tableBody.innerHTML = `
-            <tr>
-                <td colspan="7" class="no-results">
-                    <i class="fas fa-exclamation-circle"></i> Ничего не найдено
-                </td>
-            </tr>
-        `;
-        return;
-    }
-
-    filteredFilaments.forEach(filament => {
-        const row = document.createElement('tr');
-        
-        // Форматирование данных
-        const spoolInfo = filament.spoolWeight ? `${filament.spoolWeight}г` : '-';
-        const weightInfo = filament.weight ? `${filament.weight}г` : '-';
-        const profilesHtml = renderProfiles(filament.printProfiles);
-        const linksHtml = renderLinks(filament.links);
-
-        row.innerHTML = `
-            <td>${escapeHtml(filament.name) || '-'}</td>
-            <td>${escapeHtml(filament.manufacturer) || '-'}</td>
-            <td>${weightInfo}</td>
-            <td>${escapeHtml(filament.type) || '-'}</td>
-            <td>${spoolInfo}</td>
-            <td>${profilesHtml}</td>
-            <td>${linksHtml}</td>
-        `;
-
-        // Добавляем атрибуты для поиска
-        row.dataset.name = filament.name.toLowerCase();
-        row.dataset.manufacturer = filament.manufacturer ? filament.manufacturer.toLowerCase() : '';
-        row.dataset.type = filament.type.toLowerCase();
-        row.dataset.weight = filament.weight || '';
-
-        tableBody.appendChild(row);
+  }
+  
+  // ========== ФИЛЬТРАЦИЯ И СОРТИРОВКА ==========
+  function applyFilters() {
+    // Получаем выбранные фильтры
+    const materialFilters = getSelectedValues('material');
+    const manufacturerFilters = getSelectedValues('manufacturer');
+    const weightFilters = getSelectedValues('weight');
+    const ratingFilter = getRatingFilter();
+    const searchQuery = document.getElementById('search-input').value.toLowerCase();
+    const sortBy = document.getElementById('sort-select').value;
+  
+    // Фильтрация
+    filteredFilaments = allFilaments.filter(filament => {
+      // Проверка поискового запроса
+      const matchesSearch = searchQuery === '' || 
+        (filament.name && filament.name.toLowerCase().includes(searchQuery)) || 
+        (filament.manufacturer && filament.manufacturer.toLowerCase().includes(searchQuery));
+      
+      // Проверка фильтров материала
+      const matchesMaterial = materialFilters.length === 0 || 
+        materialFilters.includes('all') || 
+        (filament.type && materialFilters.includes(filament.type));
+      
+      // Проверка фильтров производителя
+      const matchesManufacturer = manufacturerFilters.length === 0 || 
+        manufacturerFilters.includes('all') || 
+        (filament.manufacturer && manufacturerFilters.includes(filament.manufacturer));
+      
+      // Проверка фильтров веса
+      const matchesWeight = weightFilters.length === 0 || 
+        weightFilters.includes('all') || 
+        (filament.weight && checkWeightFilter(filament.weight, weightFilters));
+      
+      // Проверка рейтинга
+      const matchesRating = ratingFilter === 0 || 
+        (filament.rating && filament.rating >= ratingFilter);
+      
+      return matchesSearch && matchesMaterial && matchesManufacturer && matchesWeight && matchesRating;
     });
-}
-
-// ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
-
-// Рендер профилей печати
-function renderProfiles(profiles) {
-    if (!profiles || profiles.length === 0) return '-';
+  
+    // Сортировка
+    sortFilaments(sortBy);
+  
+    // Пагинация
+    currentPage = 1;
+    updatePagination();
+    renderFilaments();
+  }
+  
+  // Проверка фильтра веса
+  function checkWeightFilter(weight, filters) {
+    return filters.some(filter => {
+      switch(filter) {
+        case '0.5': return weight === 500;
+        case '0.75': return weight === 750;
+        case '1': return weight === 1000;
+        case '2': return weight >= 2000;
+        default: return false;
+      }
+    });
+  }
+  
+  // Получение фильтра рейтинга
+  function getRatingFilter() {
+    const ratingCheckboxes = document.querySelectorAll('input[name="rating"]:checked');
+    for (const checkbox of ratingCheckboxes) {
+      if (checkbox.value !== 'all') return parseInt(checkbox.value);
+    }
+    return 0;
+  }
+  
+  // Сортировка филаментов
+  function sortFilaments(sortBy) {
+    filteredFilaments.sort((a, b) => {
+      switch(sortBy) {
+        case 'name-asc':
+          return (a.name || '').localeCompare(b.name || '');
+        case 'name-desc':
+          return (b.name || '').localeCompare(a.name || '');
+        case 'price-asc':
+          return (a.price || 0) - (b.price || 0);
+        case 'price-desc':
+          return (b.price || 0) - (a.price || 0);
+        case 'rating-asc':
+          return (a.rating || 0) - (b.rating || 0);
+        case 'rating-desc':
+          return (b.rating || 0) - (a.rating || 0);
+        default:
+          return 0;
+      }
+    });
+  }
+  
+  // ========== ПАГИНАЦИЯ ==========
+  function updatePagination() {
+    totalPages = Math.ceil(filteredFilaments.length / config.itemsPerPage);
+    currentPage = Math.min(currentPage, totalPages);
+    
+    // Получаем данные для текущей страницы
+    const startIndex = (currentPage - 1) * config.itemsPerPage;
+    const endIndex = startIndex + config.itemsPerPage;
+    paginatedFilaments = filteredFilaments.slice(startIndex, endIndex);
+    
+    renderPagination();
+  }
+  
+  function renderPagination() {
+    const paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';
+    
+    if (totalPages <= 1) return;
+    
+    // Кнопка "Назад"
+    const prevButton = document.createElement('li');
+    prevButton.className = 'pagination-item';
+    prevButton.innerHTML = `<a href="#" class="pagination-link ${currentPage === 1 ? 'disabled' : ''}" data-page="${currentPage - 1}">
+      <i class="fas fa-chevron-left"></i>
+    </a>`;
+    paginationContainer.appendChild(prevButton);
+    
+    // Первая страница
+    if (currentPage > Math.floor(config.visiblePageLinks/2) {
+      const firstPage = document.createElement('li');
+      firstPage.className = 'pagination-item';
+      firstPage.innerHTML = `<a href="#" class="pagination-link" data-page="1">1</a>`;
+      paginationContainer.appendChild(firstPage);
+      
+      if (currentPage > Math.floor(config.visiblePageLinks/2) {
+        const dots = document.createElement('li');
+        dots.className = 'pagination-item';
+        dots.innerHTML = '<span class="pagination-dots">...</span>';
+        paginationContainer.appendChild(dots);
+      }
+    }
+    
+    // Основные страницы
+    const startPage = Math.max(1, currentPage - Math.floor(config.visiblePageLinks/2));
+    const endPage = Math.min(totalPages, startPage + config.visiblePageLinks - 1);
+    
+    for (let i = startPage; i <= endPage; i++) {
+      const pageItem = document.createElement('li');
+      pageItem.className = 'pagination-item';
+      pageItem.innerHTML = `<a href="#" class="pagination-link ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>`;
+      paginationContainer.appendChild(pageItem);
+    }
+    
+    // Последняя страница
+    if (currentPage < totalPages - Math.floor(config.visiblePageLinks/2)) {
+      if (currentPage < totalPages - Math.floor(config.visiblePageLinks/2)) {
+        const dots = document.createElement('li');
+        dots.className = 'pagination-item';
+        dots.innerHTML = '<span class="pagination-dots">...</span>';
+        paginationContainer.appendChild(dots);
+      }
+      
+      const lastPage = document.createElement('li');
+      lastPage.className = 'pagination-item';
+      lastPage.innerHTML = `<a href="#" class="pagination-link" data-page="${totalPages}">${totalPages}</a>`;
+      paginationContainer.appendChild(lastPage);
+    }
+    
+    // Кнопка "Вперед"
+    const nextButton = document.createElement('li');
+    nextButton.className = 'pagination-item';
+    nextButton.innerHTML = `<a href="#" class="pagination-link ${currentPage === totalPages ? 'disabled' : ''}" data-page="${currentPage + 1}">
+      <i class="fas fa-chevron-right"></i>
+    </a>`;
+    paginationContainer.appendChild(nextButton);
+  }
+  
+  // ========== ОТОБРАЖЕНИЕ ДАННЫХ ==========
+  function renderFilaments() {
+    const container = document.getElementById('filament-cards');
+    container.innerHTML = '';
+    
+    if (paginatedFilaments.length === 0) {
+      container.innerHTML = `
+        <div class="no-results">
+          <i class="fas fa-exclamation-circle"></i>
+          <h3>Ничего не найдено</h3>
+          <p>Попробуйте изменить параметры поиска или фильтры</p>
+        </div>
+      `;
+      return;
+    }
+    
+    paginatedFilaments.forEach(filament => {
+      const card = document.createElement('div');
+      card.className = 'filament-card';
+      card.innerHTML = generateFilamentCard(filament);
+      container.appendChild(card);
+    });
+  }
+  
+  function generateFilamentCard(filament) {
+    const ratingStars = generateRatingStars(filament.rating || 0);
+    const profilesLinks = generateProfilesLinks(filament.printProfiles);
+    const marketplaceLinks = generateMarketplaceLinks(filament.links);
+    
+    return `
+      <div class="card-header">
+        <div class="card-title">
+          <h3>${filament.name || 'Без названия'}</h3>
+          <p>${filament.manufacturer || 'Производитель не указан'}</p>
+        </div>
+        <span class="card-material">${filament.type || '?'}</span>
+      </div>
+      <div class="card-body">
+        <ul class="specs-list">
+          <li>
+            <i class="fas fa-weight-hanging"></i>
+            <span>Вес филамента:</span>
+            <span class="specs-value">${filament.weight ? filament.weight + 'г' : '-'}</span>
+          </li>
+          <li>
+            <i class="fas fa-ruler-combined"></i>
+            <span>Диаметр:</span>
+            <span class="specs-value">${filament.diameter ? filament.diameter + 'мм' : '-'}</span>
+          </li>
+          <li>
+            <i class="fas fa-circle-notch"></i>
+            <span>Катушка:</span>
+            <span class="specs-value">${filament.spoolWeight ? filament.spoolWeight + 'г' : '-'}</span>
+          </li>
+        </ul>
+        <div class="profiles-section">
+          <h4>Профили печати:</h4>
+          <div class="profiles-links">${profilesLinks}</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="marketplace-links">${marketplaceLinks}</div>
+        <button class="details-button" data-id="${filament.id}">
+          Подробнее <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    `;
+  }
+  
+  // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
+  function generateRatingStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    let stars = '';
+    
+    for (let i = 0; i < 5; i++) {
+      if (i < fullStars) {
+        stars += '<i class="fas fa-star star"></i>';
+      } else if (i === fullStars && hasHalfStar) {
+        stars += '<i class="fas fa-star-half-alt star"></i>';
+      } else {
+        stars += '<i class="far fa-star star"></i>';
+      }
+    }
+    
+    return stars;
+  }
+  
+  function generateProfilesLinks(profiles) {
+    if (!profiles || profiles.length === 0) return '<span class="no-profiles">Нет профилей</span>';
     
     return profiles.map(profile => `
-        <a href="${profile.url}" 
-           target="_blank" 
-           class="print-profile"
-           title="Температура: ${profile.temp || 'не указана'}, Стол: ${profile.bed || 'не указан'}">
-            <i class="fas fa-file-alt"></i> ${escapeHtml(profile.name)}
-        </a>
-    `).join(' ');
-}
-
-// Рендер ссылок на магазины
-function renderLinks(links) {
-    if (!links || links.length === 0) return '-';
+      <a href="${profile.url}" target="_blank" class="profile-link">
+        <i class="fas fa-file-alt"></i> ${profile.name}
+      </a>
+    `).join('');
+  }
+  
+  function generateMarketplaceLinks(links) {
+    if (!links || links.length === 0) return '<span class="no-links">Нет ссылок</span>';
     
     return links.map(link => {
-        let icon = '';
-        switch(link.type) {
-            case 'ozon': icon = '<i class="fas fa-shopping-cart"></i>'; break;
-            case 'wildberries': icon = '<i class="fas fa-shopping-bag"></i>'; break;
-            case 'ali': icon = '<i class="fas fa-truck"></i>'; break;
-            default: icon = '<i class="fas fa-external-link-alt"></i>';
-        }
-        
-        return `
-            <a href="${link.url}" 
-               target="_blank" 
-               class="store-link ${link.type}"
-               title="${link.type.toUpperCase()}">
-                ${icon} ${link.type}
-            </a>
-        `;
-    }).join(' ');
-}
-
-// Экранирование HTML
-function escapeHtml(str) {
-    if (!str) return '';
-    return str.toString()
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
-
-// ========== ФИЛЬТРАЦИЯ И СОРТИРОВКА ==========
-function applyFilters() {
-    const material = document.getElementById('materialFilter').value;
-    const weight = document.getElementById('weightFilter').value;
-    const search = document.getElementById('searchInput').value.toLowerCase();
-
-    filteredFilaments = filaments.filter(filament => {
-        const matchesMaterial = !material || filament.type === material;
-        const matchesWeight = !weight || (filament.weight && filament.weight.toString() === weight);
-        const matchesSearch = !search || 
-            (filament.name && filament.name.toLowerCase().includes(search)) || 
-            (filament.manufacturer && filament.manufacturer.toLowerCase().includes(search));
-        
-        return matchesMaterial && matchesWeight && matchesSearch;
-    });
-
-    renderTable();
-}
-
-// Обновление фильтров
-function updateFilters() {
-    // Материалы
-    const materialFilter = document.getElementById('materialFilter');
-    const materials = [...new Set(filaments.map(f => f.type).filter(Boolean))];
+      const iconClass = link.type === 'ozon' ? 'fa-shopping-cart' : 
+                       link.type === 'wildberries' ? 'fa-shopping-bag' : 
+                       link.type === 'ali' ? 'fa-truck' : 'fa-external-link-alt';
+      
+      return `
+        <a href="${link.url}" target="_blank" class="marketplace-link ${link.type}-link">
+          <i class="fas ${iconClass}"></i> ${link.type}
+        </a>
+      `;
+    }).join('');
+  }
+  
+  function getSelectedValues(name) {
+    const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+    return Array.from(checkboxes).map(cb => cb.value);
+  }
+  
+  function renderFilters() {
+    const manufacturers = [...new Set(allFilaments.map(f => f.manufacturer).filter(Boolean)];
+    const container = document.getElementById('manufacturers-filter');
     
-    materials.forEach(material => {
-        if (![...materialFilter.options].some(o => o.value === material)) {
-            const option = document.createElement('option');
-            option.value = material;
-            option.textContent = material;
-            materialFilter.appendChild(option);
-        }
+    manufacturers.forEach(manufacturer => {
+      const checkbox = document.createElement('div');
+      checkbox.className = 'checkbox-group';
+      checkbox.innerHTML = `
+        <label>
+          <input type="checkbox" name="manufacturer" value="${manufacturer}">
+          ${manufacturer}
+        </label>
+      `;
+      container.appendChild(checkbox);
     });
-
-    // Веса
-    const weightFilter = document.getElementById('weightFilter');
-    const weights = [...new Set(filaments.map(f => f.weight).filter(Boolean).sort((a, b) => a - b))];
-    
-    weights.forEach(weight => {
-        const weightStr = weight.toString();
-        if (![...weightFilter.options].some(o => o.value === weightStr)) {
-            const option = document.createElement('option');
-            option.value = weightStr;
-            option.textContent = `${weight}г`;
-            weightFilter.appendChild(option);
-        }
-    });
-}
-
-// ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
-function setupEventListeners() {
-    document.getElementById('materialFilter').addEventListener('change', applyFilters);
-    document.getElementById('weightFilter').addEventListener('change', applyFilters);
-    document.getElementById('searchInput').addEventListener('input', applyFilters);
-}
-
-// ========== ИНИЦИАЛИЗАЦИЯ ==========
-document.addEventListener('DOMContentLoaded', () => {
-    loadFilaments();
-    setupEventListeners();
-});
-
-// ========== ОБРАБОТКА ОШИБОК ==========
-function showError(message) {
-    const tableBody = document.getElementById('filamentTableBody');
-    tableBody.innerHTML = `
-        <tr>
-            <td colspan="7" class="error-message">
-                <i class="fas fa-exclamation-triangle"></i> ${message}
-            </td>
-        </tr>
+  }
+  
+  function showError(message) {
+    const container = document.getElementById('filament-cards');
+    container.innerHTML = `
+      <div class="no-results">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Ошибка</h3>
+        <p>${message}</p>
+      </div>
     `;
-}
+  }
+  
+  // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
+  function setupEventListeners() {
+    // Фильтры
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', applyFilters);
+    });
+    
+    // Поиск
+    document.getElementById('search-input').addEventListener('input', debounce(applyFilters, 300));
+    
+    // Сортировка
+    document.getElementById('sort-select').addEventListener('change', applyFilters);
+    
+    // Сброс фильтров
+    document.getElementById('reset-filters').addEventListener('click', (e) => {
+      e.preventDefault();
+      resetFilters();
+    });
+    
+    // Пагинация
+    document.getElementById('pagination').addEventListener('click', (e) => {
+      if (e.target.closest('.pagination-link')) {
+        e.preventDefault();
+        const page = parseInt(e.target.closest('.pagination-link').dataset.page);
+        if (!isNaN(page)) {
+          currentPage = page;
+          updatePagination();
+          renderFilaments();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    });
+    
+    // Модальное окно
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.details-button')) {
+        const id = parseInt(e.target.closest('.details-button').dataset.id);
+        openModal(id);
+      }
+      
+      if (e.target.closest('.modal-close') || e.target.classList.contains('modal')) {
+        closeModal();
+      }
+    });
+  }
+  
+  function resetFilters() {
+    // Сброс чекбоксов
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      checkbox.checked = checkbox.value === 'all';
+    });
+    
+    // Сброс поиска
+    document.getElementById('search-input').value = '';
+    
+    // Сброс сортировки
+    document.getElementById('sort-select').value = 'name-asc';
+    
+    applyFilters();
+  }
+  
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this, args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
+  
+  // ========== МОДАЛЬНОЕ ОКНО ==========
+  function openModal(id) {
+    const filament = allFilaments.find(f => f.id === id);
+    if (!filament) return;
+    
+    const modal = document.getElementById('filament-modal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Заполнение модального окна данными
+    document.getElementById('modal-title').innerHTML = `
+      <h2>${filament.name || 'Без названия'}</h2>
+      <p>${filament.manufacturer || 'Производитель не указан'} • ${filament.type || '?'}</p>
+    `;
+    
+    // Заполнение спецификаций
+    const specsHtml = `
+      <tr>
+        <th>Вес филамента</th>
+        <td>${filament.weight ? filament.weight + 'г' : '-'}</td>
+      </tr>
+      <tr>
+        <th>Диаметр</th>
+        <td>${filament.diameter ? filament.diameter + 'мм' : '-'}</td>
+      </tr>
+      <tr>
+        <th>Вес катушки</th>
+        <td>${filament.spoolWeight ? filament.spoolWeight + 'г' : '-'}</td>
+      </tr>
+      <tr>
+        <th>Диаметр катушки</th>
+        <td>${filament.spoolDiameter ? filament.spoolDiameter + 'мм' : '-'}</td>
+      </tr>
+    `;
+    
+    document.getElementById('modal-specs').innerHTML = specsHtml;
+    
+    // Заполнение профилей
+    const profilesHtml = filament.printProfiles && filament.printProfiles.length > 0 ? 
+      filament.printProfiles.map(p => `
+        <div class="profile-item">
+          <a href="${p.url}" target="_blank" class="profile-link">
+            <i class="fas fa-file-alt"></i> ${p.name}
+          </a>
+          ${p.temp ? `<span class="profile-temp">${p.temp}</span>` : ''}
+        </div>
+      `).join('') : '<p>Нет доступных профилей</p>';
+    
+    document.getElementById('modal-profiles').innerHTML = profilesHtml;
+    
+    // Заполнение ссылок
+    const linksHtml = filament.links && filament.links.length > 0 ? 
+      filament.links.map(link => `
+        <a href="${link.url}" target="_blank" class="marketplace-link ${link.type}-link">
+          <i class="fas ${link.type === 'ozon' ? 'fa-shopping-cart' : 
+                          link.type === 'wildberries' ? 'fa-shopping-bag' : 
+                          'fa-external-link-alt'}"></i> ${link.type}
+        </a>
+      `).join('') : '<p>Нет доступных ссылок</p>';
+    
+    document.getElementById('modal-links').innerHTML = linksHtml;
+  }
+  
+  function closeModal() {
+    document.getElementById('filament-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
