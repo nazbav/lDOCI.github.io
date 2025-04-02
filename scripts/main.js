@@ -50,6 +50,10 @@ async function loadData() {
 }
 
 // ========== ФИЛЬТРАЦИЯ И СОРТИРОВКА ==========
+function calculateRating(filamentId) {
+    // Упрощенная версия для тестирования - просто возвращаем существующий рейтинг
+    return 0; // или любое другое значение по умолчанию
+}
 function applyFilters() {
     // Получаем выбранные фильтры
     const materialFilters = getSelectedValues('material');
