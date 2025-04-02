@@ -1,4 +1,8 @@
-
+const config = {
+    itemsPerPage: 12,      // Количество карточек на странице
+    visiblePageLinks: 5,   // Видимых номеров страниц в пагинации
+    storageKey: 'filaments_reviews' // Ключ для хранения отзывов в localStorage
+};
 
 // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
 let allFilaments = [];       // Все филаменты из JSON
