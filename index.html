@@ -103,66 +103,65 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      let allCards = [];
-
       async function loadBaza() {
-        const res = await fetch('./flashforge_full_baza_combined.json');
-        const data = await res.json();
-        const content = document.getElementById('bazaContent');
-
-        for (const section of data.sections) {
-          const sec = document.createElement('section');
-          sec.id = section.id;
-          sec.className = 'my-5';
-
-          const header = document.createElement('h2');
-          header.textContent = section.title;
-          header.className = 'mb-4 border-bottom pb-2';
-          sec.appendChild(header);
-
-          for (const entry of section.entries) {
-            const card = document.createElement('div');
-            card.className = 'card mb-3 p-3 rounded-4';
-
-            const subtitle = document.createElement('h5');
-            subtitle.textContent = entry.subtitle;
-            card.appendChild(subtitle);
-
-            const desc = document.createElement('p');
-            desc.textContent = entry.description;
-            card.appendChild(desc);
-
-            if (entry.link) {
-              const link = document.createElement('a');
-              link.href = entry.link;
-              link.textContent = 'Ссылка';
-              link.className = 'text-info';
-              link.target = '_blank';
-              card.appendChild(link);
-            }
-
-            sec.appendChild(card);
-            allCards.push({ card, text: `${entry.subtitle} ${entry.description}`.toLowerCase() });
+        try {
+          const response = await fetch("flashforge_full_baza_combined.json");
+          const data = await response.json();
+          console.log("Загруженные данные:", data); // <-- Смотри в консоли F12
+    
+          const container = document.createElement("div");
+          container.className = "container py-4";
+    
+          if (!data.sections || !Array.isArray(data.sections)) {
+            console.error("❌ Неправильная структура JSON");
+            return;
           }
-
-          content.appendChild(sec);
-        }
-
-        // Прокрутка к якорю
-        if (location.hash) {
-          const el = document.querySelector(location.hash);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
+    
+          for (const section of data.sections) {
+            const sectionDiv = document.createElement("section");
+            sectionDiv.id = section.id;
+            sectionDiv.className = "my-5";
+    
+            const title = document.createElement("h2");
+            title.className = "mb-3";
+            title.textContent = section.title;
+            sectionDiv.appendChild(title);
+    
+            for (const entry of section.entries || []) {
+              const card = document.createElement("div");
+              card.className = "card mb-3 p-3 rounded-4";
+    
+              const subtitle = document.createElement("h5");
+              subtitle.textContent = entry.subtitle;
+              card.appendChild(subtitle);
+    
+              const desc = document.createElement("p");
+              desc.textContent = entry.description;
+              card.appendChild(desc);
+    
+              if (entry.link) {
+                const link = document.createElement("a");
+                link.href = entry.link;
+                link.textContent = "Ссылка";
+                link.target = "_blank";
+                link.className = "text-info";
+                card.appendChild(link);
+              }
+    
+              sectionDiv.appendChild(card);
+            }
+    
+            container.appendChild(sectionDiv);
+          }
+    
+          document.body.appendChild(container);
+        } catch (error) {
+          console.error("❌ Ошибка загрузки JSON:", error);
         }
       }
-
-      document.getElementById('searchInput').addEventListener('input', function (e) {
-        const q = e.target.value.toLowerCase();
-        for (const { card, text } of allCards) {
-          card.style.display = text.includes(q) ? '' : 'none';
-        }
-      });
-
+    
       loadBaza();
     </script>
+    
   </body>
 </html>
