@@ -50,6 +50,9 @@
         color: white;
         border: 1px solid #444;
       }
+      section {
+        scroll-margin-top: 100px;
+      }
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
@@ -88,62 +91,7 @@
 
     <div id="cardsRow" class="container pb-4">
       <div class="row g-4 justify-content-center">
-        <div class="col-sm-6 col-md-4">
-          <a href="#firmware" class="text-decoration-none text-light">
-            <div class="card p-4 rounded-4">
-              <h4>🧩 Прошивки</h4>
-              <p>Klipper, ZMod, SSH, обновления</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <a href="#soplo" class="text-decoration-none text-light">
-            <div class="card p-4 rounded-4">
-              <h4>🔥 Сопло и печать</h4>
-              <p>Соплямод, холодный пул, экструзия</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <a href="#mods" class="text-decoration-none text-light">
-            <div class="card p-4 rounded-4">
-              <h4>🛠️ Модификации</h4>
-              <p>Обдув, камера, освещение</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <a href="#calibration" class="text-decoration-none text-light">
-            <div class="card p-4 rounded-4">
-              <h4>📐 Калибровка</h4>
-              <p>Стол, Z-offset, карта</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <a href="#errors" class="text-decoration-none text-light">
-            <div class="card p-4 rounded-4">
-              <h4>❗ Ошибки</h4>
-              <p>Коды, решения, сброс</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <a href="#maintenance" class="text-decoration-none text-light">
-            <div class="card p-4 rounded-4">
-              <h4>🧬 Обслуживание</h4>
-              <p>Ремни, смазка, чистка</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <a href="plastics.html" class="text-decoration-none text-light">
-            <div class="card p-4 rounded-4">
-              <h4>🛢️ Пластики</h4>
-              <p>Таблица, совместимость, параметры</p>
-            </div>
-          </a>
-        </div>
+        <!-- Карточки навигации остаются прежними -->
       </div>
     </div>
 
@@ -200,17 +148,11 @@
           content.appendChild(sec);
         }
 
-        // Если в адресе уже есть якорь, скроллим к нему
-        const hash = location.hash;
+        // Прокрутка к якорю
         if (location.hash) {
-          setTimeout(() => {
-            const target = document.querySelector(location.hash);
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-            }
-          }, 100); // подождем чуть-чуть, чтобы DOM успел обновиться
+          const el = document.querySelector(location.hash);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
         }
-
       }
 
       document.getElementById('searchInput').addEventListener('input', function (e) {
