@@ -106,7 +106,7 @@
       let allCards = [];
 
       async function loadBaza() {
-        const res = await fetch('flashforge_full_baza_combined.json');
+        const res = await fetch('./flashforge_full_baza_combined.json');
         const data = await res.json();
         const content = document.getElementById('bazaContent');
 
