@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlashForge AD5M База знаний</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
       body {
         background: linear-gradient(to bottom right, #111, #1a1a1a);
@@ -36,88 +37,426 @@
       }
       .nav-link {
         color: #ccc !important;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
       }
-      .nav-link:hover {
+      .nav-link:hover, .nav-link.active {
         color: #fff !important;
+        background-color: rgba(255, 255, 255, 0.1);
       }
       .section-block {
         margin-top: 4rem;
+        padding-top: 0.5rem;
+        scroll-margin-top: 80px;
+      }
+      .section-title {
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+      }
+      .section-title i {
+        margin-right: 0.75rem;
+        color: #0d6efd;
+      }
+      .search-container {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        background: linear-gradient(to bottom, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.9));
+        backdrop-filter: blur(10px);
+      }
+      #searchInput {
+        background-color: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        transition: all 0.3s ease;
+      }
+      #searchInput:focus {
+        background-color: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      }
+      #searchInput::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .top-nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+        gap: 0.5rem;
+      }
+      .card-subtitle {
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+      .card-link {
+        display: inline-block;
+        margin-top: 0.75rem;
+        color: #0d6efd;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      .card-link:hover {
+        color: #0a58ca;
+        text-decoration: underline;
+      }
+      .section-icon {
+        font-size: 1.25rem;
       }
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
       }
+      .no-results {
+        text-align: center;
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 800px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+      }
+      .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: rgba(13, 110, 253, 0.7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+      }
+      .back-to-top.visible {
+        opacity: 1;
+      }
+      .back-to-top:hover {
+        background-color: rgba(13, 110, 253, 0.9);
+      }
+      
+      @media (max-width: 768px) {
+        .printer-img {
+          max-width: 250px;
+        }
+        .top-nav {
+          flex-direction: column;
+          align-items: center;
+        }
+        h1 {
+          font-size: 1.75rem;
+        }
+      }
     </style>
   </head>
   <body>
-    <div class="container py-5 text-center">
-      <h1 class="display-4 fw-bold mb-3">FlashForge AD5M База знаний</h1>
-      <p class="lead mb-4">
-        Всё о прошивках, модах, настройках, ошибках и материалах для <strong>FlashForge AD5M / AD5M Pro</strong>.
-      </p>
-      <img src="image-Photoroom.png" class="printer-img rounded mb-5" alt="FlashForge AD5M">
-      <input type="text" id="searchInput" class="form-control mb-4 w-75 mx-auto" placeholder="Поиск..." />
-      <div id="content" class="container"></div>
+    <!-- Header & Search -->
+    <div class="search-container">
+      <div class="container">
+        <div class="text-center">
+          <h1 class="mb-2">FlashForge AD5M База знаний</h1>
+          <div class="d-flex justify-content-center">
+            <div class="input-group" style="max-width: 600px;">
+              <span class="input-group-text bg-transparent text-white border-0">
+                <i class="bi bi-search"></i>
+              </span>
+              <input type="text" id="searchInput" class="form-control" placeholder="Поиск по базе знаний..." />
+              <button id="clearSearch" class="btn btn-outline-secondary" type="button" style="display: none;">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-4">
+      <!-- Intro & Image -->
+      <div class="text-center mb-4">
+        <p class="lead">
+          Всё о прошивках, модах, настройках, ошибках и материалах для <strong>FlashForge AD5M / AD5M Pro</strong>.
+        </p>
+        <img src="image-Photoroom.png" class="printer-img rounded mb-4" alt="FlashForge AD5M">
+      </div>
+
+      <!-- Navigation -->
+      <nav class="top-nav" id="topNav">
+        <!-- Navigation links will be generated here -->
+      </nav>
+
+      <!-- Content -->
+      <div id="content" class="container">
+        <!-- Content will be loaded from JSON -->
+        <div class="text-center my-5">
+          <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Загрузка...</span>
+          </div>
+          <p class="mt-3">Загрузка базы знаний...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+      <i class="bi bi-arrow-up"></i>
     </div>
 
     <script>
+      // Section icons mapping
+      const sectionIcons = {
+        'firmware': 'bi-cpu',
+        'kernal': 'bi-cpu-fill',
+        'soplo': 'bi-droplet-fill',
+        'calibration': 'bi-rulers',
+        'errors': 'bi-exclamation-triangle-fill',
+        'filament': 'bi-roll',
+        'interface': 'bi-display',
+        'maintenance': 'bi-tools',
+        'mechanics': 'bi-gear-fill',
+        'mods': 'bi-wrench-adjustable',
+        'models': 'bi-box',
+        'parts': 'bi-cart-fill',
+        'printing': 'bi-printer-fill',
+        'reverse': 'bi-code-slash',
+        'slicer': 'bi-layers-fill',
+        'general': 'bi-info-circle-fill'
+      };
+
+      // Function to get icon for section
+      function getIconForSection(sectionId) {
+        return sectionIcons[sectionId] || 'bi-circle-fill';
+      }
+
       async function loadBaza() {
         try {
           const response = await fetch('flashforge_full_baza_ordered_cleaned.json');
           const data = await response.json();
           const contentDiv = document.getElementById('content');
           const searchInput = document.getElementById('searchInput');
+          const clearSearch = document.getElementById('clearSearch');
+          const topNav = document.getElementById('topNav');
+          
+          // Create navigation
+          data.sections.forEach(section => {
+            const navLink = document.createElement('a');
+            navLink.href = `#${section.id}`;
+            navLink.className = 'nav-link';
+            navLink.innerHTML = `<i class="bi ${getIconForSection(section.id)} me-1"></i> ${section.title}`;
+            topNav.appendChild(navLink);
+          });
 
           function renderSections(filter = '') {
             contentDiv.innerHTML = '';
+            
+            let hasResults = false;
+            
             data.sections.forEach(section => {
               const matchingEntries = section.entries.filter(e =>
                 e.subtitle.toLowerCase().includes(filter.toLowerCase()) ||
                 e.description.toLowerCase().includes(filter.toLowerCase())
               );
+              
               if (matchingEntries.length === 0) return;
+              hasResults = true;
 
               const sectionBlock = document.createElement('div');
               sectionBlock.className = 'section-block';
+              sectionBlock.id = section.id;
+              
               const header = document.createElement('h2');
-              header.textContent = section.title;
+              header.className = 'section-title';
+              header.innerHTML = `<i class="bi ${getIconForSection(section.id)} section-icon"></i> ${section.title}`;
               sectionBlock.appendChild(header);
 
+              const row = document.createElement('div');
+              row.className = 'row g-4';
+              
               matchingEntries.forEach(entry => {
+                const col = document.createElement('div');
+                col.className = 'col-lg-6';
+                
                 const card = document.createElement('div');
-                card.className = 'card mb-3 p-3 rounded-4';
+                card.className = 'card h-100 mb-0 p-3 rounded-4';
 
-                const title = document.createElement('h5');
-                title.textContent = entry.subtitle;
-                card.appendChild(title);
+                // Skip creating title if subtitle is "Без подзаголовка"
+                if (entry.subtitle !== "Без подзаголовка") {
+                  const title = document.createElement('h5');
+                  title.className = 'card-subtitle mb-2';
+                  title.textContent = entry.subtitle;
+                  card.appendChild(title);
+                }
 
-                const desc = document.createElement('p');
-                desc.textContent = entry.description;
-                card.appendChild(desc);
+                if (entry.description) {
+                  const desc = document.createElement('p');
+                  desc.className = 'card-text';
+                  desc.innerHTML = formatDescription(entry.description);
+                  card.appendChild(desc);
+                }
 
                 if (entry.link) {
                   const link = document.createElement('a');
                   link.href = entry.link;
-                  link.textContent = 'Ссылка';
-                  link.className = 'text-info';
+                  link.className = 'card-link';
+                  link.textContent = 'Подробнее →';
                   link.target = '_blank';
                   card.appendChild(link);
                 }
-                sectionBlock.appendChild(card);
+
+                col.appendChild(card);
+                row.appendChild(col);
               });
+
+              sectionBlock.appendChild(row);
               contentDiv.appendChild(sectionBlock);
             });
+            
+            // Show "No results" message if needed
+            if (!hasResults && filter !== '') {
+              const noResults = document.createElement('div');
+              noResults.className = 'no-results';
+              noResults.innerHTML = `
+                <i class="bi bi-search display-4 d-block mb-3 text-muted"></i>
+                <h3>Ничего не найдено</h3>
+                <p class="text-muted">По запросу "${filter}" не найдено результатов.</p>
+                <button class="btn btn-outline-light mt-2" onclick="document.getElementById('searchInput').value = ''; document.getElementById('clearSearch').click();">
+                  Сбросить поиск
+                </button>
+              `;
+              contentDiv.appendChild(noResults);
+            }
+            
+            // Update active navigation link
+            updateActiveNavLink();
+          }
+          
+          function formatDescription(text) {
+            // Convert Markdown-style links to HTML links
+            const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+            let formattedText = text.replace(linkRegex, '<a href="$2" target="_blank" class="text-info">$1</a>');
+            
+            // Convert Markdown headings
+            formattedText = formattedText.replace(/^#+\s+(.+)$/gm, '<strong>$1</strong>');
+            
+            // Convert Markdown bold
+            formattedText = formattedText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            
+            // Convert Markdown italics
+            formattedText = formattedText.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            
+            // Convert code blocks
+            formattedText = formattedText.replace(/```(.+?)```/gs, '<pre class="bg-dark p-2 rounded"><code>$1</code></pre>');
+            
+            // Convert line breaks
+            formattedText = formattedText.replace(/\n/g, '<br>');
+            
+            return formattedText;
+          }
+
+          function updateActiveNavLink() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section-block');
+            
+            // Remove active class from all links
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            if (sections.length === 0) return;
+            
+            // Check if we're filtering
+            if (searchInput.value.trim() !== '') {
+              // When filtering, don't highlight any nav link
+              return;
+            }
+            
+            // Get current scroll position
+            const scrollPosition = window.scrollY + 100;
+            
+            // Find the section that is currently visible
+            let activeSection = sections[0].id;
+            
+            sections.forEach(section => {
+              const sectionTop = section.offsetTop;
+              if (scrollPosition >= sectionTop) {
+                activeSection = section.id;
+              }
+            });
+            
+            // Add active class to the corresponding nav link
+            document.querySelector(`.nav-link[href="#${activeSection}"]`)?.classList.add('active');
           }
 
           searchInput.addEventListener('input', () => {
-            renderSections(searchInput.value);
+            const filterValue = searchInput.value.trim();
+            renderSections(filterValue);
+            clearSearch.style.display = filterValue ? 'block' : 'none';
+          });
+          
+          clearSearch.addEventListener('click', () => {
+            searchInput.value = '';
+            renderSections('');
+            clearSearch.style.display = 'none';
+          });
+          
+          // Back to top button functionality
+          const backToTop = document.getElementById('backToTop');
+          
+          window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+              backToTop.classList.add('visible');
+            } else {
+              backToTop.classList.remove('visible');
+            }
+            
+            // Update active nav link on scroll
+            updateActiveNavLink();
+          });
+          
+          backToTop.addEventListener('click', () => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
           });
 
+          // Initialize with all sections
           renderSections();
         } catch (error) {
           console.error('Ошибка загрузки базы:', error);
+          document.getElementById('content').innerHTML = `
+            <div class="alert alert-danger text-center" role="alert">
+              <i class="bi bi-exclamation-triangle-fill fs-1 d-block mb-3"></i>
+              <h4>Ошибка загрузки базы знаний</h4>
+              <p>${error.message}</p>
+              <button class="btn btn-outline-danger mt-2" onclick="location.reload()">
+                Попробовать снова
+              </button>
+            </div>
+          `;
         }
       }
+
+      // Highlight active navigation link when clicking
+      document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('nav-link') || e.target.parentElement.classList.contains('nav-link')) {
+          const navLinks = document.querySelectorAll('.nav-link');
+          navLinks.forEach(link => link.classList.remove('active'));
+          
+          const clickedLink = e.target.classList.contains('nav-link') ? 
+                              e.target : 
+                              e.target.parentElement;
+          
+          clickedLink.classList.add('active');
+        }
+      });
 
       loadBaza();
     </script>
