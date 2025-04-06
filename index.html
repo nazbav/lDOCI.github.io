@@ -1,127 +1,125 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FlashForge AD5M — База знаний</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <style>
-    body {
-      background: linear-gradient(to bottom right, #111, #1a1a1a);
-      color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding-top: 4.5rem;
-    }
-    h2, h3 { color: #fff; }
-    .card {
-      background-color: #1f1f1f;
-      border: 1px solid #333;
-      color: #ccc;
-      transition: 0.3s;
-    }
-    .card:hover {
-      background-color: #2a2a2a;
-    }
-    .search-input {
-      background-color: #222;
-      border: 1px solid #444;
-      color: #eee;
-    }
-    .printer-img {
-      max-width: 300px;
-      filter: drop-shadow(0 0 20px #000);
-    }
-    .nav-link { color: #ccc !important; }
-    .nav-link:hover { color: #fff !important; }
-  </style>
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">AD5M</a>
-      <input id="search" class="form-control w-50 mx-3 search-input" placeholder="🔍 Поиск по базе..." />
-    </div>
-  </nav>
-
-  <div class="container my-4" id="content"></div>
-
-  <script>
-    async function loadData() {
-      try {
-        const response = await fetch('flashforge_full_baza_combined.json');
-        const json = await response.json();
-
-        const content = document.getElementById('content');
-        const searchInput = document.getElementById('search');
-
-        function renderSections(data) {
-          content.innerHTML = '';
-          data.forEach(section => {
-            const sectionBlock = document.createElement('div');
-            sectionBlock.className = 'mb-5';
-
-            const heading = document.createElement('h2');
-            heading.textContent = section.category;
-            sectionBlock.appendChild(heading);
-
-            section.items.forEach(item => {
-              const card = document.createElement('div');
-              card.className = 'card mb-3 p-3';
-
-              const title = document.createElement('h5');
-              title.textContent = item.title || '(без заголовка)';
-              card.appendChild(title);
-
-              const description = document.createElement('p');
-              description.textContent = item.description || '(без описания)';
-              card.appendChild(description);
-
-              if (item.link) {
-                const link = document.createElement('a');
-                link.href = item.link;
-                link.className = 'text-info';
-                link.target = '_blank';
-                link.textContent = '🔗 Ссылка';
-                card.appendChild(link);
-              }
-
-              if (item.code) {
-                const code = document.createElement('pre');
-                code.textContent = item.code;
-                code.style.background = '#000';
-                code.style.padding = '0.5rem';
-                code.style.color = '#0f0';
-                card.appendChild(code);
-              }
-
-              sectionBlock.appendChild(card);
-            });
-
-            content.appendChild(sectionBlock);
-          });
-        }
-
-        renderSections(json.sections);
-
-        searchInput.addEventListener('input', e => {
-          const q = e.target.value.toLowerCase();
-          const filtered = json.sections.map(sec => ({
-            ...sec,
-            items: sec.items.filter(it =>
-              (it.title || '').toLowerCase().includes(q) ||
-              (it.description || '').toLowerCase().includes(q)
-            )
-          })).filter(sec => sec.items.length > 0);
-          renderSections(filtered);
-        });
-
-      } catch (err) {
-        document.getElementById('content').innerHTML = `<div class="alert alert-danger">Ошибка загрузки JSON: ${err.message}</div>`;
-        console.error(err);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlashForge AD5M База знаний</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background: linear-gradient(to bottom right, #111, #1a1a1a);
+        color: #e5e5e5;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
-    }
+      h1, h4, h2, h5 {
+        color: #fff;
+      }
+      .card {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+      }
+      .card:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: scale(1.02);
+      }
+      .printer-img {
+        max-width: 320px;
+        filter: drop-shadow(0 0 2rem #000);
+        animation: fadeIn 1s ease;
+      }
+      .lead {
+        color: #b0b0b0;
+      }
+      .nav-link {
+        color: #ccc !important;
+      }
+      .nav-link:hover {
+        color: #fff !important;
+      }
+      .section-block {
+        margin-top: 4rem;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5 text-center">
+      <h1 class="display-4 fw-bold mb-3">FlashForge AD5M База знаний</h1>
+      <p class="lead mb-4">
+        Всё о прошивках, модах, настройках, ошибках и материалах для <strong>FlashForge AD5M / AD5M Pro</strong>.
+      </p>
+      <img src="image-Photoroom.png" class="printer-img rounded mb-5" alt="FlashForge AD5M">
+      <input type="text" id="searchInput" class="form-control mb-4 w-75 mx-auto" placeholder="Поиск..." />
+      <div id="content" class="container"></div>
+    </div>
 
-    loadData();
-  </script>
-</body>
+    <script>
+      async function loadBaza() {
+        try {
+          const response = await fetch('flashforge_full_baza_ordered_cleaned.json');
+          const data = await response.json();
+          const contentDiv = document.getElementById('content');
+          const searchInput = document.getElementById('searchInput');
+
+          function renderSections(filter = '') {
+            contentDiv.innerHTML = '';
+            data.sections.forEach(section => {
+              const matchingEntries = section.entries.filter(e =>
+                e.subtitle.toLowerCase().includes(filter.toLowerCase()) ||
+                e.description.toLowerCase().includes(filter.toLowerCase())
+              );
+              if (matchingEntries.length === 0) return;
+
+              const sectionBlock = document.createElement('div');
+              sectionBlock.className = 'section-block';
+              const header = document.createElement('h2');
+              header.textContent = section.title;
+              sectionBlock.appendChild(header);
+
+              matchingEntries.forEach(entry => {
+                const card = document.createElement('div');
+                card.className = 'card mb-3 p-3 rounded-4';
+
+                const title = document.createElement('h5');
+                title.textContent = entry.subtitle;
+                card.appendChild(title);
+
+                const desc = document.createElement('p');
+                desc.textContent = entry.description;
+                card.appendChild(desc);
+
+                if (entry.link) {
+                  const link = document.createElement('a');
+                  link.href = entry.link;
+                  link.textContent = 'Ссылка';
+                  link.className = 'text-info';
+                  link.target = '_blank';
+                  card.appendChild(link);
+                }
+                sectionBlock.appendChild(card);
+              });
+              contentDiv.appendChild(sectionBlock);
+            });
+          }
+
+          searchInput.addEventListener('input', () => {
+            renderSections(searchInput.value);
+          });
+
+          renderSections();
+        } catch (error) {
+          console.error('Ошибка загрузки базы:', error);
+        }
+      }
+
+      loadBaza();
+    </script>
+  </body>
 </html>
