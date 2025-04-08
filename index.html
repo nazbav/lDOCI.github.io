@@ -1,98 +1,34 @@
-import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Card, CardContent } from "@/components/ui/card";
-
-export default function FlashforgeKnowledge() {
-  const [cards, setCards] = useState([]);
-  const [search, setSearch] = useState("");
-  const [filtered, setFiltered] = useState([]);
-
-  useEffect(() => {
-    fetch("/cards.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setCards(data);
-        setFiltered(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    const query = search.toLowerCase();
-    setFiltered(
-      cards.filter(
-        (card) =>
-          card.title.toLowerCase().includes(query) ||
-          card.description.toLowerCase().includes(query) ||
-          card.solution.toLowerCase().includes(query)
-      )
-    );
-  }, [search, cards]);
-
-  const grouped = filtered.reduce((acc, card) => {
-    acc[card.category] = acc[card.category] || [];
-    acc[card.category].push(card);
-    return acc;
-  }, {});
-
-  return (
-    <div className="min-h-screen bg-white text-zinc-800 py-16 px-4 md:px-10 font-sans">
-      <header className="max-w-7xl mx-auto mb-16">
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-blue-700">База знаний FlashForge Adventurer 5M</h1>
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-blue-600">
-            <a href="#soplemod" className="hover:underline">Соплемод</a>
-            <a href="#nozzle" className="hover:underline">Сопла</a>
-            <a href="#extruder" className="hover:underline">Экструдер</a>
-            <a href="#bed" className="hover:underline">Стол</a>
-            <a href="#plastics" className="hover:underline">Пластики</a>
-            <a href="#mechanics" className="hover:underline">Механика</a>
-            <a href="#software" className="hover:underline">ПО и прошивка</a>
-          </nav>
-        </div>
-
-        <Input
-          className="w-full max-w-2xl bg-zinc-100 border border-zinc-300 text-black placeholder:text-zinc-500 rounded-md px-4 py-3 shadow-sm"
-          placeholder="Поиск по базе знаний..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <p className="text-sm text-zinc-500 mt-2">Фильтрация карточек в реальном времени.</p>
-      </header>
-
-      <main className="max-w-7xl mx-auto">
-        {Object.entries(grouped).map(([category, cards]) => (
-          <section key={category} className="mb-16" id={category.toLowerCase()}>
-            <h2 className="text-2xl font-semibold text-zinc-800 border-b border-zinc-200 pb-1 mb-6">{category}</h2>
-            <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {cards.map((card, index) => (
-                <Card
-                  key={index}
-                  className="bg-white text-black rounded-xl shadow-md border border-zinc-200 hover:shadow-lg transition-all hover:-translate-y-1"
-                >
-                  <CardContent className="p-6">
-                    <Accordion type="single" collapsible>
-                      <AccordionItem value={`item-${index}`}>
-                        <AccordionTrigger className="text-lg font-semibold text-zinc-800 hover:text-blue-600 transition-colors">
-                          {card.title}
-                        </AccordionTrigger>
-                        <AccordionContent className="text-sm text-zinc-700 space-y-3 pt-2">
-                          <p>{card.description}</p>
-                          <p><span className="font-medium text-zinc-900">Причина:</span> {card.reason}</p>
-                          <p><span className="font-medium text-zinc-900">Решение:</span> {card.solution}</p>
-                          {card.notes && (
-                            <p><span className="font-medium text-zinc-900">Полезно знать:</span> {card.notes}</p>
-                          )}
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
-        ))}
-      </main>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>База знаний FlashForge Adventurer 5M</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>База знаний FlashForge Adventurer 5M</h1>
+    
+    <!-- Поиск -->
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Поиск по базе знаний...">
+      <p class="search-hint">При вводе текста система подсвечивает совпадения</p>
     </div>
-  );
-}
+
+    <!-- Боковое меню (категории) -->
+    <div class="sidebar">
+      <div id="categories-list">
+        <!-- Категории подгружаются из JSON -->
+      </div>
+    </div>
+
+    <!-- Основной контент (карточки) -->
+    <div class="content" id="cards-container">
+      <!-- Карточки загружаются динамически -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
