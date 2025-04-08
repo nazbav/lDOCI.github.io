@@ -686,35 +686,66 @@
             async function loadAllFiles() {
                 const categories = [];
                 
+                console.log("Начинаю загрузку JSON файлов:", jsonFiles);
+                
                 // Создаем массив промисов для всех файлов
-                const filePromises = jsonFiles.map(filename => loadJsonFile(filename));
+                const filePromises = jsonFiles.map(filename => {
+                    console.log(`Готовлю загрузку файла: ${filename}`);
+                    return loadJsonFile(filename);
+                });
                 
                 try {
                     // Ждем выполнения всех промисов
+                    console.log("Ожидаю результатов загрузки...");
                     const results = await Promise.allSettled(filePromises);
                     
                     // Обрабатываем результаты
                     results.forEach((result, index) => {
                         if (result.status === 'fulfilled' && result.value) {
+                            console.log(`Файл загружен успешно: ${jsonFiles[index]}`);
                             categories.push(result.value);
                         } else {
                             console.error(`Ошибка загрузки файла ${jsonFiles[index]}:`, result.reason);
                         }
                     });
                     
+                    console.log(`Загружено категорий: ${categories.length}`);
                     return categories;
                 } catch (error) {
                     console.error('Ошибка при загрузке файлов:', error);
-                    return [];
+                    
+                    // Аварийный выход - возвращаем тестовую категорию
+                    console.warn('Возвращаем тестовую категорию для отображения');
+                    return [{
+                        "category": "Тестовая категория (ошибка загрузки)",
+                        "description": "Произошла ошибка при загрузке данных. Пожалуйста, проверьте консоль браузера для получения подробной информации.",
+                        "entries": [
+                            {
+                                "title": "Проблема с загрузкой файлов",
+                                "problem": "Не удалось загрузить JSON файлы из папки data/",
+                                "reason": "Возможные причины: неправильный путь к файлам, отсутствие файлов, проблемы CORS, ошибки в JSON",
+                                "solution": "1. Убедитесь, что файлы находятся в папке data/ (регистр важен)\n2. Проверьте, что JSON файлы имеют правильный формат\n3. Посмотрите ошибки в консоли браузера",
+                                "notes": "Эта запись создана автоматически при ошибке загрузки."
+                            }
+                        ]
+                    }];
                 }
             }
 
             // Загрузка конкретного JSON-файла
             async function loadJsonFile(filename) {
                 try {
+                    console.log(`Загружаю файл: data/${filename}`);
                     const response = await fetch(`data/${filename}`);
-                    if (!response.ok) throw new Error(`Ошибка загрузки файла: ${response.status}`);
-                    return await response.json();
+                    console.log(`Статус ответа для ${filename}: ${response.status}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`Ошибка загрузки файла: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    console.log(`Файл ${filename} успешно загружен и распаршен`);
+                    return data;
                 } catch (error) {
                     console.error(`Ошибка загрузки файла ${filename}:`, error);
                     return null;
@@ -1273,10 +1304,23 @@
             // Инициализация приложения
             async function init() {
                 try {
+                    console.log("Начало инициализации приложения");
+                    
+                    // Показываем загрузку
+                    mainContainer.innerHTML = `
+                        <div class="loading-container">
+                            <div class="loading-spinner"></div>
+                            <div class="loading-text">Загрузка базы знаний...</div>
+                        </div>
+                    `;
+                    
                     // Загрузка всех категорий
+                    console.log("Запускаю загрузку всех категорий");
                     allCategories = await loadAllFiles();
+                    console.log(`Загружено ${allCategories.length} категорий`);
                     
                     if (allCategories.length === 0) {
+                        console.error("Категории не загружены");
                         mainContainer.innerHTML = `
                             <div class="no-results" style="display: block;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -1285,12 +1329,22 @@
                                     <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                 </svg>
                                 <p>Не удалось загрузить данные. Убедитесь, что JSON-файлы находятся в папке data/.</p>
+                                <p style="font-size: 0.9rem; margin-top: 15px;">
+                                    <a href="#" id="retry-loading">Попробовать снова</a>
+                                </p>
                             </div>
                         `;
+                        
+                        document.getElementById('retry-loading').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            init();
+                        });
+                        
                         return;
                     }
                     
                     // Рендер главной страницы
+                    console.log("Рендерю главную страницу");
                     renderHomePage();
                     
                     // Настройка навигации
@@ -1309,6 +1363,8 @@
                         renderAboutPage();
                     });
                     
+                    console.log("Инициализация приложения завершена");
+                    
                 } catch (error) {
                     console.error('Ошибка инициализации приложения:', error);
                     mainContainer.innerHTML = `
@@ -1320,8 +1376,16 @@
                             </svg>
                             <p>Произошла ошибка при загрузке приложения. Пожалуйста, обновите страницу.</p>
                             <p style="color: #888; font-size: 0.9rem; margin-top: 10px;">Технические детали: ${error.message}</p>
+                            <p style="font-size: 0.9rem; margin-top: 15px;">
+                                <a href="#" id="retry-loading">Попробовать снова</a>
+                            </p>
                         </div>
                     `;
+                    
+                    document.getElementById('retry-loading').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        init();
+                    });
                 }
             }
 
