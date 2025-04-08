@@ -13,6 +13,10 @@
             --card-bg: #f9f9f9;
             --header-bg: #ffffff;
             --footer-bg: #f2f2f2;
+            --problem-color: #ff6b6b;
+            --reason-color: #ffa94d;
+            --solution-color: #4dabf7;
+            --notes-color: #69db7c;
         }
 
         * {
@@ -54,6 +58,12 @@
             font-weight: 600;
             color: var(--accent-color);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo svg {
+            margin-right: 10px;
         }
 
         nav ul {
@@ -69,6 +79,7 @@
             text-decoration: none;
             color: var(--text-color);
             font-weight: 500;
+            transition: color 0.2s;
         }
 
         nav ul li a:hover {
@@ -96,28 +107,43 @@
 
         .search-container {
             margin-bottom: 30px;
+            position: relative;
         }
 
-        #search {
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        #search, #global-search, #category-search {
             width: 100%;
-            padding: 12px 20px;
+            padding: 12px 20px 12px 45px;
             font-size: 16px;
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 50px;
             outline: none;
+            transition: all 0.3s;
         }
 
-        #search:focus {
+        #search:focus, #global-search:focus, #category-search:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
         }
 
         .entry {
             background-color: var(--card-bg);
-            border-radius: 6px;
+            border-radius: 8px;
             margin-bottom: 20px;
             overflow: hidden;
             border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .entry:hover {
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
         }
 
         .entry-header {
@@ -127,6 +153,7 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 500;
+            transition: background-color 0.2s;
         }
 
         .entry-header:hover {
@@ -135,7 +162,7 @@
 
         .entry-header::after {
             content: '+';
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: var(--accent-color);
             transition: transform 0.3s;
         }
@@ -155,14 +182,43 @@
         }
 
         .field {
-            padding: 15px 20px;
+            padding: 20px;
             border-top: 1px solid var(--border-color);
         }
 
         .field-title {
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             color: var(--accent-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .field-title svg {
+            margin-right: 8px;
+        }
+
+        .problem .field-title {
+            color: var(--problem-color);
+        }
+
+        .reason .field-title {
+            color: var(--reason-color);
+        }
+
+        .solution .field-title {
+            color: var(--solution-color);
+        }
+
+        .notes .field-title {
+            color: var(--notes-color);
+        }
+
+        .notes .field-content {
+            font-style: italic;
+            background-color: rgba(0, 0, 0, 0.02);
+            padding: 15px;
+            border-radius: 4px;
         }
 
         footer {
@@ -184,17 +240,32 @@
             color: #666666;
         }
 
+        .footer-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
         .no-results {
             text-align: center;
-            padding: 40px;
+            padding: 60px 20px;
             color: #666666;
             display: none;
+            font-size: 1.1rem;
+        }
+
+        .no-results svg {
+            display: block;
+            margin: 0 auto 20px;
+            color: #cccccc;
         }
 
         .breadcrumbs {
             margin-bottom: 20px;
             font-size: 0.9rem;
             color: #666666;
+            display: flex;
+            align-items: center;
         }
 
         .breadcrumbs a {
@@ -202,43 +273,145 @@
             text-decoration: none;
         }
 
+        .breadcrumbs svg {
+            margin: 0 8px;
+            font-size: 0.8rem;
+        }
+
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
             margin-top: 30px;
         }
 
         .category-card {
             background-color: var(--card-bg);
-            border-radius: 6px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 25px;
             border: 1px solid var(--border-color);
             transition: all 0.2s;
             cursor: pointer;
             text-decoration: none;
             color: inherit;
+            display: flex;
+            flex-direction: column;
         }
 
         .category-card:hover {
             border-color: var(--accent-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
         }
 
         .category-card h2 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
             color: var(--accent-color);
         }
 
         .category-card p {
             color: #666;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            flex-grow: 1;
         }
 
         .category-count {
             font-size: 0.9rem;
             color: #888;
+            display: flex;
+            align-items: center;
+        }
+
+        .category-count svg {
+            margin-right: 5px;
+        }
+
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            flex-direction: column;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--accent-color);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            background-color: rgba(0, 102, 204, 0.1);
+            color: var(--accent-color);
+        }
+
+        .entry-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .update-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-left: auto;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .entry-count {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .theme-switcher {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        /* Dark theme */
+        body.dark-theme {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --border-color: #333333;
+            --card-bg: #1e1e1e;
+            --header-bg: #1a1a1a;
+            --footer-bg: #1a1a1a;
         }
 
         @media (max-width: 768px) {
@@ -260,8 +433,25 @@
                 text-align: center;
             }
 
+            .footer-links {
+                margin-top: 15px;
+            }
+
+            .footer-links a {
+                margin: 0 8px;
+            }
+
             .categories-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .entry-count {
+                margin-top: 10px;
             }
         }
     </style>
@@ -269,27 +459,49 @@
 <body>
     <header>
         <div class="header-container">
-            <a href="#" class="logo">FlashForge 5M Knowledge Base</a>
+            <a href="#" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
+                </svg>
+                FlashForge 5M KB
+            </a>
             <nav>
                 <ul>
                     <li><a href="#" id="home-link">Главная</a></li>
                     <li><a href="#" id="categories-link">Категории</a></li>
-                    <li><a href="#">О проекте</a></li>
+                    <li><a href="#" id="about-link">О проекте</a></li>
+                    <li>
+                        <button class="theme-switcher" id="theme-switcher">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                        </button>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <div class="container" id="main-container">
-        <!-- Контент будет загружен динамически -->
-        <div class="loading">Загрузка данных...</div>
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Загрузка базы знаний...</div>
+        </div>
     </div>
 
     <footer>
         <div class="footer-container">
-            <div class="copyright">© 2023 FlashForge Adventurer 5M Knowledge Base</div>
-            <div>
-                <a href="#">Политика конфиденциальности</a> | 
+            <div class="copyright">© 2023-2025 FlashForge Adventurer 5M Knowledge Base</div>
+            <div class="footer-links">
+                <a href="#">Политика конфиденциальности</a>
                 <a href="#">Условия использования</a>
             </div>
         </div>
@@ -300,16 +512,93 @@
             const mainContainer = document.getElementById('main-container');
             const homeLink = document.getElementById('home-link');
             const categoriesLink = document.getElementById('categories-link');
+            const aboutLink = document.getElementById('about-link');
+            const themeSwitcher = document.getElementById('theme-switcher');
             let allCategories = [];
+            let jsonFiles = [
+                '3D-модели поиск и подготовка.json',
+                'Интерфейс и управление.json',
+                'Механика.json',
+                'Модификации и апгрейды.json',
+                'Обслуживание.json',
+                'Предупреждение и рекомендации.json',
+                'Продвинутые возможности и хардвер.json',
+                'Прошивка.json',
+                'Слайсеры.json',
+                'Филамент.json',
+                'Экструдер и сопло.json'
+            ];
+
+            // Проверка и установка темы
+            function checkTheme() {
+                const darkTheme = localStorage.getItem('darkTheme') === 'true';
+                if (darkTheme) {
+                    document.body.classList.add('dark-theme');
+                    updateThemeIcon(true);
+                } else {
+                    document.body.classList.remove('dark-theme');
+                    updateThemeIcon(false);
+                }
+            }
+
+            // Обновление иконки темы
+            function updateThemeIcon(isDark) {
+                if (isDark) {
+                    themeSwitcher.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    `;
+                } else {
+                    themeSwitcher.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    `;
+                }
+            }
+
+            // Переключение темы
+            themeSwitcher.addEventListener('click', function() {
+                const isDarkTheme = document.body.classList.toggle('dark-theme');
+                localStorage.setItem('darkTheme', isDarkTheme);
+                updateThemeIcon(isDarkTheme);
+            });
+
+            // Проверка темы при загрузке
+            checkTheme();
 
             // Загрузка списка JSON-файлов из папки data
-            async function loadFileList() {
+            async function loadAllFiles() {
+                const categories = [];
+                
+                // Создаем массив промисов для всех файлов
+                const filePromises = jsonFiles.map(filename => loadJsonFile(filename));
+                
                 try {
-                    // В реальных условиях нужно реализовать endpoint для получения списка файлов
-                    // Здесь используем фиксированный список для примера
-                    return ['Стол.json', 'Прошивка.json', 'Механика.json'];
+                    // Ждем выполнения всех промисов
+                    const results = await Promise.allSettled(filePromises);
+                    
+                    // Обрабатываем результаты
+                    results.forEach((result, index) => {
+                        if (result.status === 'fulfilled' && result.value) {
+                            categories.push(result.value);
+                        } else {
+                            console.error(`Ошибка загрузки файла ${jsonFiles[index]}:`, result.reason);
+                        }
+                    });
+                    
+                    return categories;
                 } catch (error) {
-                    console.error('Ошибка загрузки списка файлов:', error);
+                    console.error('Ошибка при загрузке файлов:', error);
                     return [];
                 }
             }
@@ -318,27 +607,12 @@
             async function loadJsonFile(filename) {
                 try {
                     const response = await fetch(`data/${filename}`);
-                    if (!response.ok) throw new Error('Ошибка загрузки файла');
+                    if (!response.ok) throw new Error(`Ошибка загрузки файла: ${response.status}`);
                     return await response.json();
                 } catch (error) {
                     console.error(`Ошибка загрузки файла ${filename}:`, error);
                     return null;
                 }
-            }
-
-            // Загрузка всех категорий
-            async function loadAllCategories() {
-                const fileList = await loadFileList();
-                const categories = [];
-                
-                for (const file of fileList) {
-                    const data = await loadJsonFile(file);
-                    if (data) {
-                        categories.push(data);
-                    }
-                }
-                
-                return categories;
             }
 
             // Рендер главной страницы
@@ -348,22 +622,97 @@
                     <p class="category-description">Полное руководство по устранению неполадок, настройкам и оптимизации вашего 3D-принтера</p>
                     
                     <div class="search-container">
+                        <div class="search-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </div>
                         <input type="text" id="global-search" placeholder="Поиск по всей базе знаний...">
                     </div>
                     
                     <div class="categories-grid" id="categories-container"></div>
                     
                     <div class="no-results" id="noResults">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="8" y1="15" x2="16" y2="15"></line>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
                         Ничего не найдено. Попробуйте изменить поисковый запрос.
                     </div>
                 `;
                 
+                renderCategoriesList(allCategories);
                 setupGlobalSearch();
+            }
+
+            // Рендер страницы О проекте
+            function renderAboutPage() {
+                mainContainer.innerHTML = `
+                    <div class="breadcrumbs">
+                        <a href="#" id="breadcrumb-home">Главная</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                        <span>О проекте</span>
+                    </div>
+                    
+                    <h1>О проекте</h1>
+                    
+                    <div class="entry" style="margin-top: 20px;">
+                        <div class="entry-header active">О базе знаний</div>
+                        <div class="entry-content active">
+                            <div class="field">
+                                <p>База знаний по 3D-принтеру FlashForge Adventurer 5M создана с целью предоставить пользователям исчерпывающую информацию о возможных проблемах, способах их устранения и рекомендациях по оптимальной настройке и эксплуатации устройства.</p>
+                                <p>Данный проект является открытым и постоянно пополняется новыми статьями, основанными на опыте пользователей и официальной документации.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="entry">
+                        <div class="entry-header">Как пользоваться</div>
+                        <div class="entry-content">
+                            <div class="field">
+                                <p>База знаний организована по категориям, которые группируют проблемы и решения по темам. Вы можете:</p>
+                                <ul style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+                                    <li>Просматривать содержимое по категориям</li>
+                                    <li>Использовать поиск для быстрого нахождения нужной информации</li>
+                                    <li>Раскрывать интересующие вас проблемы для детального ознакомления</li>
+                                </ul>
+                                <p>Каждая запись содержит описание проблемы, её возможные причины, варианты решения и дополнительные заметки при необходимости.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="entry">
+                        <div class="entry-header">Контакты</div>
+                        <div class="entry-content">
+                            <div class="field">
+                                <p>Если у вас есть предложения по улучшению базы знаний или вы хотите поделиться своим опытом по решению проблем с FlashForge Adventurer 5M, пожалуйста, свяжитесь с нами:</p>
+                                <p style="margin-top: 10px;"><strong>Email:</strong> support@flashforge5mkb.ru</p>
+                                <p><strong>Telegram:</strong> @flashforge5m_support</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Настройка переключения для аккордеонов
+                setupAccordions();
+                
+                // Настройка хлебных крошек
+                document.getElementById('breadcrumb-home').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderHomePage();
+                });
             }
 
             // Рендер списка категорий
             function renderCategoriesList(categories) {
                 const container = document.getElementById('categories-container');
+                if (!container) return;
+                
                 container.innerHTML = '';
                 
                 categories.forEach(category => {
@@ -371,10 +720,17 @@
                     card.className = 'category-card';
                     card.href = '#';
                     card.dataset.category = category.category;
+                    
+                    // Иконка в зависимости от категории
+                    let icon = getIconByCategoryName(category.category);
+                    
                     card.innerHTML = `
                         <h2>${category.category}</h2>
-                        <p>${category.description}</p>
-                        <div class="category-count">${category.entries.length} вопросов</div>
+                        <p>${category.description || `Вопросы и решения по теме "${category.category}"`}</p>
+                        <div class="category-count">
+                            ${icon}
+                            ${category.entries.length} ${pluralize(category.entries.length, ['вопрос', 'вопроса', 'вопросов'])}
+                        </div>
                     `;
                     
                     card.addEventListener('click', (e) => {
@@ -386,189 +742,8 @@
                 });
             }
 
-            // Рендер страницы категории
-            function renderCategoryPage(category) {
-                mainContainer.innerHTML = `
-                    <div class="breadcrumbs">
-                        <a href="#" id="breadcrumb-home">Главная</a> &raquo; <span>${category.category}</span>
-                    </div>
-                    
-                    <h1>${category.category}</h1>
-                    <p class="category-description">${category.description}</p>
-                    
-                    <div class="search-container">
-                        <input type="text" id="category-search" placeholder="Поиск по категории...">
-                    </div>
-                    
-                    <div id="content"></div>
-                    
-                    <div class="no-results" id="noResults">
-                        Ничего не найдено. Попробуйте изменить поисковый запрос.
-                    </div>
-                `;
-                
-                // Рендер записей категории
-                const contentDiv = document.getElementById('content');
-                category.entries.forEach(entry => {
-                    const entryDiv = document.createElement('div');
-                    entryDiv.className = 'entry';
-                    
-                    const entryHeader = document.createElement('div');
-                    entryHeader.className = 'entry-header';
-                    entryHeader.textContent = entry.title;
-                    
-                    const entryContent = document.createElement('div');
-                    entryContent.className = 'entry-content';
-                    
-                    // Проблема
-                    const problemDiv = document.createElement('div');
-                    problemDiv.className = 'field';
-                    problemDiv.innerHTML = `<div class="field-title">Проблема</div><div>${entry.problem}</div>`;
-                    entryContent.appendChild(problemDiv);
-                    
-                    // Причина
-                    if (entry.reason) {
-                        const reasonDiv = document.createElement('div');
-                        reasonDiv.className = 'field';
-                        reasonDiv.innerHTML = `<div class="field-title">Причина</div><div>${entry.reason}</div>`;
-                        entryContent.appendChild(reasonDiv);
-                    }
-                    
-                    // Решение
-                    if (entry.solution) {
-                        const solutionDiv = document.createElement('div');
-                        solutionDiv.className = 'field';
-                        solutionDiv.innerHTML = `<div class="field-title">Решение</div><div>${formatSolution(entry.solution)}</div>`;
-                        entryContent.appendChild(solutionDiv);
-                    }
-                    
-                    // Заметки
-                    if (entry.notes) {
-                        const notesDiv = document.createElement('div');
-                        notesDiv.className = 'field';
-                        notesDiv.innerHTML = `<div class="field-title">Заметки</div><div>${entry.notes}</div>`;
-                        entryContent.appendChild(notesDiv);
-                    }
-                    
-                    // Обработчик клика
-                    entryHeader.addEventListener('click', function() {
-                        this.classList.toggle('active');
-                        entryContent.classList.toggle('active');
-                    });
-                    
-                    entryDiv.appendChild(entryHeader);
-                    entryDiv.appendChild(entryContent);
-                    contentDiv.appendChild(entryDiv);
-                });
-                
-                // Настройка поиска по категории
-                setupCategorySearch();
-                
-                // Настройка хлебных крошек
-                document.getElementById('breadcrumb-home').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    renderHomePage();
-                    renderCategoriesList(allCategories);
-                });
-                
-                // Открываем первую запись
-                const firstEntry = contentDiv.querySelector('.entry');
-                if (firstEntry) {
-                    firstEntry.querySelector('.entry-header').classList.add('active');
-                    firstEntry.querySelector('.entry-content').classList.add('active');
-                }
-            }
-
-            // Форматирование решения (простой markdown)
-            function formatSolution(text) {
-                if (!text) return '';
-                // Жирный текст
-                text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                // Ссылки
-                text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
-                // Переносы строк
-                text = text.replace(/\n/g, '<br>');
-                return text;
-            }
-
-            // Настройка глобального поиска
-            function setupGlobalSearch() {
-                const searchInput = document.getElementById('global-search');
-                const noResultsDiv = document.getElementById('noResults');
-                const categoriesContainer = document.getElementById('categories-container');
-                
-                searchInput.addEventListener('input', function() {
-                    const query = this.value.toLowerCase().trim();
-                    const cards = categoriesContainer.querySelectorAll('.category-card');
-                    let hasResults = false;
-                    
-                    cards.forEach(card => {
-                        const title = card.querySelector('h2').textContent.toLowerCase();
-                        const description = card.querySelector('p').textContent.toLowerCase();
-                        
-                        if (query === '' || title.includes(query) || description.includes(query)) {
-                            card.style.display = '';
-                            hasResults = true;
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                    
-                    noResultsDiv.style.display = hasResults ? 'none' : 'block';
-                });
-            }
-
-            // Настройка поиска по категории
-            function setupCategorySearch() {
-                const searchInput = document.getElementById('category-search');
-                const noResultsDiv = document.getElementById('noResults');
-                const entries = document.querySelectorAll('.entry');
-                
-                searchInput.addEventListener('input', function() {
-                    const query = this.value.toLowerCase().trim();
-                    let hasResults = false;
-                    
-                    entries.forEach(entry => {
-                        const title = entry.querySelector('.entry-header').textContent.toLowerCase();
-                        const content = entry.textContent.toLowerCase();
-                        
-                        if (query === '' || title.includes(query) || content.includes(query)) {
-                            entry.style.display = '';
-                            hasResults = true;
-                        } else {
-                            entry.style.display = 'none';
-                        }
-                    });
-                    
-                    noResultsDiv.style.display = hasResults ? 'none' : 'block';
-                });
-            }
-
-            // Инициализация приложения
-            async function init() {
-                // Загрузка всех категорий
-                allCategories = await loadAllCategories();
-                
-                // Рендер главной страницы
-                renderHomePage();
-                renderCategoriesList(allCategories);
-                
-                // Настройка навигации
-                homeLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    renderHomePage();
-                    renderCategoriesList(allCategories);
-                });
-                
-                categoriesLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    renderHomePage();
-                    renderCategoriesList(allCategories);
-                });
-            }
-
-            init();
-        });
-    </script>
-</body>
-</html>
+            // Функция для получения иконки по названию категории
+            function getIconByCategoryName(categoryName) {
+                const iconMap = {
+                    'Прошивка': `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>`,
+                    'Механика': `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M6.6 6.6l10.8 10.8"/>
