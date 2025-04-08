@@ -17,6 +17,13 @@
             --reason-color: #ffa94d;
             --solution-color: #4dabf7;
             --notes-color: #69db7c;
+            
+            /* Категории цвета */
+            --cat-warning: #ffcc00;
+            --cat-firmware: #0066cc;
+            --cat-hardware: #33cc33;
+            --cat-filament: #ff6600;
+            --cat-service: #9966cc;
         }
 
         * {
@@ -84,6 +91,18 @@
 
         nav ul li a:hover {
             color: var(--accent-color);
+        }
+        
+        .theme-switcher {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            margin-top: -2px;
         }
 
         .container {
@@ -193,6 +212,22 @@
             display: flex;
             align-items: center;
         }
+        
+        .field-content {
+            padding-left: 15px;
+            line-height: 1.7;
+        }
+        
+        .field-content a {
+            color: var(--accent-color);
+            text-decoration: underline;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .field-content a:hover {
+            color: #004d99;
+        }
 
         .field-title svg {
             margin-right: 8px;
@@ -284,6 +319,15 @@
             gap: 20px;
             margin-top: 30px;
         }
+        
+        /* Featured категория должна быть шире на мобильных устройствах */
+        @media (max-width: 768px) {
+            .category-card.featured {
+                grid-column: 1 / -1;
+                margin: 0 auto;
+                max-width: 450px;
+            }
+        }
 
         .category-card {
             background-color: var(--card-bg);
@@ -296,6 +340,8 @@
             color: inherit;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
 
         .category-card:hover {
@@ -303,11 +349,56 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transform: translateY(-2px);
         }
-
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--accent-color);
+            transition: width 0.2s;
+        }
+        
+        .category-card:hover::before {
+            width: 7px;
+        }
+        
+        .category-card.warning::before {
+            background-color: var(--cat-warning);
+        }
+        
+        .category-card.firmware::before {
+            background-color: var(--cat-firmware);
+        }
+        
+        .category-card.hardware::before {
+            background-color: var(--cat-hardware);
+        }
+        
+        .category-card.filament::before {
+            background-color: var(--cat-filament);
+        }
+        
+        .category-card.service::before {
+            background-color: var(--cat-service);
+        }
+        
+        .category-card.featured {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .category-card.featured:hover {
+            transform: scale(1.03) translateY(-2px);
+        }
+        
         .category-card h2 {
             font-size: 1.3rem;
             margin-bottom: 12px;
             color: var(--accent-color);
+            padding-left: 5px;
         }
 
         .category-card p {
@@ -393,16 +484,7 @@
             font-size: 0.9rem;
         }
 
-        .theme-switcher {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-            font-size: 1.1rem;
-        }
+        /* Удалено дублирование .theme-switcher */
 
         /* Dark theme */
         body.dark-theme {
@@ -516,12 +598,12 @@
             const themeSwitcher = document.getElementById('theme-switcher');
             let allCategories = [];
             let jsonFiles = [
+                'Предупреждение и рекомендации.json', // Помещаем на первое место
                 '3D-модели поиск и подготовка.json',
                 'Интерфейс и управление.json',
                 'Механика.json',
                 'Модификации и апгрейды.json',
                 'Обслуживание.json',
-                'Предупреждение и рекомендации.json',
                 'Продвинутые возможности и хардвер.json',
                 'Прошивка.json',
                 'Слайсеры.json',
@@ -715,13 +797,46 @@
                 
                 container.innerHTML = '';
                 
-                categories.forEach(category => {
+                // Создаем центральный контейнер для размещения featured категории
+                const featuredContainer = document.createElement('div');
+                featuredContainer.className = 'categories-grid';
+                featuredContainer.style.marginBottom = '25px';
+                container.appendChild(featuredContainer);
+                
+                // Создаем обычный контейнер для остальных категорий
+                const regularContainer = document.createElement('div');
+                regularContainer.className = 'categories-grid';
+                container.appendChild(regularContainer);
+                
+                categories.forEach((category, index) => {
                     const card = document.createElement('a');
-                    card.className = 'category-card';
                     card.href = '#';
                     card.dataset.category = category.category;
                     
-                    // Иконка в зависимости от категории
+                    // Добавление специальных классов для стилизации
+                    let categoryClass = '';
+                    if (category.category.includes('Предупреждение')) {
+                        categoryClass = 'warning';
+                        card.className = 'category-card warning featured';
+                    } else if (category.category.includes('Прошивка')) {
+                        categoryClass = 'firmware';
+                        card.className = 'category-card firmware';
+                    } else if (category.category.includes('Механика') || 
+                               category.category.includes('Экструдер') ||
+                               category.category.includes('хардвер')) {
+                        categoryClass = 'hardware';
+                        card.className = 'category-card hardware';
+                    } else if (category.category.includes('Филамент')) {
+                        categoryClass = 'filament';
+                        card.className = 'category-card filament';
+                    } else if (category.category.includes('Обслуживание')) {
+                        categoryClass = 'service';
+                        card.className = 'category-card service';
+                    } else {
+                        card.className = 'category-card';
+                    }
+                    
+                    // Получение иконки для категории
                     let icon = getIconByCategoryName(category.category);
                     
                     card.innerHTML = `
@@ -738,7 +853,12 @@
                         renderCategoryPage(category);
                     });
                     
-                    container.appendChild(card);
+                    // Добавляем в соответствующий контейнер
+                    if (card.classList.contains('featured')) {
+                        featuredContainer.appendChild(card);
+                    } else {
+                        regularContainer.appendChild(card);
+                    }
                 });
             }
 
@@ -944,8 +1064,17 @@
                 // Курсив
                 text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
                 
-                // Ссылки
-                text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+                // Ссылки - модифицировано для корректного отображения
+                text = text.replace(/\[(.*?)\]\((.*?)\)/g, function(match, text, url) {
+                    // Добавляем http:// если ссылка не содержит протокол
+                    if (!/^https?:\/\//i.test(url) && !url.startsWith('/')) {
+                        url = 'http://' + url;
+                    }
+                    return '<a href="' + url + '" target="_blank" class="kb-link">' + text + '</a>';
+                });
+                
+                // Автоматическое определение ссылок
+                text = text.replace(/\b(https?:\/\/[^\s,]+)/g, '<a href="$1" target="_blank" class="kb-link">$1</a>');
                 
                 // Списки
                 text = text.replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>');
