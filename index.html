@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База знаний</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --accent-color: #4285f4;
+            --hover-color: #f1f1f1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        #search {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        #search:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+
+        .category {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .entry {
+            background-color: var(--card-color);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .entry-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .entry-header:hover {
+            background-color: var(--hover-color);
+        }
+
+        .entry-header::after {
+            content: '+';
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .entry-header.active::after {
+            transform: rotate(45deg);
+        }
+
+        .entry-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .entry-content.active {
+            padding: 0 20px 20px;
+            max-height: 2000px;
+        }
+
+        .field {
+            margin-bottom: 10px;
+        }
+
+        .field-title {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .notes {
+            font-style: italic;
+            padding: 10px;
+            background-color: rgba(255, 235, 59, 0.1);
+            border-radius: 4px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .entry-header {
+                padding: 12px 15px;
+            }
+
+            .entry-content {
+                padding: 0 15px;
+            }
+
+            .entry-content.active {
+                padding: 0 15px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>База знаний</h1>
+        
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Поиск по всем полям...">
+        </div>
+        
+        <div id="content">
+            <div class="loading">Загрузка данных...</div>
+        </div>
+        
+        <div class="no-results" id="noResults">
+            Ничего не найдено. Попробуйте изменить запрос.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Загружаем все JSON файлы из папки data
+            async function loadData() {
+                try {
+                    // В реальном проекте здесь нужно получить список файлов с сервера
+                    // Для примера будем использовать фиксированный список
+                    const files = [
+                        'Прошивка.json',
+                        'Механика.json'
+                    ];
+                    
+                    const data = [];
+                    
+                    for (const file of files) {
+                        try {
+                            const response = await fetch(`data/${file}`);
+                            if (!response.ok) continue;
+                            const jsonData = await response.json();
+                            data.push(jsonData);
+                        } catch (e) {
+                            console.error(`Ошибка загрузки файла ${file}:`, e);
+                        }
+                    }
+                    
+                    return data;
+                } catch (error) {
+                    console.error('Ошибка загрузки данных:', error);
+                    return [];
+                }
+            }
+            
+            // Рендерим данные на странице
+            function renderData(data) {
+                const contentDiv = document.getElementById('content');
+                
+                if (data.length === 0) {
+                    contentDiv.innerHTML = '<div class="loading">Не удалось загрузить данные.</div>';
+                    return;
+                }
+                
+                contentDiv.innerHTML = '';
+                
+                data.forEach(category => {
+                    if (!category.entries || category.entries.length === 0) return;
+                    
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category';
+                    categoryDiv.dataset.category = category.category.toLowerCase();
+                    
+                    const categoryTitle = document.createElement('h2');
+                    categoryTitle.className = 'category-title';
+                    categoryTitle.textContent = category.category;
+                    
+                    categoryDiv.appendChild(categoryTitle);
+                    
+                    category.entries.forEach(entry => {
+                        const entryDiv = document.createElement('div');
+                        entryDiv.className = 'entry';
+                        entryDiv.dataset.title = entry.title.toLowerCase();
+                        entryDiv.dataset.problem = entry.problem.toLowerCase();
+                        entryDiv.dataset.reason = (entry.reason || '').toLowerCase();
+                        entryDiv.dataset.solution = (entry.solution || '').toLowerCase();
+                        entryDiv.dataset.notes = (entry.notes || '').toLowerCase();
+                        
+                        const entryHeader = document.createElement('div');
+                        entryHeader.className = 'entry-header';
+                        entryHeader.textContent = entry.title;
+                        
+                        const entryContent = document.createElement('div');
+                        entryContent.className = 'entry-content';
+                        
+                        // Проблема
+                        const problemDiv = document.createElement('div');
+                        problemDiv.className = 'field';
+                        problemDiv.innerHTML = `<span class="field-title">❗ Проблема:</span> ${entry.problem}`;
+                        entryContent.appendChild(problemDiv);
+                        
+                        // Причина (если есть)
+                        if (entry.reason) {
+                            const reasonDiv = document.createElement('div');
+                            reasonDiv.className = 'field';
+                            reasonDiv.innerHTML = `<span class="field-title">🔍 Причина:</span> ${entry.reason}`;
+                            entryContent.appendChild(reasonDiv);
+                        }
+                        
+                        // Решение (если есть)
+                        if (entry.solution) {
+                            const solutionDiv = document.createElement('div');
+                            solutionDiv.className = 'field';
+                            solutionDiv.innerHTML = `<span class="field-title">✅ Решение:</span> ${parseMarkdown(entry.solution)}`;
+                            entryContent.appendChild(solutionDiv);
+                        }
+                        
+                        // Заметки (если есть)
+                        if (entry.notes) {
+                            const notesDiv = document.createElement('div');
+                            notesDiv.className = 'notes';
+                            notesDiv.innerHTML = `💡 ${parseMarkdown(entry.notes)}`;
+                            entryContent.appendChild(notesDiv);
+                        }
+                        
+                        // Обработчик клика для аккордеона
+                        entryHeader.addEventListener('click', function() {
+                            this.classList.toggle('active');
+                            entryContent.classList.toggle('active');
+                        });
+                        
+                        entryDiv.appendChild(entryHeader);
+                        entryDiv.appendChild(entryContent);
+                        categoryDiv.appendChild(entryDiv);
+                    });
+                    
+                    contentDiv.appendChild(categoryDiv);
+                });
+            }
+            
+            // Простая функция для преобразования Markdown в HTML
+            function parseMarkdown(text) {
+                if (!text) return '';
+                
+                // Жирный текст
+                text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                
+                // Ссылки
+                text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+                
+                // Переносы строк
+                text = text.replace(/\n/g, '<br>');
+                
+                return text;
+            }
+            
+            // Поиск
+            function setupSearch() {
+                const searchInput = document.getElementById('search');
+                const noResultsDiv = document.getElementById('noResults');
+                
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.toLowerCase().trim();
+                    const entries = document.querySelectorAll('.entry');
+                    let hasVisible = false;
+                    
+                    if (query === '') {
+                        entries.forEach(entry => {
+                            entry.style.display = '';
+                            const category = entry.closest('.category');
+                            if (category) category.style.display = '';
+                        });
+                        noResultsDiv.style.display = 'none';
+                        return;
+                    }
+                    
+                    entries.forEach(entry => {
+                        const matches = 
+                            entry.dataset.title.includes(query) ||
+                            entry.dataset.problem.includes(query) ||
+                            entry.dataset.reason.includes(query) ||
+                            entry.dataset.solution.includes(query) ||
+                            entry.dataset.notes.includes(query);
+                        
+                        if (matches) {
+                            entry.style.display = '';
+                            hasVisible = true;
+                            
+                            // Показываем родительскую категорию
+                            const category = entry.closest('.category');
+                            if (category) category.style.display = '';
+                        } else {
+                            entry.style.display = 'none';
+                        }
+                    });
+                    
+                    // Скрываем пустые категории
+                    document.querySelectorAll('.category').forEach(category => {
+                        const visibleEntries = category.querySelectorAll('.entry:not([style*="display: none"])');
+                        if (visibleEntries.length === 0) {
+                            category.style.display = 'none';
+                        }
+                    });
+                    
+                    noResultsDiv.style.display = hasVisible ? 'none' : 'block';
+                });
+            }
+            
+            // Инициализация
+            async function init() {
+                const data = await loadData();
+                renderData(data);
+                setupSearch();
+            }
+            
+            init();
+        });
+    </script>
+</body>
+</html>
