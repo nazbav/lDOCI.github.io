@@ -1087,22 +1087,44 @@
                 text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
                 
                 // Ссылки в формате [текст](url)
-                text = text.replace(/\[(.*?)\]\((.*?)\)/g, function(match, text, url) {
+                text = text.replace(/\[(.*?)\]\((.*?)\)/g, function(match, linkText, url) {
                     // Добавляем http:// если ссылка не содержит протокол
                     if (!/^https?:\/\//i.test(url) && !url.startsWith('/')) {
                         url = 'https://' + url;
                     }
-                    return '<a href="' + url + '" target="_blank" class="kb-link">' + text + '</a>';
+                    return '<a href="' + url + '" target="_blank" class="kb-link">' + linkText + '</a>';
                 });
                 
-                // Выделение url как ссылок (если они не были обработаны выше)
-                // Ищем URL, которые не являются частью html-тега и не находятся внутри атрибута href
-                text = text.replace(/(?<!href=["'])(?<!["'=])(https?:\/\/[^\s<]+)/gi, 
-                    '<a href="$1" target="_blank" class="kb-link">$1</a>');
+                // Детектируем прямые URL с протоколом
+                text = text.replace(/(https?:\/\/[^\s<>"']+)/gi, function(match) {
+                    // Проверяем, не является ли это уже частью тега <a>
+                    if (text.indexOf('<a') !== -1 && (
+                        text.indexOf(match) > text.indexOf('<a') && 
+                        text.indexOf(match) < text.indexOf('</a>')
+                    )) {
+                        return match;
+                    }
+                    return '<a href="' + match + '" target="_blank" class="kb-link">' + match + '</a>';
+                });
                 
-                // Распознавание доменов без протокола (например, example.com)
-                text = text.replace(/\b(?<!href=["']|\/\/)([a-z0-9][-a-z0-9]*\.[a-z0-9][-a-z0-9]*\.[a-z]{2,}|[a-z0-9][-a-z0-9]*\.[a-z]{2,})(?!["']>|\.[a-z])/gi, 
-                    '<a href="https://$1" target="_blank" class="kb-link">$1</a>');
+                // Детектируем домены без протокола (например example.com)
+                text = text.replace(/\b([a-z0-9][-a-z0-9]*\.[a-z0-9][-a-z0-9]*\.[a-z]{2,}|[a-z0-9][-a-z0-9]*\.[a-z]{2,})\b/gi, function(match) {
+                    // Проверяем, не является ли это уже частью URL или тега <a>
+                    if (text.indexOf('<a') !== -1 && (
+                        text.indexOf(match) > text.indexOf('<a') && 
+                        text.indexOf(match) < text.indexOf('</a>')
+                    )) {
+                        return match;
+                    }
+                    // Проверяем, не является ли это частью атрибута href
+                    if (text.indexOf('href="') !== -1 && (
+                        text.indexOf(match) > text.indexOf('href="') && 
+                        text.indexOf(match) < text.indexOf('"', text.indexOf('href="') + 6)
+                    )) {
+                        return match;
+                    }
+                    return '<a href="https://' + match + '" target="_blank" class="kb-link">' + match + '</a>';
+                });
                 
                 // Списки
                 text = text.replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>');
