@@ -238,7 +238,7 @@
             transition: background-color 0.2s;
         }
 
-        .brand {
+        .manufacturer {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--accent-color);
@@ -619,11 +619,11 @@
                 <h3>Производитель</h3>
                 <div class="filter-option">
                     <label>
-                        <input type="checkbox" name="brand" value="all" checked id="brand-all">
+                        <input type="checkbox" name="manufacturer" value="all" checked id="manufacturer-all">
                         Все
                     </label>
                 </div>
-                <div id="brand-filters">
+                <div id="manufacturer-filters">
                     <!-- Будет заполнено динамически -->
                 </div>
             </div>
@@ -709,8 +709,8 @@
             
             <div class="filters-row">
                 <select id="sort-select" class="filter-select">
-                    <option value="brand-asc">Сортировка: Название (А-Я)</option>
-                    <option value="brand-desc">Сортировка: Название (Я-А)</option>
+                    <option value="manufacturer-asc">Сортировка: Название (А-Я)</option>
+                    <option value="manufacturer-desc">Сортировка: Название (Я-А)</option>
                     <option value="weight-asc">Сортировка: Вес (по возрастанию)</option>
                     <option value="weight-desc">Сортировка: Вес (по убыванию)</option>
                     <option value="rating-desc">Сортировка: Рейтинг (высокий сначала)</option>
@@ -759,7 +759,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const sortSelect = document.getElementById('sort-select');
   const resetFiltersBtn = document.getElementById('reset-filters');
   const materialFiltersContainer = document.getElementById('material-filters');
-  const brandFiltersContainer = document.getElementById('brand-filters');
+  const manufacturerFiltersContainer = document.getElementById('manufacturer-filters');
 
   let filaments = [];
   let prices = {};
@@ -784,7 +784,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function generateFilterOptions() {
     const materials = [...new Set(filaments.map(f => f.type))];
-    const brands = [...new Set(filaments.map(f => f.brand))];
+    const manufacturers = [...new Set(filaments.map(f => f.manufacturer))];
 
     materialFiltersContainer.innerHTML = materials.map(type => `
       <div class="filter-option">
@@ -792,13 +792,13 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     `).join("");
 
-    brandFiltersContainer.innerHTML = brands.map(brand => `
+    manufacturerFiltersContainer.innerHTML = manufacturers.map(manufacturer => `
       <div class="filter-option">
-        <label><input type="checkbox" name="brand" value="${brand}"> ${brand}</label>
+        <label><input type="checkbox" name="manufacturer" value="${manufacturer}"> ${manufacturer}</label>
       </div>
     `).join("");
 
-    document.querySelectorAll('input[name="material"], input[name="brand"], input[name="weight"], input[name="rating"]').forEach(input => {
+    document.querySelectorAll('input[name="material"], input[name="manufacturer"], input[name="weight"], input[name="rating"]').forEach(input => {
       input.addEventListener("change", applyFilters);
     });
 
@@ -807,31 +807,31 @@ document.addEventListener('DOMContentLoaded', function () {
     resetFiltersBtn.addEventListener("click", () => {
       document.querySelectorAll('input[type=checkbox], input[type=radio]').forEach(el => el.checked = el.id.includes("all"));
       searchInput.value = "";
-      sortSelect.value = "brand-asc";
+      sortSelect.value = "manufacturer-asc";
       applyFilters();
     });
   }
 
   function applyFilters() {
     const activeMaterials = [...document.querySelectorAll('input[name="material"]:checked')].map(i => i.value).filter(v => v !== "all");
-    const activeBrands = [...document.querySelectorAll('input[name="brand"]:checked')].map(i => i.value).filter(v => v !== "all");
+    const activemanufacturers = [...document.querySelectorAll('input[name="manufacturer"]:checked')].map(i => i.value).filter(v => v !== "all");
     const activeWeights = [...document.querySelectorAll('input[name="weight"]:checked')].map(i => i.value).filter(v => v !== "all").map(Number);
     const ratingFilter = document.querySelector('input[name="rating"]:checked').value;
     const query = searchInput.value.trim().toLowerCase();
 
     filteredFilaments = filaments.filter(f => {
       if (activeMaterials.length && !activeMaterials.includes(f.type)) return false;
-      if (activeBrands.length && !activeBrands.includes(f.brand)) return false;
+      if (activemanufacturers.length && !activemanufacturers.includes(f.manufacturer)) return false;
       if (activeWeights.length && !activeWeights.includes(f.weight_g)) return false;
       if (ratingFilter !== "all" && (!f.author_rating || f.author_rating < parseInt(ratingFilter))) return false;
-      if (query && !(f.brand.toLowerCase().includes(query) || f.type.toLowerCase().includes(query))) return false;
+      if (query && !(f.manufacturer.toLowerCase().includes(query) || f.type.toLowerCase().includes(query))) return false;
       return true;
     });
 
     const sort = sortSelect.value;
     filteredFilaments.sort((a, b) => {
-      if (sort === "brand-asc") return a.brand.localeCompare(b.brand);
-      if (sort === "brand-desc") return b.brand.localeCompare(a.brand);
+      if (sort === "manufacturer-asc") return a.manufacturer.localeCompare(b.manufacturer);
+      if (sort === "manufacturer-desc") return b.manufacturer.localeCompare(a.manufacturer);
       if (sort === "weight-asc") return a.weight_g - b.weight_g;
       if (sort === "weight-desc") return b.weight_g - a.weight_g;
       if (sort === "rating-desc") return (b.author_rating || 0) - (a.author_rating || 0);
@@ -893,7 +893,7 @@ document.addEventListener('DOMContentLoaded', function () {
       filamentGrid.innerHTML += `
         <div class="filament-card">
           <div class="card-header">
-            <span class="brand">${f.brand}</span>
+            <span class="manufacturer">${f.manufacturer}</span>
             <span class="filament-type">${f.type}</span>
           </div>
           <div class="card-content">
