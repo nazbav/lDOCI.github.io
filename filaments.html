@@ -1,0 +1,1071 @@
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица филаментов</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #222222;
+            --accent-color: #0066cc;
+            --border-color: #e0e0e0;
+            --card-bg: #f9f9f9;
+            --header-bg: #ffffff;
+            --footer-bg: #f2f2f2;
+            --problem-color: #ff6b6b;
+            --reason-color: #ffa94d;
+            --solution-color: #4dabf7;
+            --notes-color: #69db7c;
+            --cheapest-color: #69db7c;
+            --button-bg: #3366ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo svg {
+            margin-right: 10px;
+        }
+
+        .theme-switcher {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            margin-top: -2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            flex: 1;
+            display: flex;
+            gap: 30px;
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .category-description {
+            color: #666666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        #search, #global-search, #category-search {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #search:focus, #global-search:focus, #category-search:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .filters-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-group h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .filter-option {
+            margin-bottom: 10px;
+        }
+
+        .filter-option label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .filter-option input[type="checkbox"],
+        .filter-option input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .reset-filters {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .reset-filters:hover {
+            background-color: #2952cc;
+        }
+
+        .filament-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .filament-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .filament-card:hover {
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s;
+        }
+
+        .brand {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .filament-type {
+            background-color: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .specs-section {
+            margin-bottom: 15px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .spec-label {
+            color: #666;
+        }
+
+        .rating-section {
+            margin: 15px 0;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .rating-stars {
+            color: #FFD700;
+            letter-spacing: 3px;
+            font-size: 1.2rem;
+        }
+
+        .poop-rating {
+            letter-spacing: 3px;
+            font-size: 1.2rem;
+        }
+
+        .author-review {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 4px;
+            font-style: italic;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .author-review::before {
+            content: """;
+            font-size: 2rem;
+            color: #ddd;
+            position: absolute;
+            top: -5px;
+            left: 5px;
+        }
+
+        .author-review p {
+            position: relative;
+            z-index: 1;
+        }
+
+        .prices-section {
+            margin-top: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .price-marketplace {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-marketplace img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .price-value {
+            font-weight: 500;
+        }
+
+        .cheapest {
+            color: var(--cheapest-color);
+            font-weight: 600;
+        }
+
+        .cheapest::after {
+            content: " 💸";
+        }
+
+        .review-section {
+            margin-top: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .review-toggle {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .review-toggle:hover {
+            background-color: #0052a3;
+        }
+
+        .review-form {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 4px;
+            display: none;
+        }
+
+        .review-form.show {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #ddd;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #FFD700;
+        }
+
+        .submit-review {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .submit-review:hover {
+            background-color: #0052a3;
+        }
+
+        .review-success {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .review-success.show {
+            display: block;
+        }
+
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            flex-direction: column;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--accent-color);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666666;
+            display: none;
+            font-size: 1.1rem;
+        }
+
+        .no-results svg {
+            display: block;
+            margin: 0 auto 20px;
+            color: #cccccc;
+        }
+
+        footer {
+            background-color: var(--footer-bg);
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright {
+            color: #666666;
+        }
+
+        .footer-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        /* Dark theme */
+        body.dark-theme {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --border-color: #333333;
+            --card-bg: #1e1e1e;
+            --header-bg: #1a1a1a;
+            --footer-bg: #1a1a1a;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0 8px;
+            }
+            
+            .filament-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
+                </svg>
+                Таблица филаментов
+            </a>
+            <button class="theme-switcher" id="theme-switcher">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="filter-group">
+                <h3>Материал</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" name="material" value="all" checked id="material-all">
+                        Все
+                    </label>
+                </div>
+                <div id="material-filters">
+                    <!-- Будет заполнено динамически -->
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Производитель</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" name="brand" value="all" checked id="brand-all">
+                        Все
+                    </label>
+                </div>
+                <div id="brand-filters">
+                    <!-- Будет заполнено динамически -->
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Вес</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" name="weight" value="all" checked id="weight-all">
+                        Все
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" name="weight" value="500">
+                        500г
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" name="weight" value="750">
+                        750г
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" name="weight" value="1000">
+                        1000г
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="checkbox" name="weight" value="2000">
+                        2000г+
+                    </label>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Рейтинг</h3>
+                <div class="filter-option">
+                    <label>
+                        <input type="radio" name="rating" value="all" checked>
+                        Все
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="radio" name="rating" value="5">
+                        5 звезд
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="radio" name="rating" value="4">
+                        4+ звезды
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <label>
+                        <input type="radio" name="rating" value="3">
+                        3+ звезды
+                    </label>
+                </div>
+            </div>
+            
+            <button class="reset-filters" id="reset-filters">Сбросить фильтры</button>
+        </div>
+        
+        <div class="content">
+            <h1>Каталог 3D-филаментов</h1>
+            <p class="category-description">Наша база данных содержит информацию о различных производителях 3D-филамента, доступных на российском рынке. Здесь вы найдёте технические характеристики катушек, отзывы пользователей и ссылки на маркетплейсы.</p>
+            
+            <div class="search-container">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <input type="text" id="search" placeholder="Поиск по названию или производителю...">
+            </div>
+            
+            <div class="filters-row">
+                <select id="sort-select" class="filter-select">
+                    <option value="brand-asc">Сортировка: Название (А-Я)</option>
+                    <option value="brand-desc">Сортировка: Название (Я-А)</option>
+                    <option value="weight-asc">Сортировка: Вес (по возрастанию)</option>
+                    <option value="weight-desc">Сортировка: Вес (по убыванию)</option>
+                    <option value="rating-desc">Сортировка: Рейтинг (высокий сначала)</option>
+                </select>
+            </div>
+            
+            <div id="loading" class="loading-container">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Загрузка базы данных...</div>
+            </div>
+            
+            <div id="no-results" class="no-results">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="8" y1="15" x2="16" y2="15"></line>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+                <h2>Ничего не найдено</h2>
+                <p>Попробуйте изменить параметры поиска или фильтры</p>
+            </div>
+            
+            <div id="filament-grid" class="filament-grid">
+                <!-- Карточки будут добавлены динамически через JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="copyright">© 2023-2025 Каталог 3D-филаментов</div>
+            <div class="footer-links">
+                <a href="#">Обратная связь</a>
+                <a href="#">Добавить филамент</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filamentGrid = document.getElementById('filament-grid');
+            const loadingContainer = document.getElementById('loading');
+            const noResultsContainer = document.getElementById('no-results');
+            const searchInput = document.getElementById('search');
+            const sortSelect = document.getElementById('sort-select');
+            const themeSwitcher = document.getElementById('theme-switcher');
+            const resetFiltersBtn = document.getElementById('reset-filters');
+            const materialFiltersContainer = document.getElementById('material-filters');
+            const brandFiltersContainer = document.getElementById('brand-filters');
+            
+            let filaments = [];
+            let prices = {};
+            let filteredFilaments = [];
+            let materialTypes = new Set();
+            let brandNames = new Set();
+            
+            // Функция для замены NaN на null в строке JSON
+            function fixJsonWithNaN(jsonString) {
+                return jsonString
+                    .replace(/: NaN/g, ': null')
+                    .replace(/:"NaN"/g, ':null');
+            }
+            
+            // Функция для отображения звёзд рейтинга
+            function renderRating(rating, isPoop = false) {
+                if (isPoop) {
+                    return '<div class="poop-rating">💩💩💩💩💩</div>';
+                }
+                
+                if (!rating) return '<div class="rating-stars">Нет оценки</div>';
+                
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 >= 0.5;
+                const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+                
+                let starsHtml = '<div class="rating-stars">';
+                
+                for (let i = 0; i < fullStars; i++) {
+                    starsHtml += '★';
+                }
+                
+                if (halfStar) {
+                    starsHtml += '⯨';
+                }
+                
+                for (let i = 0; i < emptyStars; i++) {
+                    starsHtml += '☆';
+                }
+                
+                starsHtml += '</div>';
+                return starsHtml;
+            }
+            
+            // Форматирование цены
+            function formatPrice(price) {
+                if (!price) return 'Нет данных';
+                return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(price);
+            }
+            
+            // Поиск самой низкой цены
+            function findCheapestPrice(prices) {
+                if (!prices) return null;
+                
+                const platforms = ['ozon', 'wb', 'aliexpress'];
+                let minPrice = Infinity;
+                let cheapestPlatform = null;
+                
+                platforms.forEach(platform => {
+                    if (prices[platform] && prices[platform].value && prices[platform].value < minPrice) {
+                        minPrice = prices[platform].value;
+                        cheapestPlatform = platform;
+                    }
+                });
+                
+                return cheapestPlatform;
+            }
+            
+            // Отправка отзыва
+            function submitReview(event, filamentId) {
+                event.preventDefault();
+                
+                const usernameInput = document.getElementById(`username-${filamentId}`);
+                const commentInput = document.getElementById(`comment-${filamentId}`);
+                const ratingInputs = document.querySelectorAll(`input[name="rating-${filamentId}"]`);
+                
+                let rating = 0;
+                for (const input of ratingInputs) {
+                    if (input.checked) {
+                        rating = parseInt(input.value);
+                        break;
+                    }
+                }
+                
+                if (!usernameInput.value || !commentInput.value || rating === 0) {
+                    alert('Пожалуйста, заполните все поля формы');
+                    return;
+                }
+                
+                const reviewData = {
+                    material_id: filamentId,
+                    username: usernameInput.value,
+                    rating: rating,
+                    comment: commentInput.value
+                };
+                
+                // Отправка данных на сервер
+                fetch('https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(reviewData)
+                })
+                .then(response => {
+                    console.log('Отзыв успешно отправлен');
+                    
+                    // Показываем сообщение об успехе
+                    const form = document.getElementById(`form-${filamentId}`);
+                    const successMessage = document.getElementById(`success-${filamentId}`);
+                    
+                    form.classList.remove('show');
+                    successMessage.classList.add('show');
+                    
+                    // Сбрасываем форму
+                    usernameInput.value = '';
+                    commentInput.value = '';
+                    for (const input of ratingInputs) {
+                        input.checked = false;
+                    }
+                    
+                    // Скрываем сообщение через 3 секунды
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 3000);
+                    // Фильтрация филаментов
+            function filterFilaments() {
+                const searchQuery = searchInput.value.toLowerCase().trim();
+                
+                // Получаем выбранные материалы
+                const materialFilters = [];
+                const materialAll = document.getElementById('material-all').checked;
+                if (!materialAll) {
+                    document.querySelectorAll('input[name="material"]:checked').forEach(cb => {
+                        materialFilters.push(cb.value);
+                    });
+                }
+                
+                // Получаем выбранные бренды
+                const brandFilters = [];
+                const brandAll = document.getElementById('brand-all').checked;
+                if (!brandAll) {
+                    document.querySelectorAll('input[name="brand"]:checked').forEach(cb => {
+                        brandFilters.push(cb.value);
+                    });
+                }
+                
+                // Получаем выбранные веса
+                const weightFilters = [];
+                const weightAll = document.getElementById('weight-all').checked;
+                if (!weightAll) {
+                    document.querySelectorAll('input[name="weight"]:checked').forEach(cb => {
+                        weightFilters.push(cb.value);
+                    });
+                }
+                
+                // Получаем выбранный рейтинг
+                const ratingFilter = document.querySelector('input[name="rating"]:checked').value;
+                
+                // Фильтруем филаменты
+                filteredFilaments = filaments.filter(filament => {
+                    // Поиск по названию и бренду
+                    const matchesSearch = 
+                        searchQuery === '' || 
+                        filament.brand.toLowerCase().includes(searchQuery) || 
+                        (filament.type && filament.type.toLowerCase().includes(searchQuery));
+                    
+                    // Фильтр по материалу
+                    const matchesMaterial = 
+                        materialAll || 
+                        (filament.type && materialFilters.includes(filament.type));
+                    
+                    // Фильтр по бренду
+                    const matchesBrand = 
+                        brandAll || 
+                        (filament.brand && brandFilters.includes(filament.brand));
+                    
+                    // Фильтр по весу
+                    let matchesWeight = weightAll;
+                    
+                    if (!matchesWeight && filament.weight_g) {
+                        const weight = parseFloat(filament.weight_g);
+                        
+                        for (const weightFilter of weightFilters) {
+                            switch (weightFilter) {
+                                case '500':
+                                    if (weight <= 500) matchesWeight = true;
+                                    break;
+                                case '750':
+                                    if (weight > 500 && weight <= 750) matchesWeight = true;
+                                    break;
+                                case '1000':
+                                    if (weight > 750 && weight <= 1000) matchesWeight = true;
+                                    break;
+                                case '2000':
+                                    if (weight > 1000) matchesWeight = true;
+                                    break;
+                            }
+                        }
+                    }
+                    
+                    // Фильтр по рейтингу
+                    let matchesRating = ratingFilter === 'all';
+                    
+                    if (!matchesRating && filament.author_rating) {
+                        const rating = parseFloat(filament.author_rating);
+                        
+                        switch (ratingFilter) {
+                            case '5':
+                                matchesRating = rating === 5;
+                                break;
+                            case '4':
+                                matchesRating = rating >= 4;
+                                break;
+                            case '3':
+                                matchesRating = rating >= 3;
+                                break;
+                        }
+                    }
+                    
+                    return matchesSearch && matchesMaterial && matchesBrand && matchesWeight && matchesRating;
+                });
+                
+                // Сортируем филаменты
+                sortFilaments();
+                
+                // Рендерим результаты
+                renderFilamentCards();
+            }
+            
+            // Сортировка филаментов
+            function sortFilaments() {
+                const sortValue = sortSelect.value;
+                
+                filteredFilaments.sort((a, b) => {
+                    switch (sortValue) {
+                        case 'brand-asc':
+                            return a.brand.localeCompare(b.brand);
+                        case 'brand-desc':
+                            return b.brand.localeCompare(a.brand);
+                        case 'weight-asc':
+                            return (a.weight_g || 0) - (b.weight_g || 0);
+                        case 'weight-desc':
+                            return (b.weight_g || 0) - (a.weight_g || 0);
+                        case 'rating-desc':
+                            return (b.author_rating || 0) - (a.author_rating || 0);
+                        default:
+                            return 0;
+                    }
+                });
+                
+                renderFilamentCards();
+            }
+            
+            // Переключение темной темы
+            function toggleTheme() {
+                document.body.classList.toggle('dark-theme');
+                
+                // Обновляем иконку темы
+                if (document.body.classList.contains('dark-theme')) {
+                    themeSwitcher.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    `;
+                } else {
+                    themeSwitcher.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    `;
+                }
+                
+                // Сохраняем предпочтение в localStorage
+                localStorage.setItem('darkTheme', document.body.classList.contains('dark-theme'));
+            }
+            
+            // Проверка сохраненной темы при загрузке страницы
+            function checkSavedTheme() {
+                const savedDarkTheme = localStorage.getItem('darkTheme') === 'true';
+                if (savedDarkTheme) {
+                    document.body.classList.add('dark-theme');
+                    themeSwitcher.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    `;
+                }
+            }
+            
+            // Проверяем сохраненную тему
+            checkSavedTheme();
+            
+            // Начинаем загрузку данных
+            loadData();
+            
+            // Глобальная функция для отправки отзывов
+            window.submitReview = submitReview;
+        });
+    </script>
