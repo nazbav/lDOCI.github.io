@@ -763,24 +763,6 @@
             
             let filaments = [];
             let prices = {};
-            Promise.all([
-  fetch("filaments_data/filaments.json").then(res => res.json()),
-  fetch("filaments_data/prices.json").then(res => res.json())
-])
-.then(([filamentData, priceData]) => {
-  filaments = filamentData;
-  prices = priceData;
-
-  filteredFilaments = filaments;
-  generateFilterOptions();  // если у тебя фильтры
-  applyFilters();           // если у тебя рендер карточек
-  document.getElementById("loading-container").style.display = "none";
-})
-.catch(err => {
-  console.error("Ошибка загрузки базы:", err);
-  document.getElementById("loading-container").innerHTML = "<b>❌ Не удалось загрузить базу данных</b>";
-});
-
             let filteredFilaments = [];
             let materialTypes = new Set();
             let brandNames = new Set();
