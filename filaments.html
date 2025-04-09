@@ -1153,8 +1153,8 @@
                 // Показываем индикатор загрузки
                 loadingContainer.style.display = 'flex';
                 
-                // Используем стандартный fetch API для браузера
-                fetch('filaments.json')
+                // Используем стандартный fetch API для браузера с правильным путем к файлу
+                fetch('filaments_data/filaments.json')
                     .then(function(response) {
                         return response.json();
                     })
