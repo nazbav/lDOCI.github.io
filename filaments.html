@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Таблица филаментов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #ffffff;
@@ -1150,27 +1151,35 @@
             // Загрузка данных
             async function loadData() {
                 try {
-                    // Используем данные напрямую из переменной, а не из файла
-                    // Это решает проблему с загрузкой JSON файла
-                    filaments = [
-                        // Здесь все данные из JSON файла
-                        {"id":"bestfilament_pla_1000","name":"Bestfilament PLA 1000г","manufacturer":"Bestfilament","type":"PLA","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"https://bestfilament.ru/"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"bestfilament_abs_1000","name":"Bestfilament ABS 1000г","manufacturer":"Bestfilament","type":"ABS","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"https://bestfilament.ru/"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"bestfilament_petg_1000","name":"Bestfilament PETG 1000г","manufacturer":"Bestfilament","type":"PETG","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"https://bestfilament.ru/"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"exoflex_pla_1000","name":"EXOFLEX PLA 1000г","manufacturer":"EXOFLEX","type":"PLA","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"exoflex_abs_1000","name":"EXOFLEX ABS 1000г","manufacturer":"EXOFLEX","type":"ABS","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"exoflex_asa_1000","name":"EXOFLEX ASA 1000г","manufacturer":"EXOFLEX","type":"ASA","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"mako_pla_1000","name":"MAKO PLA 1000г","manufacturer":"MAKO","type":"PLA","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"mako_abs_1000","name":"MAKO ABS 1000г","manufacturer":"MAKO","type":"ABS","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"mako_pa6_750","name":"MAKO PA6-GF30 750г","manufacturer":"MAKO","type":"PA6-GF30","weight":750,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"strimplast_pla_1000","name":"СТРИМПЛАСТ PLA 1000г","manufacturer":"СТРИМПЛАСТ","type":"PLA","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"strimplast_abs_1000","name":"СТРИМПЛАСТ ABS+ 1000г","manufacturer":"СТРИМПЛАСТ","type":"ABS+","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"strimplast_flex_500","name":"СТРИМПЛАСТ Flex 500г","manufacturer":"СТРИМПЛАСТ","type":"TPU","weight":500,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"cyberfiber_pla_1000","name":"CYBERFIBER PLA 1000г","manufacturer":"CYBERFIBER","type":"PLA","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"cyberfiber_carbex_750","name":"CYBERFIBER Carbex MF 750г","manufacturer":"CYBERFIBER","type":"ABS-MF","weight":750,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"cyberfiber_poketon_500","name":"CYBERFIBER POKETON 500г","manufacturer":"CYBERFIBER","type":"POKETON","weight":500,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0},
-                        {"id":"fdplast_pla_1000","name":"FDplast PLA 1000г","manufacturer":"FDplast","type":"PLA","weight":1000,"diameter":1.75,"spoolWeight":200,"spoolDiameter":200,"spoolWidth":70,"spoolInnerDiameter":52,"filamentDiameter":85,"printProfiles":[],"links":[{"type":"website","url":"#"},{"type":"ozon","url":"#"},{"type":"wb","url":"#"}],"poop_rating":false,"author_rating":0}
-                    ];
+                    // Загружаем данные из filaments.json с помощью readFile
+                    const fileContent = await window.fs.readFile('filaments.json', { encoding: 'utf8' });
+                    filaments = JSON.parse(fileContent);
+                    
+                    // Создаем фильтры для типов материалов и производителей
+                    filaments.forEach(filament => {
+                        if (filament.type) materialTypes.add(filament.type);
+                        if (filament.manufacturer) brandNames.add(filament.manufacturer);
+                    });
+                    
+                    // Заполняем фильтры
+                    populateFilters();
+                    
+                    // Инициализируем отфильтрованный список
+                    filteredFilaments = [...filaments];
+                    
+                    // Сортируем и отображаем филаменты
+                    sortFilaments();
+                    
+                    // Скрываем индикатор загрузки
+                    loadingContainer.style.display = 'none';
+                } catch (error) {
+                    console.error('Ошибка загрузки данных:', error);
+                    loadingContainer.innerHTML = `
+                        <p>Произошла ошибка при загрузке данных: ${error.message}</p>
+                        <button id="retry-load">Попробовать снова</button>
+                    `;
+                    document.getElementById('retry-load').addEventListener('click', loadData);
+                }
                     
                     // Создаем фильтры для типов материалов и производителей
                     filaments.forEach(filament => {
@@ -1546,7 +1555,9 @@
                                 <div class="section-title">Рейтинг:</div>
                                 ${renderRating(filament.author_rating, filament.poop_rating)}
                             </div>
-                            <button class="review-toggle">Подробнее</button>
+                            <button class="review-toggle">
+                                <i class="fas fa-info-circle"></i> Подробнее
+                            </button>
                         </div>
                     `;
                     
@@ -1782,46 +1793,28 @@
             function loadReviews(filamentId) {
                 reviewList.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><div class="loading-text">Загрузка отзывов...</div></div>';
                 
-                // В реальном проекте здесь был бы запрос к Google Sheets через API
-                // Для примера создадим заглушку с несколькими отзывами
-                
-                setTimeout(() => {
-                    const mockReviews = [
-                        {
-                            author: 'Александр',
-                            date: '12.03.2025',
-                            rating: 4,
-                            text: 'Хороший филамент, печатает стабильно. Есть небольшие проблемы с адгезией на холодном столе, но в целом доволен.'
-                        },
-                        {
-                            author: 'Екатерина',
-                            date: '05.02.2025',
-                            rating: 5,
-                            text: 'Отличное качество намотки, никаких проблем с печатью. Рекомендую!'
-                        },
-                        {
-                            author: 'Дмитрий',
-                            date: '20.01.2025',
-                            rating: 3,
-                            text: 'Средненько. Были проблемы с забиванием сопла. После просушки стало лучше, но всё равно не идеально.'
-                        }
-                    ];
-                    
-                    if (mockReviews.length === 0) {
-                        reviewList.innerHTML = '<div class="no-reviews">Отзывов пока нет. Будьте первым, кто оставит отзыв!</div>';
-                    } else {
-                        reviewList.innerHTML = mockReviews.map(review => `
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <div class="review-author">${review.author}</div>
-                                    <div class="review-date">${review.date}</div>
+                // Загружаем отзывы из Google Sheets через Apps Script API
+                fetch(`https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec?filamentId=${filamentId}&action=getReviews`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.reviews || data.reviews.length === 0) {
+                            reviewList.innerHTML = '<div class="no-reviews">Отзывов пока нет. Будьте первым, кто оставит отзыв!</div>';
+                        } else {
+                            reviewList.innerHTML = data.reviews.map(review => `
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-author">${review.username}</div>
+                                        <div class="review-date">${review.date}</div>
+                                    </div>
+                                    <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                                    <div class="review-text">${review.comment}</div>
                                 </div>
-                                <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
-                                <div class="review-text">${review.text}</div>
-                            </div>
-                        `).join('');
-                    }
-                }, 1000);
+                            `).join('');
+                        }
+                    })
+                    .catch(error => {
+                        reviewList.innerHTML = `<div class="error">Ошибка при загрузке отзывов: ${error.message}</div>`;
+                    });
             }
             
             // Обновление UI для выбора рейтинга
@@ -1920,42 +1913,54 @@
                 }
                 
                 const reviewData = {
-                    filamentId: currentFilament.id,
-                    author: reviewAuthor.value,
-                    text: reviewText.value,
+                    material_id: currentFilament.id,
+                    username: reviewAuthor.value,
                     rating: currentRating,
-                    date: new Date().toLocaleDateString('ru-RU')
+                    comment: reviewText.value
                 };
                 
-                // В реальном проекте здесь был бы запрос к Google Apps Script
-                // Для примера просто добавим отзыв локально
+                // Отправка отзыва на сервер через Google Apps Script
+                submitReviewBtn.disabled = true;
+                submitReviewBtn.textContent = 'Отправка...';
                 
-                const newReview = document.createElement('div');
-                newReview.className = 'review-item';
-                newReview.innerHTML = `
-                    <div class="review-header">
-                        <div class="review-author">${reviewData.author}</div>
-                        <div class="review-date">${reviewData.date}</div>
-                    </div>
-                    <div class="review-rating">${'★'.repeat(reviewData.rating)}${'☆'.repeat(5 - reviewData.rating)}</div>
-                    <div class="review-text">${reviewData.text}</div>
-                `;
-                
-                const noReviewsElement = reviewList.querySelector('.no-reviews');
-                if (noReviewsElement) {
-                    reviewList.innerHTML = '';
-                }
-                
-                reviewList.insertBefore(newReview, reviewList.firstChild);
-                
-                // Сбрасываем форму
-                reviewAuthor.value = '';
-                reviewText.value = '';
-                currentRating = 0;
-                updateRatingUI();
-                
-                alert('Спасибо! Ваш отзыв добавлен.');
+                fetch('https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(reviewData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Обновляем список отзывов
+                        loadReviews(currentFilament.id);
+                        
+                        // Сбрасываем форму
+                        reviewAuthor.value = '';
+                        reviewText.value = '';
+                        currentRating = 0;
+                        updateRatingUI();
+                        
+                        alert('Спасибо! Ваш отзыв добавлен.');
+                    } else {
+                        alert('Ошибка при добавлении отзыва: ' + (data.error || 'Неизвестная ошибка'));
+                    }
+                })
+                .catch(error => {
+                    alert('Ошибка при отправке отзыва: ' + error.message);
+                })
+                .finally(() => {
+                    submitReviewBtn.disabled = false;
+                    submitReviewBtn.textContent = 'Отправить отзыв';
+                });
             });
+            
+            // Переключение темы
+            themeSwitcher.addEventListener('click', toggleTheme);
+            
+            // Проверяем сохраненную тему
+            checkSavedTheme();
             
             // Переключение темы
             themeSwitcher.addEventListener('click', toggleTheme);
