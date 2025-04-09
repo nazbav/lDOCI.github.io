@@ -220,6 +220,7 @@
             overflow: hidden;
             border: 1px solid var(--border-color);
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         .filament-card:hover {
@@ -238,7 +239,7 @@
             transition: background-color 0.2s;
         }
 
-        .manufacturer {
+        .brand {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--accent-color);
@@ -540,6 +541,281 @@
             --footer-bg: #1a1a1a;
         }
 
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: var(--bg-color);
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid var(--border-color);
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .modal-tab.active {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .modal-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .modal-tab-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .modal-tab-content.active {
+            display: block;
+        }
+
+        .specs-category {
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .specs-category:first-child {
+            margin-top: 0;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .specs-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .specs-table td {
+            padding: 10px;
+        }
+
+        .specs-table td:first-child {
+            font-weight: 500;
+            width: 40%;
+        }
+
+        .market-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .market-link {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: background-color 0.2s;
+        }
+
+        .market-link:hover {
+            background-color: #e0e0e0;
+        }
+
+        .market-link img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .reviews-section {
+            padding: 10px 0;
+        }
+
+        .review-list {
+            margin-top: 15px;
+        }
+
+        .review-item {
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-weight: 600;
+        }
+
+        .review-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .review-rating {
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+
+        .review-text {
+            line-height: 1.6;
+        }
+
+        .review-form {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .rating-input {
+            display: flex;
+            gap: 5px;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .rating-input i {
+            cursor: pointer;
+            color: #ddd;
+        }
+
+        .rating-input i.fas {
+            color: #FFD700;
+        }
+
+        .submit-review-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-review-btn:hover {
+            background-color: #0052a3;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .pagination ul {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+
+        .pagination li {
+            display: inline-block;
+        }
+
+        .pagination a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+
+        .pagination a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .pagination .active a {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -571,6 +847,11 @@
             
             .filament-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
             }
         }
     </style>
@@ -619,11 +900,11 @@
                 <h3>Производитель</h3>
                 <div class="filter-option">
                     <label>
-                        <input type="checkbox" name="manufacturer" value="all" checked id="manufacturer-all">
+                        <input type="checkbox" name="brand" value="all" checked id="brand-all">
                         Все
                     </label>
                 </div>
-                <div id="manufacturer-filters">
+                <div id="brand-filters">
                     <!-- Будет заполнено динамически -->
                 </div>
             </div>
@@ -709,8 +990,8 @@
             
             <div class="filters-row">
                 <select id="sort-select" class="filter-select">
-                    <option value="manufacturer-asc">Сортировка: Название (А-Я)</option>
-                    <option value="manufacturer-desc">Сортировка: Название (Я-А)</option>
+                    <option value="name-asc">Сортировка: Название (А-Я)</option>
+                    <option value="name-desc">Сортировка: Название (Я-А)</option>
                     <option value="weight-asc">Сортировка: Вес (по возрастанию)</option>
                     <option value="weight-desc">Сортировка: Вес (по убыванию)</option>
                     <option value="rating-desc">Сортировка: Рейтинг (высокий сначала)</option>
@@ -736,6 +1017,86 @@
             <div id="filament-grid" class="filament-grid">
                 <!-- Карточки будут добавлены динамически через JavaScript -->
             </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <ul id="pagination">
+                    <!-- Пагинация будет сгенерирована JS -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно с информацией о филаменте -->
+    <div class="modal" id="filament-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">
+                    <!-- Заполняется через JS -->
+                </div>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-tabs">
+                <div class="modal-tab active" data-tab="specs">Характеристики</div>
+                <div class="modal-tab" data-tab="reviews">Отзывы</div>
+            </div>
+            <div class="modal-tab-content active" id="tab-specs">
+                <h3 class="specs-category"><i class="fas fa-info-circle"></i> Технические характеристики</h3>
+                <table class="specs-table">
+                    <tbody id="modal-specs">
+                        <!-- Заполняется через JS -->
+                    </tbody>
+                </table>
+                
+                <h3 class="specs-category"><i class="fas fa-file-alt"></i> Профили печати</h3>
+                <div id="modal-profiles">
+                    <!-- Заполняется через JS -->
+                </div>
+                
+                <h3 class="specs-category"><i class="fas fa-shopping-cart"></i> Где купить</h3>
+                <div id="modal-links">
+                    <!-- Заполняется через JS -->
+                </div>
+            </div>
+            <div class="modal-tab-content" id="tab-reviews">
+                <div class="reviews-section">
+                    <h3 class="specs-category">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        Отзывы пользователей
+                    </h3>
+                    <div class="review-list" id="review-list">
+                        <!-- Здесь будут отзывы -->
+                    </div>
+                    
+                    <div class="review-form">
+                        <h3>Добавить отзыв</h3>
+                        <div class="form-group">
+                            <label for="review-author">Ваше имя:</label>
+                            <input type="text" id="review-author" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ваша оценка:</label>
+                            <div class="rating-input" id="rating-input">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="review-text">Ваш отзыв:</label>
+                            <textarea id="review-text" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="button" class="submit-review-btn" id="submit-review-btn">Отправить отзыв</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -749,214 +1110,845 @@
         </div>
     </footer>
 
-    
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const filamentGrid = document.getElementById('filament-grid');
-  const loadingContainer = document.getElementById('loading');
-  const noResultsContainer = document.getElementById('no-results');
-  const searchInput = document.getElementById('search');
-  const sortSelect = document.getElementById('sort-select');
-  const resetFiltersBtn = document.getElementById('reset-filters');
-  const materialFiltersContainer = document.getElementById('material-filters');
-  const manufacturerFiltersContainer = document.getElementById('manufacturer-filters');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM элементы
+            const filamentGrid = document.getElementById('filament-grid');
+            const loadingContainer = document.getElementById('loading');
+            const noResultsContainer = document.getElementById('no-results');
+            const searchInput = document.getElementById('search');
+            const sortSelect = document.getElementById('sort-select');
+            const themeSwitcher = document.getElementById('theme-switcher');
+            const resetFiltersBtn = document.getElementById('reset-filters');
+            const materialFiltersContainer = document.getElementById('material-filters');
+            const brandFiltersContainer = document.getElementById('brand-filters');
+            const paginationContainer = document.getElementById('pagination');
+            const modal = document.getElementById('filament-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalSpecs = document.getElementById('modal-specs');
+            const modalProfiles = document.getElementById('modal-profiles');
+            const modalLinks = document.getElementById('modal-links');
+            const modalClose = document.querySelector('.modal-close');
+            const modalTabs = document.querySelectorAll('.modal-tab');
+            const modalTabContents = document.querySelectorAll('.modal-tab-content');
+            const reviewList = document.getElementById('review-list');
+            const reviewAuthor = document.getElementById('review-author');
+            const reviewText = document.getElementById('review-text');
+            const ratingInput = document.getElementById('rating-input');
+            const submitReviewBtn = document.getElementById('submit-review-btn');
 
-  let filaments = [];
-  let prices = {};
-  let filteredFilaments = [];
-
-  Promise.all([
-    fetch("filaments_data/filaments.json").then(res => res.json()),
-    fetch("filaments_data/prices.json").then(res => res.json())
-  ])
-  .then(([filamentData, priceData]) => {
-    filaments = filamentData;
-    prices = priceData;
-    filteredFilaments = filaments;
-    generateFilterOptions();
-    applyFilters();
-    loadingContainer.style.display = "none";
-  })
-  .catch(err => {
-    console.error("Ошибка загрузки базы:", err);
-    loadingContainer.innerHTML = "<b>❌ Не удалось загрузить базу данных</b>";
-  });
-
-  function generateFilterOptions() {
-    const materials = [...new Set(filaments.map(f => f.type))];
-    const manufacturers = [...new Set(filaments.map(f => f.manufacturer))];
-
-    materialFiltersContainer.innerHTML = materials.map(type => `
-      <div class="filter-option">
-        <label><input type="checkbox" name="material" value="${type}"> ${type}</label>
-      </div>
-    `).join("");
-
-    manufacturerFiltersContainer.innerHTML = manufacturers.map(manufacturer => `
-      <div class="filter-option">
-        <label><input type="checkbox" name="manufacturer" value="${manufacturer}"> ${manufacturer}</label>
-      </div>
-    `).join("");
-
-    document.querySelectorAll('input[name="material"], input[name="manufacturer"], input[name="weight"], input[name="rating"]').forEach(input => {
-      input.addEventListener("change", applyFilters);
-    });
-
-    searchInput.addEventListener("input", applyFilters);
-    sortSelect.addEventListener("change", applyFilters);
-    resetFiltersBtn.addEventListener("click", () => {
-      document.querySelectorAll('input[type=checkbox], input[type=radio]').forEach(el => el.checked = el.id.includes("all"));
-      searchInput.value = "";
-      sortSelect.value = "manufacturer-asc";
-      applyFilters();
-    });
-  }
-
-  function applyFilters() {
-    const activeMaterials = [...document.querySelectorAll('input[name="material"]:checked')].map(i => i.value).filter(v => v !== "all");
-    const activemanufacturers = [...document.querySelectorAll('input[name="manufacturer"]:checked')].map(i => i.value).filter(v => v !== "all");
-    const activeWeights = [...document.querySelectorAll('input[name="weight"]:checked')].map(i => i.value).filter(v => v !== "all").map(Number);
-    const ratingFilter = document.querySelector('input[name="rating"]:checked').value;
-    const query = searchInput.value.trim().toLowerCase();
-
-    filteredFilaments = filaments.filter(f => {
-      if (activeMaterials.length && !activeMaterials.includes(f.type)) return false;
-      if (activemanufacturers.length && !activemanufacturers.includes(f.manufacturer)) return false;
-      if (activeWeights.length && !activeWeights.includes(f.weight_g)) return false;
-      if (ratingFilter !== "all" && (!f.author_rating || f.author_rating < parseInt(ratingFilter))) return false;
-      if (query && !(f.manufacturer.toLowerCase().includes(query) || f.type.toLowerCase().includes(query))) return false;
-      return true;
-    });
-
-    const sort = sortSelect.value;
-    filteredFilaments.sort((a, b) => {
-      if (sort === "manufacturer-asc") return a.manufacturer.localeCompare(b.manufacturer);
-      if (sort === "manufacturer-desc") return b.manufacturer.localeCompare(a.manufacturer);
-      if (sort === "weight-asc") return a.weight_g - b.weight_g;
-      if (sort === "weight-desc") return b.weight_g - a.weight_g;
-      if (sort === "rating-desc") return (b.author_rating || 0) - (a.author_rating || 0);
-      return 0;
-    });
-
-    renderFilamentCards();
-  }
-
-  function renderFilamentCards() {
-    filamentGrid.innerHTML = "";
-    if (!filteredFilaments.length) {
-      noResultsContainer.style.display = "block";
-      return;
-    } else {
-      noResultsContainer.style.display = "none";
-    }
-
-    filteredFilaments.forEach(f => {
-      const p = prices[f.id] || {};
-      const cheapest = findCheapestPrice(p);
-
-      const priceHTML = ['ozon', 'wb', 'aliexpress'].map(market => {
-        const entry = p[market];
-        if (!entry) return "";
-        const isBest = market === cheapest ? 'cheapest' : '';
-        return `
-          <div class="price-item ${isBest}">
-            <div class="price-marketplace">${market.toUpperCase()}</div>
-            <div class="price-value">${entry.value ? entry.value + " ₽" : "—"} <a href="${entry.url}" target="_blank">🛒</a></div>
-          </div>`;
-      }).join("");
-
-      const rating = f.poop_rating ? '<div class="poop-rating">💩💩💩💩💩</div>' :
-        '<div class="rating-stars">' + "★".repeat(Math.round(f.author_rating || 0)) + '</div>';
-
-      const reviewForm = `
-        <form id="form-${f.id}" class="review-form">
-          <div class="form-group">
-            <label>Имя:</label>
-            <input id="username-${f.id}" class="form-control" placeholder="Ваше имя">
-          </div>
-          <div class="form-group">
-            <label>Оценка:</label>
-            <div class="star-rating">
-              ${[5,4,3,2,1].map(n => `
-                <input type="radio" name="rating-${f.id}" id="r${n}-${f.id}" value="${n}">
-                <label for="r${n}-${f.id}">★</label>`).join('')}
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Отзыв:</label>
-            <textarea id="comment-${f.id}" class="form-control" placeholder="Ваш отзыв"></textarea>
-          </div>
-          <button class="submit-review" onclick="submitReview(event, '${f.id}')">Отправить</button>
-        </form>
-        <div class="review-success" id="success-${f.id}">Спасибо! Ваш отзыв отправлен.</div>`;
-
-      filamentGrid.innerHTML += `
-        <div class="filament-card">
-          <div class="card-header">
-            <span class="manufacturer">${f.manufacturer}</span>
-            <span class="filament-type">${f.type}</span>
-          </div>
-          <div class="card-content">
-            <div class="specs-section">
-              <div class="spec-item"><span class="spec-label">Вес:</span> ${f.weight_g} г</div>
-              <div class="spec-item"><span class="spec-label">Диаметр:</span> ${f.diameter_mm || "—"} мм</div>
-            </div>
-            <div class="rating-section">
-              <div class="section-title">Рейтинг автора:</div>
-              ${rating}
-            </div>
-            <div class="author-review"><p>${f.author_review || "—"}</p></div>
-            <div class="prices-section">${priceHTML}</div>
-            <div class="review-section">
-              <button class="review-toggle" onclick="document.getElementById('form-${f.id}').classList.toggle('show')">Оставить отзыв</button>
-              ${reviewForm}
-            </div>
-          </div>
-        </div>`;
-    });
-  }
-
-  function findCheapestPrice(p) {
-    let min = Infinity, best = null;
-    for (const k in p) {
-      if (p[k] && p[k].value && p[k].value < min) {
-        min = p[k].value;
-        best = k;
-      }
-    }
-    return best;
-  }
-});
-function submitReview(event, filamentId) {
-  event.preventDefault();
-  const username = document.getElementById(`username-${filamentId}`).value;
-  const comment = document.getElementById(`comment-${filamentId}`).value;
-  const rating = [...document.querySelectorAll(`input[name="rating-${filamentId}"]`)].find(r => r.checked)?.value;
-
-  if (!comment || !rating) {
-    alert("Пожалуйста, заполните все поля");
-    return;
-  }
-
-  fetch("https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec", {
-    method: "POST",
-    body: JSON.stringify({
-      material_id: filamentId,
-      username: username || "Аноним",
-      rating: parseInt(rating),
-      comment
-    })
-  })
-  .then(r => r.json())
-  .then(() => {
-    document.getElementById(`form-${filamentId}`).classList.remove("show");
-    document.getElementById(`success-${filamentId}`).classList.add("show");
-    setTimeout(() => {
-      document.getElementById(`success-${filamentId}`).classList.remove("show");
-    }, 3000);
-  });
-}
-</script>
-
+            // Данные
+            let filaments = [];
+            let filteredFilaments = [];
+            let materialTypes = new Set();
+            let brandNames = new Set();
+            let currentFilament = null;
+            let currentRating = 0;
+            let currentPage = 1;
+            const itemsPerPage = 12;
+            
+            // Загрузка данных
+            async function loadData() {
+                try {
+                    // В реальности данные были бы загружены с сервера
+                    // Для примера используем данные из JSON файла
+                    const response = await fetch('filaments.json');
+                    filaments = await response.json();
+                    
+                    // Создаем фильтры для типов материалов и производителей
+                    filaments.forEach(filament => {
+                        if (filament.type) materialTypes.add(filament.type);
+                        if (filament.manufacturer) brandNames.add(filament.manufacturer);
+                    });
+                    
+                    // Заполняем фильтры
+                    populateFilters();
+                    
+                    // Инициализируем отфильтрованный список
+                    filteredFilaments = [...filaments];
+                    
+                    // Сортируем и отображаем филаменты
+                    sortFilaments();
+                    
+                    // Скрываем индикатор загрузки
+                    loadingContainer.style.display = 'none';
+                } catch (error) {
+                    console.error('Ошибка загрузки данных:', error);
+                    loadingContainer.innerHTML = `
+                        <p>Произошла ошибка при загрузке данных: ${error.message}</p>
+                        <button id="retry-load">Попробовать снова</button>
+                    `;
+                    document.getElementById('retry-load').addEventListener('click', loadData);
+                }
+            }
+            
+            // Заполнение фильтров
+            function populateFilters() {
+                // Фильтры материалов
+                materialTypes.forEach(type => {
+                    const checkbox = document.createElement('div');
+                    checkbox.className = 'filter-option';
+                    checkbox.innerHTML = `
+                        <label>
+                            <input type="checkbox" name="material" value="${type}">
+                            ${type}
+                        </label>
+                    `;
+                    materialFiltersContainer.appendChild(checkbox);
+                });
+                
+                // Фильтры производителей
+                brandNames.forEach(brand => {
+                    const checkbox = document.createElement('div');
+                    checkbox.className = 'filter-option';
+                    checkbox.innerHTML = `
+                        <label>
+                            <input type="checkbox" name="brand" value="${brand}">
+                            ${brand}
+                        </label>
+                    `;
+                    brandFiltersContainer.appendChild(checkbox);
+                });
+                
+                // Добавляем обработчики событий для фильтров
+                addFilterEventListeners();
+            }
+            
+            // Добавление обработчиков событий для фильтров
+            function addFilterEventListeners() {
+                // Фильтр "Все" для материалов
+                document.getElementById('material-all').addEventListener('change', function() {
+                    const materialCheckboxes = document.querySelectorAll('input[name="material"]:not(#material-all)');
+                    materialCheckboxes.forEach(cb => {
+                        cb.checked = false;
+                        cb.disabled = this.checked;
+                    });
+                    filterFilaments();
+                });
+                
+                // Другие материалы
+                document.querySelectorAll('input[name="material"]:not(#material-all)').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const materialAll = document.getElementById('material-all');
+                        if (this.checked) {
+                            materialAll.checked = false;
+                        } else {
+                            // Если ни один чекбокс не выбран, выбираем "Все"
+                            const anyChecked = Array.from(document.querySelectorAll('input[name="material"]:not(#material-all)')).some(cb => cb.checked);
+                            if (!anyChecked) {
+                                materialAll.checked = true;
+                            }
+                        }
+                        filterFilaments();
+                    });
+                });
+                
+                // Фильтр "Все" для производителей
+                document.getElementById('brand-all').addEventListener('change', function() {
+                    const brandCheckboxes = document.querySelectorAll('input[name="brand"]:not(#brand-all)');
+                    brandCheckboxes.forEach(cb => {
+                        cb.checked = false;
+                        cb.disabled = this.checked;
+                    });
+                    filterFilaments();
+                });
+                
+                // Другие производители
+                document.querySelectorAll('input[name="brand"]:not(#brand-all)').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const brandAll = document.getElementById('brand-all');
+                        if (this.checked) {
+                            brandAll.checked = false;
+                        } else {
+                            // Если ни один чекбокс не выбран, выбираем "Все"
+                            const anyChecked = Array.from(document.querySelectorAll('input[name="brand"]:not(#brand-all)')).some(cb => cb.checked);
+                            if (!anyChecked) {
+                                brandAll.checked = true;
+                            }
+                        }
+                        filterFilaments();
+                    });
+                });
+                
+                // Фильтр "Все" для веса
+                document.getElementById('weight-all').addEventListener('change', function() {
+                    const weightCheckboxes = document.querySelectorAll('input[name="weight"]:not(#weight-all)');
+                    weightCheckboxes.forEach(cb => {
+                        cb.checked = false;
+                        cb.disabled = this.checked;
+                    });
+                    filterFilaments();
+                });
+                
+                // Другие веса
+                document.querySelectorAll('input[name="weight"]:not(#weight-all)').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const weightAll = document.getElementById('weight-all');
+                        if (this.checked) {
+                            weightAll.checked = false;
+                        } else {
+                            // Если ни один чекбокс не выбран, выбираем "Все"
+                            const anyChecked = Array.from(document.querySelectorAll('input[name="weight"]:not(#weight-all)')).some(cb => cb.checked);
+                            if (!anyChecked) {
+                                weightAll.checked = true;
+                            }
+                        }
+                        filterFilaments();
+                    });
+                });
+                
+                // Фильтр по рейтингу
+                document.querySelectorAll('input[name="rating"]').forEach(radio => {
+                    radio.addEventListener('change', filterFilaments);
+                });
+                
+                // Поиск
+                searchInput.addEventListener('input', filterFilaments);
+                
+                // Сортировка
+                sortSelect.addEventListener('change', sortFilaments);
+                
+                // Сброс фильтров
+                resetFiltersBtn.addEventListener('click', resetFilters);
+            }
+            
+            // Сброс всех фильтров
+            function resetFilters() {
+                // Сбрасываем поиск
+                searchInput.value = '';
+                
+                // Сбрасываем сортировку
+                sortSelect.selectedIndex = 0;
+                
+                // Сбрасываем фильтры материалов
+                document.getElementById('material-all').checked = true;
+                document.querySelectorAll('input[name="material"]:not(#material-all)').forEach(cb => {
+                    cb.checked = false;
+                    cb.disabled = true;
+                });
+                
+                // Сбрасываем фильтры производителей
+                document.getElementById('brand-all').checked = true;
+                document.querySelectorAll('input[name="brand"]:not(#brand-all)').forEach(cb => {
+                    cb.checked = false;
+                    cb.disabled = true;
+                });
+                
+                // Сбрасываем фильтры веса
+                document.getElementById('weight-all').checked = true;
+                document.querySelectorAll('input[name="weight"]:not(#weight-all)').forEach(cb => {
+                    cb.checked = false;
+                    cb.disabled = true;
+                });
+                
+                // Сбрасываем фильтры рейтинга
+                document.querySelector('input[name="rating"][value="all"]').checked = true;
+                
+                // Применяем фильтры
+                filterFilaments();
+            }
+            
+            // Фильтрация филаментов
+            function filterFilaments() {
+                const searchQuery = searchInput.value.toLowerCase().trim();
+                
+                // Получаем выбранные материалы
+                const materialFilters = [];
+                const materialAll = document.getElementById('material-all').checked;
+                if (!materialAll) {
+                    document.querySelectorAll('input[name="material"]:not(#material-all):checked').forEach(cb => {
+                        materialFilters.push(cb.value);
+                    });
+                }
+                
+                // Получаем выбранные бренды
+                const brandFilters = [];
+                const brandAll = document.getElementById('brand-all').checked;
+                if (!brandAll) {
+                    document.querySelectorAll('input[name="brand"]:not(#brand-all):checked').forEach(cb => {
+                        brandFilters.push(cb.value);
+                    });
+                }
+                
+                // Получаем выбранные веса
+                const weightFilters = [];
+                const weightAll = document.getElementById('weight-all').checked;
+                if (!weightAll) {
+                    document.querySelectorAll('input[name="weight"]:not(#weight-all):checked').forEach(cb => {
+                        weightFilters.push(parseInt(cb.value));
+                    });
+                }
+                
+                // Получаем выбранный рейтинг
+                const ratingFilter = document.querySelector('input[name="rating"]:checked').value;
+                
+                // Фильтруем филаменты
+                filteredFilaments = filaments.filter(filament => {
+                    // Поиск по названию и бренду
+                    const matchesSearch = 
+                        searchQuery === '' || 
+                        filament.name.toLowerCase().includes(searchQuery) || 
+                        filament.manufacturer.toLowerCase().includes(searchQuery) ||
+                        filament.type.toLowerCase().includes(searchQuery);
+                    
+                    // Фильтр по материалу
+                    const matchesMaterial = 
+                        materialAll || 
+                        materialFilters.includes(filament.type);
+                    
+                    // Фильтр по бренду
+                    const matchesBrand = 
+                        brandAll || 
+                        brandFilters.includes(filament.manufacturer);
+                    
+                    // Фильтр по весу
+                    let matchesWeight = weightAll;
+                    
+                    if (!matchesWeight) {
+                        const weight = filament.weight;
+                        
+                        if (weightFilters.includes(500) && weight <= 500) {
+                            matchesWeight = true;
+                        } else if (weightFilters.includes(750) && weight > 500 && weight <= 750) {
+                            matchesWeight = true;
+                        } else if (weightFilters.includes(1000) && weight > 750 && weight <= 1000) {
+                            matchesWeight = true;
+                        } else if (weightFilters.includes(2000) && weight > 1000) {
+                            matchesWeight = true;
+                        }
+                    }
+                    
+                    // Фильтр по рейтингу
+                    let matchesRating = ratingFilter === 'all';
+                    
+                    if (!matchesRating && filament.author_rating) {
+                        const rating = filament.author_rating;
+                        
+                        switch (ratingFilter) {
+                            case '5':
+                                matchesRating = rating === 5;
+                                break;
+                            case '4':
+                                matchesRating = rating >= 4;
+                                break;
+                            case '3':
+                                matchesRating = rating >= 3;
+                                break;
+                        }
+                    }
+                    
+                    return matchesSearch && matchesMaterial && matchesBrand && matchesWeight && matchesRating;
+                });
+                
+                // Сортируем филаменты
+                sortFilaments();
+                
+                // Сбрасываем текущую страницу на первую
+                currentPage = 1;
+                
+                // Обновляем пагинацию
+                updatePagination();
+            }
+            
+            // Сортировка филаментов
+            function sortFilaments() {
+                const sortValue = sortSelect.value;
+                
+                filteredFilaments.sort((a, b) => {
+                    switch (sortValue) {
+                        case 'name-asc':
+                            return a.name.localeCompare(b.name);
+                        case 'name-desc':
+                            return b.name.localeCompare(a.name);
+                        case 'weight-asc':
+                            return a.weight - b.weight;
+                        case 'weight-desc':
+                            return b.weight - a.weight;
+                        case 'rating-desc':
+                            return (b.author_rating || 0) - (a.author_rating || 0);
+                        case 'rating-asc':
+                            return (a.author_rating || 0) - (b.author_rating || 0);
+                        case 'price-asc':
+                            // По цене (если бы была информация о ценах)
+                            return 0;
+                        case 'price-desc':
+                            // По цене (если бы была информация о ценах)
+                            return 0;
+                        default:
+                            return 0;
+                    }
+                });
+                
+                // Обновляем отображение
+                renderFilamentCards();
+            }
+            
+            // Отображение карточек филаментов
+            function renderFilamentCards() {
+                // Очищаем контейнер
+                filamentGrid.innerHTML = '';
+                
+                // Вычисляем индексы для текущей страницы
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const paginatedFilaments = filteredFilaments.slice(startIndex, endIndex);
+                
+                // Проверяем, есть ли результаты
+                if (filteredFilaments.length === 0) {
+                    noResultsContainer.style.display = 'block';
+                    paginationContainer.style.display = 'none';
+                } else {
+                    noResultsContainer.style.display = 'none';
+                    paginationContainer.style.display = 'flex';
+                }
+                
+                // Создаем карточки для текущей страницы
+                paginatedFilaments.forEach(filament => {
+                    const card = document.createElement('div');
+                    card.className = 'filament-card';
+                    card.dataset.id = filament.id;
+                    
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <div class="brand">${filament.manufacturer}</div>
+                            <div class="filament-type">${filament.type}</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>${filament.name}</h3>
+                            <div class="specs-section">
+                                <div class="spec-item">
+                                    <div class="spec-label">Вес:</div>
+                                    <div>${filament.weight} г</div>
+                                </div>
+                                <div class="spec-item">
+                                    <div class="spec-label">Диаметр:</div>
+                                    <div>${filament.diameter} мм</div>
+                                </div>
+                            </div>
+                            <div class="rating-section">
+                                <div class="section-title">Рейтинг:</div>
+                                ${renderRating(filament.author_rating, filament.poop_rating)}
+                            </div>
+                            <button class="review-toggle">Подробнее</button>
+                        </div>
+                    `;
+                    
+                    // Добавляем обработчик события для открытия модального окна
+                    card.addEventListener('click', () => {
+                        openFilamentModal(filament);
+                    });
+                    
+                    filamentGrid.appendChild(card);
+                });
+            }
+            
+            // Отображение звездного рейтинга
+            function renderRating(rating, isPoop = false) {
+                if (isPoop) {
+                    return '<div class="poop-rating">💩💩💩💩💩</div>';
+                }
+                
+                if (!rating) return '<div class="rating-stars">Нет оценки</div>';
+                
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 >= 0.5;
+                const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+                
+                let starsHtml = '<div class="rating-stars">';
+                
+                for (let i = 0; i < fullStars; i++) {
+                    starsHtml += '★';
+                }
+                
+                if (halfStar) {
+                    starsHtml += '⯨';
+                }
+                
+                for (let i = 0; i < emptyStars; i++) {
+                    starsHtml += '☆';
+                }
+                
+                starsHtml += '</div>';
+                return starsHtml;
+            }
+            
+            // Обновление пагинации
+            function updatePagination() {
+                const totalPages = Math.ceil(filteredFilaments.length / itemsPerPage);
+                
+                // Очищаем контейнер пагинации
+                paginationContainer.innerHTML = '';
+                
+                // Если всего одна страница, скрываем пагинацию
+                if (totalPages <= 1) {
+                    paginationContainer.style.display = 'none';
+                    renderFilamentCards();
+                    return;
+                }
+                
+                paginationContainer.style.display = 'flex';
+                
+                // Создаем элементы пагинации
+                const ul = document.createElement('ul');
+                
+                // Кнопка "Предыдущая"
+                if (currentPage > 1) {
+                    const prevLi = document.createElement('li');
+                    const prevLink = document.createElement('a');
+                    prevLink.href = '#';
+                    prevLink.innerHTML = '&laquo;';
+                    prevLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage--;
+                        updatePagination();
+                    });
+                    prevLi.appendChild(prevLink);
+                    ul.appendChild(prevLi);
+                }
+                
+                // Номера страниц
+                const maxPageLinks = 5; // Максимальное количество ссылок на страницы
+                let startPage = Math.max(1, currentPage - Math.floor(maxPageLinks / 2));
+                let endPage = Math.min(totalPages, startPage + maxPageLinks - 1);
+                
+                if (endPage - startPage + 1 < maxPageLinks) {
+                    startPage = Math.max(1, endPage - maxPageLinks + 1);
+                }
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    const pageLi = document.createElement('li');
+                    if (i === currentPage) {
+                        pageLi.className = 'active';
+                    }
+                    
+                    const pageLink = document.createElement('a');
+                    pageLink.href = '#';
+                    pageLink.textContent = i;
+                    pageLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = i;
+                        updatePagination();
+                    });
+                    
+                    pageLi.appendChild(pageLink);
+                    ul.appendChild(pageLi);
+                }
+                
+                // Кнопка "Следующая"
+                if (currentPage < totalPages) {
+                    const nextLi = document.createElement('li');
+                    const nextLink = document.createElement('a');
+                    nextLink.href = '#';
+                    nextLink.innerHTML = '&raquo;';
+                    nextLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage++;
+                        updatePagination();
+                    });
+                    nextLi.appendChild(nextLink);
+                    ul.appendChild(nextLi);
+                }
+                
+                paginationContainer.appendChild(ul);
+                
+                // Обновляем карточки
+                renderFilamentCards();
+            }
+            
+            // Открытие модального окна с информацией о филаменте
+            function openFilamentModal(filament) {
+                currentFilament = filament;
+                
+                // Заполняем заголовок
+                modalTitle.textContent = filament.name;
+                
+                // Заполняем характеристики
+                modalSpecs.innerHTML = `
+                    <tr>
+                        <td>Производитель</td>
+                        <td>${filament.manufacturer}</td>
+                    </tr>
+                    <tr>
+                        <td>Тип материала</td>
+                        <td>${filament.type}</td>
+                    </tr>
+                    <tr>
+                        <td>Вес</td>
+                        <td>${filament.weight} г</td>
+                    </tr>
+                    <tr>
+                        <td>Диаметр нити</td>
+                        <td>${filament.diameter} мм</td>
+                    </tr>
+                    <tr>
+                        <td>Вес катушки</td>
+                        <td>${filament.spoolWeight} г</td>
+                    </tr>
+                    <tr>
+                        <td>Диаметр катушки</td>
+                        <td>${filament.spoolDiameter} мм</td>
+                    </tr>
+                    <tr>
+                        <td>Ширина катушки</td>
+                        <td>${filament.spoolWidth} мм</td>
+                    </tr>
+                    <tr>
+                        <td>Внутренний диаметр катушки</td>
+                        <td>${filament.spoolInnerDiameter} мм</td>
+                    </tr>
+                    <tr>
+                        <td>Диаметр намотки филамента</td>
+                        <td>${filament.filamentDiameter} мм</td>
+                    </tr>
+                    <tr>
+                        <td>Рейтинг</td>
+                        <td>${renderRating(filament.author_rating, filament.poop_rating)}</td>
+                    </tr>
+                `;
+                
+                // Заполняем профили печати
+                if (filament.printProfiles && filament.printProfiles.length > 0) {
+                    modalProfiles.innerHTML = filament.printProfiles.map(profile => `
+                        <div class="profile-item">
+                            <h4>${profile.name}</h4>
+                            <p>${profile.description}</p>
+                            <a href="${profile.url}" target="_blank" class="download-link">Скачать профиль</a>
+                        </div>
+                    `).join('');
+                } else {
+                    modalProfiles.innerHTML = '<p>Профили печати отсутствуют</p>';
+                }
+                
+                // Заполняем ссылки на маркетплейсы
+                if (filament.links && filament.links.length > 0) {
+                    modalLinks.innerHTML = `
+                        <div class="market-links">
+                            ${filament.links.map(link => `
+                                <a href="${link.url}" target="_blank" class="market-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                    ${link.type === 'website' ? 'Официальный сайт' : 
+                                     link.type === 'ozon' ? 'Ozon' : 
+                                     link.type === 'wb' ? 'Wildberries' : 
+                                     link.type}
+                                </a>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    modalLinks.innerHTML = '<p>Ссылки на маркетплейсы отсутствуют</p>';
+                }
+                
+                // Загружаем отзывы
+                loadReviews(filament.id);
+                
+                // Активируем первую вкладку
+                document.querySelector('.modal-tab[data-tab="specs"]').classList.add('active');
+                document.getElementById('tab-specs').classList.add('active');
+                document.querySelector('.modal-tab[data-tab="reviews"]').classList.remove('active');
+                document.getElementById('tab-reviews').classList.remove('active');
+                
+                // Показываем модальное окно
+                modal.style.display = 'block';
+                
+                // Сбрасываем форму отзывов
+                reviewAuthor.value = '';
+                reviewText.value = '';
+                currentRating = 0;
+                updateRatingUI();
+            }
+            
+            // Загрузка отзывов
+            function loadReviews(filamentId) {
+                reviewList.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><div class="loading-text">Загрузка отзывов...</div></div>';
+                
+                // В реальном проекте здесь был бы запрос к Google Sheets через API
+                // Для примера создадим заглушку с несколькими отзывами
+                
+                setTimeout(() => {
+                    const mockReviews = [
+                        {
+                            author: 'Александр',
+                            date: '12.03.2025',
+                            rating: 4,
+                            text: 'Хороший филамент, печатает стабильно. Есть небольшие проблемы с адгезией на холодном столе, но в целом доволен.'
+                        },
+                        {
+                            author: 'Екатерина',
+                            date: '05.02.2025',
+                            rating: 5,
+                            text: 'Отличное качество намотки, никаких проблем с печатью. Рекомендую!'
+                        },
+                        {
+                            author: 'Дмитрий',
+                            date: '20.01.2025',
+                            rating: 3,
+                            text: 'Средненько. Были проблемы с забиванием сопла. После просушки стало лучше, но всё равно не идеально.'
+                        }
+                    ];
+                    
+                    if (mockReviews.length === 0) {
+                        reviewList.innerHTML = '<div class="no-reviews">Отзывов пока нет. Будьте первым, кто оставит отзыв!</div>';
+                    } else {
+                        reviewList.innerHTML = mockReviews.map(review => `
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="review-author">${review.author}</div>
+                                    <div class="review-date">${review.date}</div>
+                                </div>
+                                <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                                <div class="review-text">${review.text}</div>
+                            </div>
+                        `).join('');
+                    }
+                }, 1000);
+            }
+            
+            // Обновление UI для выбора рейтинга
+            function updateRatingUI() {
+                const stars = ratingInput.querySelectorAll('i');
+                stars.forEach((star, index) => {
+                    if (index < currentRating) {
+                        star.className = 'fas fa-star';
+                    } else {
+                        star.className = 'far fa-star';
+                    }
+                });
+            }
+            
+            // Переключение темной темы
+            function toggleTheme() {
+                document.body.classList.toggle('dark-theme');
+                
+                // Обновляем иконку темы
+                if (document.body.classList.contains('dark-theme')) {
+                    themeSwitcher.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    `;
+                } else {
+                    themeSwitcher.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    `;
+                }
+                
+                // Сохраняем предпочтение в localStorage
+                localStorage.setItem('darkTheme', document.body.classList.contains('dark-theme'));
+            }
+            
+            // Проверка сохраненной темы при загрузке страницы
+            function checkSavedTheme() {
+                const savedDarkTheme = localStorage.getItem('darkTheme') === 'true';
+                if (savedDarkTheme) {
+                    document.body.classList.add('dark-theme');
+                    themeSwitcher.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    `;
+                }
+            }
+            
+            // Обработчики событий для модального окна
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Переключение вкладок в модальном окне
+            modalTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Убираем активный класс со всех вкладок
+                    modalTabs.forEach(t => t.classList.remove('active'));
+                    modalTabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Добавляем активный класс текущей вкладке
+                    tab.classList.add('active');
+                    const tabId = 'tab-' + tab.dataset.tab;
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Обработчики для формы отзывов
+            ratingInput.querySelectorAll('i').forEach(star => {
+                star.addEventListener('click', () => {
+                    currentRating = parseInt(star.dataset.rating);
+                    updateRatingUI();
+                });
+            });
+            
+            submitReviewBtn.addEventListener('click', () => {
+                if (!reviewAuthor.value || !reviewText.value || currentRating === 0) {
+                    alert('Пожалуйста, заполните все поля формы и выберите рейтинг');
+                    return;
+                }
+                
+                const reviewData = {
+                    filamentId: currentFilament.id,
+                    author: reviewAuthor.value,
+                    text: reviewText.value,
+                    rating: currentRating,
+                    date: new Date().toLocaleDateString('ru-RU')
+                };
+                
+                // В реальном проекте здесь был бы запрос к Google Apps Script
+                // Для примера просто добавим отзыв локально
+                
+                const newReview = document.createElement('div');
+                newReview.className = 'review-item';
+                newReview.innerHTML = `
+                    <div class="review-header">
+                        <div class="review-author">${reviewData.author}</div>
+                        <div class="review-date">${reviewData.date}</div>
+                    </div>
+                    <div class="review-rating">${'★'.repeat(reviewData.rating)}${'☆'.repeat(5 - reviewData.rating)}</div>
+                    <div class="review-text">${reviewData.text}</div>
+                `;
+                
+                const noReviewsElement = reviewList.querySelector('.no-reviews');
+                if (noReviewsElement) {
+                    reviewList.innerHTML = '';
+                }
+                
+                reviewList.insertBefore(newReview, reviewList.firstChild);
+                
+                // Сбрасываем форму
+                reviewAuthor.value = '';
+                reviewText.value = '';
+                currentRating = 0;
+                updateRatingUI();
+                
+                alert('Спасибо! Ваш отзыв добавлен.');
+            });
+            
+            // Переключение темы
+            themeSwitcher.addEventListener('click', toggleTheme);
+            
+            // Проверяем сохраненную тему
+            checkSavedTheme();
+            
+            // Начинаем загрузку данных
+            loadData();
+        });
+    </script>
 </body>
 </html>
