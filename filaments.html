@@ -749,137 +749,214 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const filamentGrid = document.getElementById('filament-grid');
-            const loadingContainer = document.getElementById('loading');
-            const noResultsContainer = document.getElementById('no-results');
-            const searchInput = document.getElementById('search');
-            const sortSelect = document.getElementById('sort-select');
-            const themeSwitcher = document.getElementById('theme-switcher');
-            const resetFiltersBtn = document.getElementById('reset-filters');
-            const materialFiltersContainer = document.getElementById('material-filters');
-            const brandFiltersContainer = document.getElementById('brand-filters');
-            
-            let filaments = [];
-            let prices = {};
-            let filteredFilaments = [];
-            let materialTypes = new Set();
-            let brandNames = new Set();
-            
-            // Функция для замены NaN на null в строке JSON
-            function fixJsonWithNaN(jsonString) {
-                return jsonString
-                    .replace(/: NaN/g, ': null')
-                    .replace(/:"NaN"/g, ':null');
-            }
-            
-            // Функция для отображения звёзд рейтинга
-            function renderRating(rating, isPoop = false) {
-                if (isPoop) {
-                    return '<div class="poop-rating">💩💩💩💩💩</div>';
-                }
-                
-                if (!rating) return '<div class="rating-stars">Нет оценки</div>';
-                
-                const fullStars = Math.floor(rating);
-                const halfStar = rating % 1 >= 0.5;
-                const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-                
-                let starsHtml = '<div class="rating-stars">';
-                
-                for (let i = 0; i < fullStars; i++) {
-                    starsHtml += '★';
-                }
-                
-                if (halfStar) {
-                    starsHtml += '⯨';
-                }
-                
-                for (let i = 0; i < emptyStars; i++) {
-                    starsHtml += '☆';
-                }
-                
-                starsHtml += '</div>';
-                return starsHtml;
-            }
-            
-            // Форматирование цены
-            function formatPrice(price) {
-                if (!price) return 'Нет данных';
-                return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(price);
-            }
-            
-            // Поиск самой низкой цены
-            function findCheapestPrice(prices) {
-                if (!prices) return null;
-                
-                const platforms = ['ozon', 'wb', 'aliexpress'];
-                let minPrice = Infinity;
-                let cheapestPlatform = null;
-                
-                platforms.forEach(platform => {
-                    if (prices[platform] && prices[platform].value && prices[platform].value < minPrice) {
-                        minPrice = prices[platform].value;
-                        cheapestPlatform = platform;
-                    }
-                });
-                
-                return cheapestPlatform;
-            }
-            
-            // Отправка отзыва
-            function submitReview(event, filamentId) {
-                event.preventDefault();
-                
-                const usernameInput = document.getElementById(`username-${filamentId}`);
-                const commentInput = document.getElementById(`comment-${filamentId}`);
-                const ratingInputs = document.querySelectorAll(`input[name="rating-${filamentId}"]`);
-                
-                let rating = 0;
-                for (const input of ratingInputs) {
-                    if (input.checked) {
-                        rating = parseInt(input.value);
-                        break;
-                    }
-                }
-                
-                if (!usernameInput.value || !commentInput.value || rating === 0) {
-                    alert('Пожалуйста, заполните все поля формы');
-                    return;
-                }
-                
-                const reviewData = {
-                    material_id: filamentId,
-                    username: usernameInput.value,
-                    rating: rating,
-                    comment: commentInput.value
-                };
-                
-                // Отправка данных на сервер
-                fetch('https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(reviewData)
-                })
-                .then(response => {
-                    console.log('Отзыв успешно отправлен');
-                    
-                    // Показываем сообщение об успехе
-                    const form = document.getElementById(`form-${filamentId}`);
-                    const successMessage = document.getElementById(`success-${filamentId}`);
-                    
-                    form.classList.remove('show');
-                    successMessage.classList.add('show');
-                    
-                    // Сбрасываем форму
-                    usernameInput.value = '';
-                    commentInput.value = '';
-                    for (const input of ratingInputs) {
-                        input.checked = false;
-                    }
-                    
-                    // Скрываем сообщение через 3 секунды
-                    setTimeout(()
+    
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const filamentGrid = document.getElementById('filament-grid');
+  const loadingContainer = document.getElementById('loading');
+  const noResultsContainer = document.getElementById('no-results');
+  const searchInput = document.getElementById('search');
+  const sortSelect = document.getElementById('sort-select');
+  const resetFiltersBtn = document.getElementById('reset-filters');
+  const materialFiltersContainer = document.getElementById('material-filters');
+  const brandFiltersContainer = document.getElementById('brand-filters');
+
+  let filaments = [];
+  let prices = {};
+  let filteredFilaments = [];
+
+  Promise.all([
+    fetch("filaments_data/filaments.json").then(res => res.json()),
+    fetch("filaments_data/prices.json").then(res => res.json())
+  ])
+  .then(([filamentData, priceData]) => {
+    filaments = filamentData;
+    prices = priceData;
+    filteredFilaments = filaments;
+    generateFilterOptions();
+    applyFilters();
+    loadingContainer.style.display = "none";
+  })
+  .catch(err => {
+    console.error("Ошибка загрузки базы:", err);
+    loadingContainer.innerHTML = "<b>❌ Не удалось загрузить базу данных</b>";
+  });
+
+  function generateFilterOptions() {
+    const materials = [...new Set(filaments.map(f => f.type))];
+    const brands = [...new Set(filaments.map(f => f.brand))];
+
+    materialFiltersContainer.innerHTML = materials.map(type => `
+      <div class="filter-option">
+        <label><input type="checkbox" name="material" value="${type}"> ${type}</label>
+      </div>
+    `).join("");
+
+    brandFiltersContainer.innerHTML = brands.map(brand => `
+      <div class="filter-option">
+        <label><input type="checkbox" name="brand" value="${brand}"> ${brand}</label>
+      </div>
+    `).join("");
+
+    document.querySelectorAll('input[name="material"], input[name="brand"], input[name="weight"], input[name="rating"]').forEach(input => {
+      input.addEventListener("change", applyFilters);
+    });
+
+    searchInput.addEventListener("input", applyFilters);
+    sortSelect.addEventListener("change", applyFilters);
+    resetFiltersBtn.addEventListener("click", () => {
+      document.querySelectorAll('input[type=checkbox], input[type=radio]').forEach(el => el.checked = el.id.includes("all"));
+      searchInput.value = "";
+      sortSelect.value = "brand-asc";
+      applyFilters();
+    });
+  }
+
+  function applyFilters() {
+    const activeMaterials = [...document.querySelectorAll('input[name="material"]:checked')].map(i => i.value).filter(v => v !== "all");
+    const activeBrands = [...document.querySelectorAll('input[name="brand"]:checked')].map(i => i.value).filter(v => v !== "all");
+    const activeWeights = [...document.querySelectorAll('input[name="weight"]:checked')].map(i => i.value).filter(v => v !== "all").map(Number);
+    const ratingFilter = document.querySelector('input[name="rating"]:checked').value;
+    const query = searchInput.value.trim().toLowerCase();
+
+    filteredFilaments = filaments.filter(f => {
+      if (activeMaterials.length && !activeMaterials.includes(f.type)) return false;
+      if (activeBrands.length && !activeBrands.includes(f.brand)) return false;
+      if (activeWeights.length && !activeWeights.includes(f.weight_g)) return false;
+      if (ratingFilter !== "all" && (!f.author_rating || f.author_rating < parseInt(ratingFilter))) return false;
+      if (query && !(f.brand.toLowerCase().includes(query) || f.type.toLowerCase().includes(query))) return false;
+      return true;
+    });
+
+    const sort = sortSelect.value;
+    filteredFilaments.sort((a, b) => {
+      if (sort === "brand-asc") return a.brand.localeCompare(b.brand);
+      if (sort === "brand-desc") return b.brand.localeCompare(a.brand);
+      if (sort === "weight-asc") return a.weight_g - b.weight_g;
+      if (sort === "weight-desc") return b.weight_g - a.weight_g;
+      if (sort === "rating-desc") return (b.author_rating || 0) - (a.author_rating || 0);
+      return 0;
+    });
+
+    renderFilamentCards();
+  }
+
+  function renderFilamentCards() {
+    filamentGrid.innerHTML = "";
+    if (!filteredFilaments.length) {
+      noResultsContainer.style.display = "block";
+      return;
+    } else {
+      noResultsContainer.style.display = "none";
+    }
+
+    filteredFilaments.forEach(f => {
+      const p = prices[f.id] || {};
+      const cheapest = findCheapestPrice(p);
+
+      const priceHTML = ['ozon', 'wb', 'aliexpress'].map(market => {
+        const entry = p[market];
+        if (!entry) return "";
+        const isBest = market === cheapest ? 'cheapest' : '';
+        return `
+          <div class="price-item ${isBest}">
+            <div class="price-marketplace">${market.toUpperCase()}</div>
+            <div class="price-value">${entry.value ? entry.value + " ₽" : "—"} <a href="${entry.url}" target="_blank">🛒</a></div>
+          </div>`;
+      }).join("");
+
+      const rating = f.poop_rating ? '<div class="poop-rating">💩💩💩💩💩</div>' :
+        '<div class="rating-stars">' + "★".repeat(Math.round(f.author_rating || 0)) + '</div>';
+
+      const reviewForm = `
+        <form id="form-${f.id}" class="review-form">
+          <div class="form-group">
+            <label>Имя:</label>
+            <input id="username-${f.id}" class="form-control" placeholder="Ваше имя">
+          </div>
+          <div class="form-group">
+            <label>Оценка:</label>
+            <div class="star-rating">
+              ${[5,4,3,2,1].map(n => `
+                <input type="radio" name="rating-${f.id}" id="r${n}-${f.id}" value="${n}">
+                <label for="r${n}-${f.id}">★</label>`).join('')}
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Отзыв:</label>
+            <textarea id="comment-${f.id}" class="form-control" placeholder="Ваш отзыв"></textarea>
+          </div>
+          <button class="submit-review" onclick="submitReview(event, '${f.id}')">Отправить</button>
+        </form>
+        <div class="review-success" id="success-${f.id}">Спасибо! Ваш отзыв отправлен.</div>`;
+
+      filamentGrid.innerHTML += `
+        <div class="filament-card">
+          <div class="card-header">
+            <span class="brand">${f.brand}</span>
+            <span class="filament-type">${f.type}</span>
+          </div>
+          <div class="card-content">
+            <div class="specs-section">
+              <div class="spec-item"><span class="spec-label">Вес:</span> ${f.weight_g} г</div>
+              <div class="spec-item"><span class="spec-label">Диаметр:</span> ${f.diameter_mm || "—"} мм</div>
+            </div>
+            <div class="rating-section">
+              <div class="section-title">Рейтинг автора:</div>
+              ${rating}
+            </div>
+            <div class="author-review"><p>${f.author_review || "—"}</p></div>
+            <div class="prices-section">${priceHTML}</div>
+            <div class="review-section">
+              <button class="review-toggle" onclick="document.getElementById('form-${f.id}').classList.toggle('show')">Оставить отзыв</button>
+              ${reviewForm}
+            </div>
+          </div>
+        </div>`;
+    });
+  }
+
+  function findCheapestPrice(p) {
+    let min = Infinity, best = null;
+    for (const k in p) {
+      if (p[k] && p[k].value && p[k].value < min) {
+        min = p[k].value;
+        best = k;
+      }
+    }
+    return best;
+  }
+});
+function submitReview(event, filamentId) {
+  event.preventDefault();
+  const username = document.getElementById(`username-${filamentId}`).value;
+  const comment = document.getElementById(`comment-${filamentId}`).value;
+  const rating = [...document.querySelectorAll(`input[name="rating-${filamentId}"]`)].find(r => r.checked)?.value;
+
+  if (!comment || !rating) {
+    alert("Пожалуйста, заполните все поля");
+    return;
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      material_id: filamentId,
+      username: username || "Аноним",
+      rating: parseInt(rating),
+      comment
+    })
+  })
+  .then(r => r.json())
+  .then(() => {
+    document.getElementById(`form-${filamentId}`).classList.remove("show");
+    document.getElementById(`success-${filamentId}`).classList.add("show");
+    setTimeout(() => {
+      document.getElementById(`success-${filamentId}`).classList.remove("show");
+    }, 3000);
+  });
+}
+</script>
+
+</body>
+</html>
