@@ -1149,37 +1149,42 @@
             const itemsPerPage = 12;
             
             // Загрузка данных
-            async function loadData() {
-                try {
-                    // Загружаем данные из filaments.json с помощью readFile
-                    const fileContent = await window.fs.readFile('filaments.json', { encoding: 'utf8' });
-                    filaments = JSON.parse(fileContent);
-                    
-                    // Создаем фильтры для типов материалов и производителей
-                    filaments.forEach(filament => {
-                        if (filament.type) materialTypes.add(filament.type);
-                        if (filament.manufacturer) brandNames.add(filament.manufacturer);
+            function loadData() {
+                // Показываем индикатор загрузки
+                loadingContainer.style.display = 'flex';
+                
+                // Используем промисы вместо async/await для лучшей совместимости
+                window.fs.readFile('filaments.json', { encoding: 'utf8' })
+                    .then(function(fileContent) {
+                        filaments = JSON.parse(fileContent);
+                        
+                        // Создаем фильтры для типов материалов и производителей
+                        filaments.forEach(function(filament) {
+                            if (filament.type) materialTypes.add(filament.type);
+                            if (filament.manufacturer) brandNames.add(filament.manufacturer);
+                        });
+                        
+                        // Заполняем фильтры
+                        populateFilters();
+                        
+                        // Инициализируем отфильтрованный список
+                        filteredFilaments = [...filaments];
+                        
+                        // Сортируем и отображаем филаменты
+                        sortFilaments();
+                        
+                        // Скрываем индикатор загрузки
+                        loadingContainer.style.display = 'none';
+                    })
+                    .catch(function(error) {
+                        console.error('Ошибка загрузки данных:', error);
+                        loadingContainer.innerHTML = `
+                            <p>Произошла ошибка при загрузке данных: ${error.message}</p>
+                            <button id="retry-load">Попробовать снова</button>
+                        `;
+                        document.getElementById('retry-load').addEventListener('click', loadData);
                     });
-                    
-                    // Заполняем фильтры
-                    populateFilters();
-                    
-                    // Инициализируем отфильтрованный список
-                    filteredFilaments = [...filaments];
-                    
-                    // Сортируем и отображаем филаменты
-                    sortFilaments();
-                    
-                    // Скрываем индикатор загрузки
-                    loadingContainer.style.display = 'none';
-                } catch (error) {
-                    console.error('Ошибка загрузки данных:', error);
-                    loadingContainer.innerHTML = `
-                        <p>Произошла ошибка при загрузке данных: ${error.message}</p>
-                        <button id="retry-load">Попробовать снова</button>
-                    `;
-                    document.getElementById('retry-load').addEventListener('click', loadData);
-                }
+            }
                     
                     // Создаем фильтры для типов материалов и производителей
                     filaments.forEach(filament => {
@@ -1794,7 +1799,7 @@
                 reviewList.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><div class="loading-text">Загрузка отзывов...</div></div>';
                 
                 // Загружаем отзывы из Google Sheets через Apps Script API
-                fetch(`https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec?filamentId=${filamentId}&action=getReviews`)
+                                    fetch('https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec?filamentId=' + filamentId + '&action=getReviews')
                     .then(response => response.json())
                     .then(data => {
                         if (!data.reviews || data.reviews.length === 0) {
