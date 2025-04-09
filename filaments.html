@@ -1153,10 +1153,13 @@
                 // Показываем индикатор загрузки
                 loadingContainer.style.display = 'flex';
                 
-                // Используем промисы вместо async/await для лучшей совместимости
-                window.fs.readFile('filaments.json', { encoding: 'utf8' })
-                    .then(function(fileContent) {
-                        filaments = JSON.parse(fileContent);
+                // Используем стандартный fetch API для браузера
+                fetch('filaments.json')
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        filaments = data;
                         
                         // Создаем фильтры для типов материалов и производителей
                         filaments.forEach(function(filament) {
@@ -1178,10 +1181,9 @@
                     })
                     .catch(function(error) {
                         console.error('Ошибка загрузки данных:', error);
-                        loadingContainer.innerHTML = `
-                            <p>Произошла ошибка при загрузке данных: ${error.message}</p>
-                            <button id="retry-load">Попробовать снова</button>
-                        `;
+                        loadingContainer.innerHTML = 
+                            '<p>Произошла ошибка при загрузке данных: ' + error.message + '</p>' +
+                            '<button id="retry-load">Попробовать снова</button>';
                         document.getElementById('retry-load').addEventListener('click', loadData);
                     });
             }
