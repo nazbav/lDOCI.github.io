@@ -478,52 +478,127 @@
             --footer-bg: #1a1a1a;
         }
 
+
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav ul {
-                margin-top: 15px;
-            }
-
-            nav ul li {
-                margin: 0 10px;
-            }
-
-            .footer-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-links {
-                margin-top: 15px;
-            }
-
-            .footer-links a {
-                margin: 0 8px;
-            }
-
-            .categories-grid {
-                grid-template-columns: 1fr !important;;
-            }
-
-            .category-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .entry-count {
-                margin-top: 10px;
-            }
-            .category-card h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            }
-
-        }
+    /* Существующие стили для header */
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav ul {
+        margin-top: 15px;
+    }
+    
+    nav ul li {
+        margin: 0 10px;
+    }
+    
+    /* Существующие стили для footer */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 15px;
+    }
+    
+    .footer-links a {
+        margin: 0 8px;
+    }
+    
+    /* Улучшенные стили для categories-grid */
+    .categories-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    /* Исправления для карточек категорий */
+    .category-card {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 15px;
+    }
+    
+    /* Предотвращаем обрезание заголовков */
+    .category-card h2 {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        font-size: 1.2rem;
+        line-height: 1.4;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Улучшаем отображение иконок в заголовках */
+    .category-card h2 svg {
+        flex-shrink: 0;
+        margin-right: 8px;
+    }
+    
+    /* Предотвращаем растягивание featured карточек */
+    .category-card.featured {
+        grid-column: auto;
+    }
+    
+    /* Существующие стили для заголовка категории */
+    .category-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .entry-count {
+        margin-top: 10px;
+    }
+    
+    /* Дополнительные улучшения */
+    .container {
+        padding: 20px 15px;
+    }
+    
+    .entry-header {
+        font-size: 0.95rem;
+        padding: 15px;
+    }
+    
+    .field {
+        padding: 15px;
+        padding-left: 25px;
+    }
+    
+    /* Улучшение отображения поисковой строки */
+    #search, #global-search, #category-search {
+        font-size: 14px;
+        padding: 10px 15px 10px 40px;
+    }
+    
+    .search-icon {
+        left: 12px;
+    }
+    
+    /* Упрощаем поля описания карточек */
+    .category-card p {
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    /* Уменьшаем счетчик категорий */
+    .category-count {
+        font-size: 0.8rem;
+    }
+    
+    /* Улучшаем вертикальные отступы */
+    .category-description {
+        margin-bottom: 20px;
+    }
+}
     </style>
 </head>
 <body>
@@ -829,12 +904,15 @@
                 });
             }
 
-            // Рендер списка категорий
+            // Рендер списка категорий с улучшенной поддержкой мобильных устройств
             function renderCategoriesList(categories) {
                 const container = document.getElementById('categories-container');
                 if (!container) return;
                 
                 container.innerHTML = '';
+                
+                // Проверяем, используется ли мобильное устройство
+                const isMobile = window.innerWidth <= 768;
                 
                 // Сортируем категории, ставим "Предупреждение и рекомендации" на первое место
                 const sortedCategories = [...categories].sort((a, b) => {
@@ -847,8 +925,8 @@
                     const card = document.createElement('a');
                     card.className = 'category-card';
                     
-                    // Выделяем "Предупреждение и рекомендации" как featured
-                    if (category.category === 'Предупреждение и рекомендации') {
+                    // На мобильном устройстве не используем featured класс
+                    if (category.category === 'Предупреждение и рекомендации' && !isMobile) {
                         card.className += ' featured';
                     }
                     
@@ -858,9 +936,15 @@
                     // Иконка в зависимости от категории
                     let icon = getIconByCategoryName(category.category);
                     
+                    // Обрезаем длинные описания на мобильных устройствах
+                    let description = category.description || `Вопросы и решения по теме "${category.category}"`;
+                    if (isMobile && description.length > 80) {
+                        description = description.substring(0, 77) + '...';
+                    }
+                    
                     card.innerHTML = `
                         <h2>${icon} ${category.category}</h2>
-                        <p>${category.description || `Вопросы и решения по теме "${category.category}"`}</p>
+                        <p>${description}</p>
                         <div class="category-count">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
@@ -878,6 +962,14 @@
                     });
                     
                     container.appendChild(card);
+                });
+                
+                // Обновляем отображение при изменении размера окна
+                window.addEventListener('resize', function() {
+                    if ((window.innerWidth <= 768) !== isMobile) {
+                        // Если произошло переключение между мобильным и десктопным режимом
+                        renderCategoriesList(allCategories);
+                    }
                 });
             }
 
