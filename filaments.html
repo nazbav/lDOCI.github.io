@@ -1181,6 +1181,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(() => {
                 filteredFilaments = [...filaments];
                 sortFilaments();
+                updatePagination();
                 loadingContainer.style.display = 'none';
             })
             .catch(error => {
