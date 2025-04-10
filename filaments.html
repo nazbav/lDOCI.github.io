@@ -70,7 +70,10 @@
         .logo svg {
             margin-right: 10px;
         }
-
+        .rating-stars i {
+            color: #FFD700;
+            margin-right: 2px;
+        }
         .theme-switcher {
             background: none;
             border: none;
@@ -1492,28 +1495,33 @@ document.addEventListener('DOMContentLoaded', function() {
     
         function renderRating(authorRating, poop, userAvgRating) {
         if (poop) return '<div class="poop-rating">💩💩💩💩💩</div>';
-        
+
         let html = '';
 
         if (authorRating) {
             html += `<div><strong>Оценка автора:</strong> ${renderStars(authorRating)}</div>`;
         }
 
-        if (userAvgRating) {
+        if (userAvgRating !== null && userAvgRating !== undefined) {
             html += `<div><strong>Средняя оценка пользователей:</strong> ${renderStars(userAvgRating)}</div>`;
         } else {
-            html += `<div><strong>Средняя оценка пользователей:</strong> пока нет</div>`;
+            html += `<div><strong>Средняя оценка пользователей:</strong> <span style="color: #aaa;">пока нет</span></div>`;
         }
 
         return html;
     }
 
     function renderStars(rating) {
-        const full = Math.floor(rating);
-        const half = rating % 1 >= 0.5;
-        const empty = 5 - full - (half ? 1 : 0);
+    const full = Math.floor(rating);
+    const half = rating % 1 >= 0.5;
+    const empty = 5 - full - (half ? 1 : 0);
 
-        return '★'.repeat(full) + (half ? '⯨' : '') + '☆'.repeat(empty);
+    let html = '';
+    for (let i = 0; i < full; i++) html += '<i class="fas fa-star"></i>';
+    if (half) html += '<i class="fas fa-star-half-alt"></i>';
+    for (let i = 0; i < empty; i++) html += '<i class="far fa-star"></i>';
+
+    return `<span class="rating-stars">${html}</span>`;
     }
     
     function updatePagination() {
@@ -1709,12 +1717,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 `).join('');
                 if (typeof data.user_avg_rating !== "undefined") {
                     currentFilament.user_avg_rating = data.user_avg_rating;
-                    updateModalRating(); // Обновим в модалке
+                    updateModalRating();
 
-                    // 🔥 А теперь обновим рейтинг в карточке
-                    const card = document.querySelector(`.filament-card[data-id="${filamentId}"]`);
+                    // ⬇️ Обновляем рейтинг в карточке
+                    const card = document.querySelector(`.filament-card[data-id="${currentFilament.id}"]`);
                     if (card) {
-                        const ratingSection = card.querySelector('.rating-section');
+                        const ratingSection = card.querySelector(".rating-section");
                         if (ratingSection) {
                             ratingSection.innerHTML = `
                                 <div class="section-title">Рейтинг:</div>
