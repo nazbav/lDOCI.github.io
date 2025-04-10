@@ -1694,7 +1694,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadReviews(filamentId) {
         reviewList.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><div class="loading-text">Загрузка отзывов...</div></div>';
         
-        fetch('https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec?filamentId=' + filamentId + '&action=getReviews')
+        fetch('https://https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=' + filamentId + '&action=getReviews')
             .then(response => response.json())
             .then(data => {
                 if (!data.reviews || data.reviews.length === 0) {
@@ -1792,7 +1792,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitReviewBtn.disabled = true;
         submitReviewBtn.textContent = 'Отправка...';
         
-        fetch('https://script.google.com/macros/s/AKfycbzGSRrGesPeE8fnQsrwDUp4mo4oqNEznyK0pm4DFkO-zHoHciO9OpdcbhoODE_QVgOdrw/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
