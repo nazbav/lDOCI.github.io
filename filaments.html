@@ -238,7 +238,7 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 500;
-            background-color: white;
+            background-color: var(--card-header-bg);
             border-bottom: 1px solid var(--border-color);
             transition: background-color 0.2s;
         }
@@ -537,12 +537,18 @@
 
         /* Dark theme */
         body.dark-theme {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --border-color: #333333;
-            --card-bg: #1e1e1e;
-            --header-bg: #1a1a1a;
-            --footer-bg: #1a1a1a;
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --border-color: #333333;
+        --card-bg: #1e1e1e;
+        --header-bg: #1a1a1a;
+        --footer-bg: #1a1a1a;
+
+        --market-link-bg: #2a2a2a;
+        --modal-bg: #1c1c1c;
+        --tab-bg: #1e1e1e;
+        --card-header-bg: #1a1a1a;
+        --button-bg: #3366ff;
         }
 
         /* Modal styles */
@@ -677,7 +683,7 @@
             display: flex;
             align-items: center;
             padding: 8px 12px;
-            background-color: #f5f5f5;
+            background-color: var(--market-link-bg);
             border-radius: 4px;
             text-decoration: none;
             color: var(--text-color);
