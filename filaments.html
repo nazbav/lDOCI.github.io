@@ -1689,34 +1689,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function loadReviews(filamentId) {
-        reviewList.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><div class="loading-text">Загрузка отзывов...</div></div>';
-        
-        fetch('https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=' + filamentId + '&action=getReviews')
-            .then(response => response.json())
-            .then(data => {
-                if (!data.reviews || data.reviews.length === 0) {
-                    reviewList.innerHTML = '<div class="no-reviews">Отзывов пока нет. Будьте первым, кто оставит отзыв!</div>';
-                } else {
-                    reviewList.innerHTML = data.reviews.map(review => `
-                        <div class="review-item">
-                            <div class="review-header">
-                                <div class="review-author">${review.username}</div>
-                                <div class="review-date">${review.date}</div>
-                            </div>
-                            <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
-                            <div class="review-text">${review.comment}</div>
+    reviewList.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div><div class="loading-text">Загрузка отзывов...</div></div>';
+    
+    fetch('https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=' + filamentId + '&action=getReviews')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.reviews || data.reviews.length === 0) {
+                reviewList.innerHTML = '<div class="no-reviews">Отзывов пока нет. Будьте первым, кто оставит отзыв!</div>';
+            } else {
+                reviewList.innerHTML = data.reviews.map(review => `
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="review-author">${review.username}</div>
+                            <div class="review-date">${review.date}</div>
                         </div>
-                    `).join('');
-                    if (typeof data.user_avg_rating !== "undefined") {
-                        currentFilament.user_avg_rating = data.user_avg_rating;
-                        updateModalRating(); // Перерисовать рейтинг в модалке
+                        <div class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                        <div class="review-text">${review.comment}</div>
+                    </div>
+                `).join('');
+                if (typeof data.user_avg_rating !== "undefined") {
+                    currentFilament.user_avg_rating = data.user_avg_rating;
+                    updateModalRating(); // Обновим в модалке
+
+                    // 🔥 А теперь обновим рейтинг в карточке
+                    const card = document.querySelector(`.filament-card[data-id="${filamentId}"]`);
+                    if (card) {
+                        const ratingSection = card.querySelector('.rating-section');
+                        if (ratingSection) {
+                            ratingSection.innerHTML = `
+                                <div class="section-title">Рейтинг:</div>
+                                ${renderRating(currentFilament.author_rating, currentFilament.poop_rating, currentFilament.user_avg_rating)}
+                            `;
+                        }
                     }
                 }
-            })
-            .catch(error => {
-                reviewList.innerHTML = `<div class="error">Ошибка при загрузке отзывов: ${error.message}</div>`;
-            });
-    }
+            }
+        })
+        .catch(error => {
+            reviewList.innerHTML = `<div class="error">Ошибка при загрузке отзывов: ${error.message}</div>`;
+        });
+}
     
     function updateRatingUI() {
         const stars = ratingInput.querySelectorAll('i');
