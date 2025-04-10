@@ -1707,6 +1707,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="review-text">${review.comment}</div>
                         </div>
                     `).join('');
+                    if (typeof data.user_avg_rating !== "undefined") {
+                        currentFilament.user_avg_rating = data.user_avg_rating;
+                        updateModalRating(); // Перерисовать рейтинг в модалке
+                    }
                 }
             })
             .catch(error => {
@@ -1724,7 +1728,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+    function updateModalRating() {
+    const ratingRow = modalSpecs.querySelector("tr:last-child td:last-child");
+    if (ratingRow && currentFilament) {
+        ratingRow.innerHTML = renderRating(currentFilament.author_rating, currentFilament.poop_rating, currentFilament.user_avg_rating);
+    }
+}
     function toggleTheme() {
         document.body.classList.toggle('dark-theme');
         
