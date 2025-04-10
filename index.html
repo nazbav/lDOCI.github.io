@@ -190,7 +190,7 @@
         .field {
             padding: 20px;
             border-top: 1px solid var(--border-color);
-            padding-left: 40px; /* Увеличиваем отступ слева для лучшей читаемости */
+            padding-left: 40px;
         }
 
         .field-title {
@@ -243,7 +243,6 @@
             font-weight: 500;
         }
 
-        /* Стиль для списков */
         .field ul, .field ol {
             padding-left: 20px;
             margin: 10px 0;
@@ -465,10 +464,36 @@
             display: flex;
             align-items: center;
             font-size: 1.1rem;
-            margin-top: -2px; /* Выравниваем иконку */
+            margin-top: -2px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-decoration: none;
         }
 
-        /* Dark theme */
+        .back-button:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(0, 102, 204, 0.05);
+            color: var(--accent-color);
+        }
+
+        .back-button svg {
+            margin-right: 5px;
+        }
+        
         body.dark-theme {
             --bg-color: #121212;
             --text-color: #e0e0e0;
@@ -478,129 +503,150 @@
             --footer-bg: #1a1a1a;
         }
 
-
         @media (max-width: 768px) {
-    /* Существующие стили для header */
-    .header-container {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    nav ul {
-        margin-top: 15px;
-    }
-    
-    nav ul li {
-        margin: 0 10px;
-    }
-    
-    /* Существующие стили для footer */
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .footer-links {
-        margin-top: 15px;
-    }
-    
-    .footer-links a {
-        margin: 0 8px;
-    }
-    
-    /* Улучшенные стили для categories-grid */
-    .categories-grid {
-        grid-template-columns: 1fr !important;
-        gap: 15px;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-    
-    /* Исправления для карточек категорий */
-    .category-card {
-        width: 100%;
-        margin-bottom: 10px;
-        padding: 15px;
-    }
-    
-    /* Предотвращаем обрезание заголовков */
-    .category-card h2 {
-        white-space: normal;
-        overflow: visible;
-        text-overflow: clip;
-        font-size: 1.2rem;
-        line-height: 1.4;
-        margin-right: 10px;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    
-    /* Улучшаем отображение иконок в заголовках */
-    .category-card h2 svg {
-        flex-shrink: 0;
-        margin-right: 8px;
-    }
-    
-    /* Предотвращаем растягивание featured карточек */
-    .category-card.featured {
-        grid-column: auto;
-    }
-    
-    /* Существующие стили для заголовка категории */
-    .category-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .entry-count {
-        margin-top: 10px;
-    }
-    
-    /* Дополнительные улучшения */
-    .container {
-        padding: 20px 15px;
-    }
-    
-    .entry-header {
-        font-size: 0.95rem;
-        padding: 15px;
-    }
-    
-    .field {
-        padding: 15px;
-        padding-left: 25px;
-    }
-    
-    /* Улучшение отображения поисковой строки */
-    #search, #global-search, #category-search {
-        font-size: 14px;
-        padding: 10px 15px 10px 40px;
-    }
-    
-    .search-icon {
-        left: 12px;
-    }
-    
-    /* Упрощаем поля описания карточек */
-    .category-card p {
-        margin-bottom: 10px;
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-    
-    /* Уменьшаем счетчик категорий */
-    .category-count {
-        font-size: 0.8rem;
-    }
-    
-    /* Улучшаем вертикальные отступы */
-    .category-description {
-        margin-bottom: 20px;
-    }
-}
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 15px;
+            }
+            
+            .footer-links a {
+                margin: 0 8px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr !important;
+                gap: 15px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            
+            .back-button {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+                margin-bottom: 10px;
+            }
+            
+            .breadcrumbs {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-back-button {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 100;
+                background-color: var(--accent-color);
+                color: white;
+                border: none;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+                opacity: 0.9;
+            }
+            
+            .mobile-back-button:hover {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            
+            .category-card {
+                width: 100%;
+                margin-bottom: 10px;
+                padding: 15px;
+            }
+            
+            .category-card h2 {
+                white-space: normal;
+                overflow: visible;
+                text-overflow: clip;
+                font-size: 1.2rem;
+                line-height: 1.4;
+                margin-right: 10px;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .category-card h2 svg {
+                flex-shrink: 0;
+                margin-right: 8px;
+            }
+            
+            .category-card.featured {
+                grid-column: auto;
+            }
+            
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .entry-count {
+                margin-top: 10px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .entry-header {
+                font-size: 0.95rem;
+                padding: 15px;
+            }
+            
+            .field {
+                padding: 15px;
+                padding-left: 25px;
+            }
+            
+            #search, #global-search, #category-search {
+                font-size: 14px;
+                padding: 10px 15px 10px 40px;
+            }
+            
+            .search-icon {
+                left: 12px;
+            }
+            
+            .category-card p {
+                margin-bottom: 10px;
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+            
+            .category-count {
+                font-size: 0.8rem;
+            }
+            
+            .category-description {
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
+
+
 <body>
     <header>
         <div class="header-container">
@@ -673,59 +719,7 @@
                 'Филамент.json',
                 'Экструдер и сопло.json'
             ];
-            
-            // Пример содержимого для демонстрации, если файлы не загрузятся
-            const demoContent = [
-                {
-                    "category": "Предупреждение и рекомендации",
-                    "description": "Важные советы и предостережения для безопасной и эффективной работы с принтером",
-                    "entries": [
-                        {
-                            "title": "Рекомендации по обращению с филаментами",
-                            "problem": "Некоторые виды филаментов требуют особого обращения",
-                            "reason": "Разные материалы имеют разные свойства и могут быстро деградировать при неправильном хранении",
-                            "solution": "• Храните филаменты в герметичных контейнерах с силикагелем\n• PLA не требует особых условий, но лучше хранить в сухом месте\n• Нейлон и PETG гигроскопичны, их нужно хранить в вакууме или с осушителем\n• ABS рекомендуется хранить вдали от прямых солнечных лучей",
-                            "notes": "Помните, что влажный филамент может вызывать проблемы при печати: пузырьки, неравномерную экструзию и плохую адгезию слоев. Если вы заметили такие признаки, попробуйте просушить филамент в специальной сушилке или духовке на минимальной температуре."
-                        },
-                        {
-                            "title": "Важные меры предосторожности при печати",
-                            "problem": "3D-печать требует соблюдения правил безопасности",
-                            "reason": "Высокие температуры и механические движения могут представлять опасность",
-                            "solution": "• Не оставляйте работающий принтер без присмотра на длительное время\n• Убедитесь, что принтер стоит на устойчивой поверхности\n• Не прикасайтесь к нагретым элементам (сопло, стол)\n• При выявлении необычных шумов или запахов немедленно отключите питание\n• Рекомендуется установить детектор дыма рядом с принтером",
-                            "notes": "Многие пользователи устанавливают IP-камеры для удаленного мониторинга процесса печати. Это позволяет вовремя заметить проблемы и предотвратить потенциальные неприятности."
-                        },
-                        {
-                            "title": "Полезные заметки про филаменты",
-                            "problem": "При неправильном выборе материала или настроек могут возникать проблемы с печатью",
-                            "reason": "Каждый тип филамента имеет свои особенности и требования",
-                            "solution": "1. Карбон и стекловолокно быстро «съедают» латунные сопла. Рекомендованы сопла из закаленной стали (HRC50+) или вольфрамовые.\n\n2. Древесные филаменты (woodfill) тоже лучше печатать через 0.6 мм, чтобы исключить засоры древесными включениями.\n\n3. Храните такие филаменты (особенно карбон) сухими, они тоже могут впитывать влагу.",
-                            "notes": "Эксперименты с разными материалами помогут вам лучше понять возможности вашего принтера. Начинайте с простых материалов и постепенно переходите к более сложным."
-                        }
-                    ]
-                },
-                {
-                    "category": "Филамент",
-                    "description": "Всё о материалах для 3D-печати, их свойствах и настройках",
-                    "entries": [
-                        {
-                            "title": "Оптимальные температуры для различных филаментов",
-                            "problem": "Неверные температурные настройки приводят к проблемам с печатью",
-                            "reason": "Каждый материал имеет свой диапазон рабочих температур экструзии и стола",
-                            "solution": "**PLA:** Сопло 190-210°C, Стол 50-60°C или без нагрева\n**PETG:** Сопло 230-250°C, Стол 70-80°C\n**ABS:** Сопло 230-250°C, Стол 100-110°C\n**TPU/TPE:** Сопло 220-235°C, Стол 50-60°C\n**Нейлон:** Сопло 240-260°C, Стол 80-100°C\n**ASA:** Сопло 240-255°C, Стол 90-110°C",
-                            "notes": "Всегда проверяйте рекомендации производителя конкретного филамента, так как температуры могут отличаться в зависимости от добавок и красителей. Для первого слоя можно увеличить температуру сопла на 5-10°C для лучшей адгезии."
-                        },
-                        {
-                            "title": "Рекомендуемые ресурсы для заказа моделей",
-                            "problem": "Поиск качественных 3D-моделей может быть сложным",
-                            "reason": "В интернете много разных источников, и качество моделей сильно варьируется",
-                            "solution": "• Printables.com – один из лучших ресурсов от Prusa. Много качественных моделей, удобный поиск, рейтинги авторов.\n• Thingiverse.com – старейшая платформа MakerBot. Больше всего моделей, но встречаются дубли и устаревшие, поиск неидеален. Тем не менее, почти любую вещь можно там найти.\n• Cults3D.com – коммерческий и бесплатный контент. Много эксклюзивных авторских работ, но за некоторые придется заплатить пару долларов.\n• MyMiniFactory.com – курируемая платформа с проверкой на печатаемость. Высокое качество, есть как бесплатные, так и платные модели.",
-                            "notes": "При поиске моделей обращайте внимание на рейтинг и комментарии. Часто автор указывает рекомендуемые настройки печати, что может сэкономить вам время на экспериментах."
-                        }
-                    ]
-                }
-            ];
 
-            // Проверка и установка темы
             function checkTheme() {
                 const darkTheme = localStorage.getItem('darkTheme') === 'true';
                 if (darkTheme) {
@@ -737,7 +731,6 @@
                 }
             }
 
-            // Обновление иконки темы
             function updateThemeIcon(isDark) {
                 if (isDark) {
                     themeSwitcher.innerHTML = `
@@ -762,28 +755,21 @@
                 }
             }
 
-            // Переключение темы
             themeSwitcher.addEventListener('click', function() {
                 const isDarkTheme = document.body.classList.toggle('dark-theme');
                 localStorage.setItem('darkTheme', isDarkTheme);
                 updateThemeIcon(isDarkTheme);
             });
 
-            // Проверка темы при загрузке
             checkTheme();
 
-            // Загрузка списка JSON-файлов из папки data
             async function loadAllFiles() {
                 const categories = [];
-                
-                // Создаем массив промисов для всех файлов
                 const filePromises = jsonFiles.map(filename => loadJsonFile(filename));
                 
                 try {
-                    // Ждем выполнения всех промисов
                     const results = await Promise.allSettled(filePromises);
                     
-                    // Обрабатываем результаты
                     results.forEach((result, index) => {
                         if (result.status === 'fulfilled' && result.value) {
                             categories.push(result.value);
@@ -799,7 +785,6 @@
                 }
             }
 
-            // Загрузка конкретного JSON-файла
             async function loadJsonFile(filename) {
                 try {
                     const response = await fetch(`data/${filename}`);
@@ -811,7 +796,6 @@
                 }
             }
 
-            // Рендер главной страницы
             function renderHomePage() {
                 mainContainer.innerHTML = `
                     <h1>База знаний FlashForge Adventurer 5M</h1>
@@ -844,9 +828,16 @@
                 setupGlobalSearch();
             }
 
-            // Рендер страницы О проекте
             function renderAboutPage() {
                 mainContainer.innerHTML = `
+                    <a href="#" class="back-button" id="back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Назад
+                    </a>
+                    
                     <div class="breadcrumbs">
                         <a href="#" id="breadcrumb-home">Главная</a>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -892,29 +883,58 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Плавающая кнопка назад для мобильных устройств -->
+                    <a href="#" class="mobile-back-button" id="mobile-back-button" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </a>
                 `;
                 
-                // Настройка переключения для аккордеонов
                 setupAccordions();
                 
-                // Настройка хлебных крошек
+                document.getElementById('back-button').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderHomePage();
+                });
+                
+                const mobileBackButton = document.getElementById('mobile-back-button');
+                
+                if (window.innerWidth <= 768) {
+                    mobileBackButton.style.display = 'flex';
+                }
+                
+                mobileBackButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderHomePage();
+                });
+                
+                window.addEventListener('scroll', function() {
+                    if (window.innerWidth <= 768) {
+                        if (window.scrollY > 300) {
+                            mobileBackButton.style.display = 'flex';
+                        } else {
+                            mobileBackButton.style.display = 'none';
+                        }
+                    }
+                });
+                
                 document.getElementById('breadcrumb-home').addEventListener('click', (e) => {
                     e.preventDefault();
                     renderHomePage();
                 });
             }
 
-            // Рендер списка категорий с улучшенной поддержкой мобильных устройств
             function renderCategoriesList(categories) {
                 const container = document.getElementById('categories-container');
                 if (!container) return;
                 
                 container.innerHTML = '';
                 
-                // Проверяем, используется ли мобильное устройство
                 const isMobile = window.innerWidth <= 768;
                 
-                // Сортируем категории, ставим "Предупреждение и рекомендации" на первое место
                 const sortedCategories = [...categories].sort((a, b) => {
                     if (a.category === 'Предупреждение и рекомендации') return -1;
                     if (b.category === 'Предупреждение и рекомендации') return 1;
@@ -925,7 +945,6 @@
                     const card = document.createElement('a');
                     card.className = 'category-card';
                     
-                    // На мобильном устройстве не используем featured класс
                     if (category.category === 'Предупреждение и рекомендации' && !isMobile) {
                         card.className += ' featured';
                     }
@@ -933,10 +952,8 @@
                     card.href = '#';
                     card.dataset.category = category.category;
                     
-                    // Иконка в зависимости от категории
                     let icon = getIconByCategoryName(category.category);
                     
-                    // Обрезаем длинные описания на мобильных устройствах
                     let description = category.description || `Вопросы и решения по теме "${category.category}"`;
                     if (isMobile && description.length > 80) {
                         description = description.substring(0, 77) + '...';
@@ -964,16 +981,13 @@
                     container.appendChild(card);
                 });
                 
-                // Обновляем отображение при изменении размера окна
                 window.addEventListener('resize', function() {
                     if ((window.innerWidth <= 768) !== isMobile) {
-                        // Если произошло переключение между мобильным и десктопным режимом
                         renderCategoriesList(allCategories);
                     }
                 });
             }
 
-            // Функция для получения иконки по названию категории
             function getIconByCategoryName(categoryName) {
                 const iconMap = {
                     'Прошивка': `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>`,
@@ -992,7 +1006,6 @@
                 return iconMap[categoryName] || `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`;
             }
 
-            // Функция для склонения слов
             function pluralize(count, words) {
                 let index;
                 if (count % 10 === 1 && count % 100 !== 11) {
@@ -1005,9 +1018,16 @@
                 return words[index];
             }
 
-            // Рендер страницы категории
             function renderCategoryPage(category) {
                 mainContainer.innerHTML = `
+                    <a href="#" class="back-button" id="back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Назад
+                    </a>
+                    
                     <div class="breadcrumbs">
                         <a href="#" id="breadcrumb-home">Главная</a>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1044,22 +1064,51 @@
                         </svg>
                         Ничего не найдено. Попробуйте изменить поисковый запрос.
                     </div>
+                    
+                    <!-- Плавающая кнопка назад для мобильных устройств -->
+                    <a href="#" class="mobile-back-button" id="mobile-back-button" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </a>
                 `;
                 
-                // Рендер записей категории
                 renderCategoryEntries(category);
-                
-                // Настройка поиска по категории
                 setupCategorySearch();
                 
-                // Настройка хлебных крошек
+                document.getElementById('back-button').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderHomePage();
+                });
+                
+                const mobileBackButton = document.getElementById('mobile-back-button');
+                
+                if (window.innerWidth <= 768) {
+                    mobileBackButton.style.display = 'flex';
+                }
+                
+                mobileBackButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderHomePage();
+                });
+                
+                window.addEventListener('scroll', function() {
+                    if (window.innerWidth <= 768) {
+                        if (window.scrollY > 300) {
+                            mobileBackButton.style.display = 'flex';
+                        } else {
+                            mobileBackButton.style.display = 'none';
+                        }
+                    }
+                });
+                
                 document.getElementById('breadcrumb-home').addEventListener('click', (e) => {
                     e.preventDefault();
                     renderHomePage();
                 });
             }
 
-            // Рендер записей категории
             function renderCategoryEntries(category) {
                 const container = document.getElementById('entries-container');
                 container.innerHTML = '';
@@ -1080,7 +1129,6 @@
                     const entryContent = document.createElement('div');
                     entryContent.className = 'entry-content';
                     
-                    // Проблема
                     if (entry.problem) {
                         const problemDiv = document.createElement('div');
                         problemDiv.className = 'field problem';
@@ -1098,7 +1146,6 @@
                         entryContent.appendChild(problemDiv);
                     }
                     
-                    // Причина
                     if (entry.reason) {
                         const reasonDiv = document.createElement('div');
                         reasonDiv.className = 'field reason';
@@ -1116,7 +1163,6 @@
                         entryContent.appendChild(reasonDiv);
                     }
                     
-                    // Решение
                     if (entry.solution) {
                         const solutionDiv = document.createElement('div');
                         solutionDiv.className = 'field solution';
@@ -1133,7 +1179,6 @@
                         entryContent.appendChild(solutionDiv);
                     }
                     
-                    // Заметки
                     if (entry.notes) {
                         const notesDiv = document.createElement('div');
                         notesDiv.className = 'field notes';
@@ -1153,7 +1198,6 @@
                         entryContent.appendChild(notesDiv);
                     }
                     
-                    // Обработчик клика для раскрытия/закрытия
                     entryHeader.addEventListener('click', function() {
                         this.classList.toggle('active');
                         entryContent.classList.toggle('active');
@@ -1165,41 +1209,24 @@
                 });
             }
 
-            // Форматирование Markdown
             function formatMarkdown(text) {
                 if (!text) return '';
                 
-                // Жирный текст
                 text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                
-                // Курсив
                 text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-                
-                // URL-ссылки без маркировки (автоопределение)
                 text = text.replace(/(https?:\/\/[^\s\"\'\>\<]+)/g, '<a href="$1" target="_blank">$1</a>');
-                
-                // Ссылки с маркировкой [текст](url)
                 text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="marked-link">$1</a>');
-                
-                // Списки
                 text = text.replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>');
                 text = text.replace(/(<li>.*?<\/li>)(?!\s*<li>)/gs, '<ul>$1</ul>');
-                
-                // Нумерованные списки
                 text = text.replace(/^\s*(\d+)\.\s+(.*?)$/gm, '<li>$2</li>');
                 text = text.replace(/(<li>.*?<\/li>)(?!\s*<li>)/gs, '<ol>$1</ol>');
-                
-                // Заголовки
                 text = text.replace(/^##\s+(.*?)$/gm, '<h3>$1</h3>');
                 text = text.replace(/^#\s+(.*?)$/gm, '<h2>$1</h2>');
-                
-                // Переносы строк
                 text = text.replace(/\n/g, '<br>');
                 
                 return text;
             }
 
-            // Настройка глобального поиска
             function setupGlobalSearch() {
                 const searchInput = document.getElementById('global-search');
                 if (!searchInput) return;
@@ -1211,22 +1238,18 @@
                     const query = this.value.toLowerCase().trim();
                     
                     if (query.length < 2) {
-                        // Отображаем все категории, если запрос короткий
                         const cards = categoriesContainer.querySelectorAll('.category-card');
                         cards.forEach(card => card.style.display = '');
                         noResultsDiv.style.display = 'none';
                         return;
                     }
                     
-                    // Массив для хранения найденных совпадений
                     const results = [];
                     
-                    // Поиск по категориям и их записям
                     allCategories.forEach(category => {
                         let categoryMatches = category.category.toLowerCase().includes(query);
                         let descriptionMatches = category.description && category.description.toLowerCase().includes(query);
                         
-                        // Поиск в записях категории
                         const matchingEntries = category.entries.filter(entry => {
                             return (
                                 entry.title.toLowerCase().includes(query) ||
@@ -1245,7 +1268,6 @@
                         }
                     });
                     
-                    // Обновление отображения
                     const cards = categoriesContainer.querySelectorAll('.category-card');
                     cards.forEach(card => {
                         const categoryName = card.dataset.category;
@@ -1253,7 +1275,6 @@
                         
                         if (matchingCategory) {
                             card.style.display = '';
-                            // Обновляем счетчик найденных записей в категории
                             const countElement = card.querySelector('.category-count');
                             if (countElement && matchingCategory.matches > 0) {
                                 countElement.innerHTML = `
@@ -1269,12 +1290,10 @@
                         }
                     });
                     
-                    // Показываем сообщение, если ничего не найдено
                     noResultsDiv.style.display = results.length === 0 ? 'block' : 'none';
                 });
             }
 
-            // Настройка поиска по категории
             function setupCategorySearch() {
                 const searchInput = document.getElementById('category-search');
                 if (!searchInput) return;
@@ -1312,7 +1331,6 @@
                 });
             }
 
-            // Настройка переключения для аккордеонов
             function setupAccordions() {
                 const headers = document.querySelectorAll('.entry-header');
                 headers.forEach(header => {
@@ -1324,10 +1342,8 @@
                 });
             }
 
-            // Инициализация приложения
             async function init() {
                 try {
-                    // Загрузка всех категорий
                     allCategories = await loadAllFiles();
                     
                     if (allCategories.length === 0) {
@@ -1344,16 +1360,13 @@
                         return;
                     }
                     
-                    // Рендер главной страницы
                     renderHomePage();
                     
-                    // Настройка навигации
                     homeLink.addEventListener('click', (e) => {
                         e.preventDefault();
                         renderHomePage();
                     });
                     
-                   
                     aboutLink.addEventListener('click', (e) => {
                         e.preventDefault();
                         renderAboutPage();
@@ -1375,7 +1388,6 @@
                 }
             }
 
-            // Запуск приложения
             init();
         });
     </script>
