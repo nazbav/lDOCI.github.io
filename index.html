@@ -83,7 +83,11 @@
             font-weight: 500;
             transition: color 0.2s;
         }
-
+        nav ul li a.highlight-link {
+        font-weight: 600;
+        color: var(--accent-color);
+        border-bottom: 2px solid var(--accent-color);
+        }
         nav ul li a:hover {
             color: var(--accent-color);
         }
@@ -528,8 +532,8 @@
             <nav>
                 <ul>
                     <li><a href="#" id="home-link">Главная</a></li>
-                    <li><a href="#" id="categories-link">Категории</a></li>
                     <li><a href="#" id="about-link">О проекте</a></li>
+                    <li><a href="filaments.html" class="highlight-link">Таблица филаментов</a></li>
                     <li>
                         <button class="theme-switcher" id="theme-switcher">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
