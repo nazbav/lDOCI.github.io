@@ -1789,21 +1789,16 @@ document.addEventListener('DOMContentLoaded', function() {
         submitReviewBtn.disabled = true;
         submitReviewBtn.textContent = 'Отправка...';
         
-        const reviewData = {
-        material_id: currentFilament.id,
-        username: reviewAuthor.value,
-        rating: currentRating,
-        comment: reviewText.value
-    };
+        const formData = new URLSearchParams();
+        formData.append("material_id", currentFilament.id);
+        formData.append("username", reviewAuthor.value);
+        formData.append("rating", currentRating);
+        formData.append("comment", reviewText.value);
 
-    fetch('https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(reviewData)
-    })
-
+        fetch('https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec', {
+            method: 'POST',
+            body: formData
+        })
         .then(function(response) {
             return response.json();
         })
