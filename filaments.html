@@ -1070,7 +1070,7 @@
                     <div class="review-list" id="review-list">
                         <!-- Здесь будут отзывы -->
                     </div>
-                    
+                    <button class="review-toggle" id="toggle-review-form">✍️ Оставить отзыв</button>
                     <div class="review-form">
                         <h3>Добавить отзыв</h3>
                         <div class="form-group">
@@ -1474,7 +1474,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="rating-section">
                         <div class="section-title">Рейтинг:</div>
-                        ${renderRating(filament.author_rating, filament.poop_rating)}
+                        ${renderRating(filament.author_rating, filament.poop_rating, filament.user_avg_rating)}
                     </div>
                     <button class="review-toggle">
                         <i class="fas fa-info-circle"></i> Подробнее
@@ -1490,33 +1490,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    function renderRating(rating, isPoop = false) {
-        if (isPoop) {
-            return '<div class="poop-rating">💩💩💩💩💩</div>';
+        function renderRating(authorRating, poop, userAvgRating) {
+        if (poop) return '<div class="poop-rating">💩💩💩💩💩</div>';
+        
+        let html = '';
+
+        if (authorRating) {
+            html += `<div><strong>Оценка автора:</strong> ${renderStars(authorRating)}</div>`;
         }
-        
-        if (!rating) return '<div class="rating-stars">Нет оценки</div>';
-        
-        const fullStars = Math.floor(rating);
-        const halfStar = rating % 1 >= 0.5;
-        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-        
-        let starsHtml = '<div class="rating-stars">';
-        
-        for (let i = 0; i < fullStars; i++) {
-            starsHtml += '★';
+
+        if (userAvgRating) {
+            html += `<div><strong>Средняя оценка пользователей:</strong> ${renderStars(userAvgRating)}</div>`;
+        } else {
+            html += `<div><strong>Средняя оценка пользователей:</strong> пока нет</div>`;
         }
-        
-        if (halfStar) {
-            starsHtml += '⯨';
-        }
-        
-        for (let i = 0; i < emptyStars; i++) {
-            starsHtml += '☆';
-        }
-        
-        starsHtml += '</div>';
-        return starsHtml;
+
+        return html;
+    }
+
+    function renderStars(rating) {
+        const full = Math.floor(rating);
+        const half = rating % 1 >= 0.5;
+        const empty = 5 - full - (half ? 1 : 0);
+
+        return '★'.repeat(full) + (half ? '⯨' : '') + '☆'.repeat(empty);
     }
     
     function updatePagination() {
@@ -1638,7 +1635,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </tr>
             <tr>
                 <td>Рейтинг</td>
-                <td>${renderRating(filament.author_rating, filament.poop_rating)}</td>
+                <td>${renderRating(filament.author_rating, filament.poop_rating, filament.user_avg_rating)}</td>
             </tr>
         `;
         
@@ -1824,7 +1821,9 @@ document.addEventListener('DOMContentLoaded', function() {
             submitReviewBtn.textContent = 'Отправить отзыв';
         });
     });
-    
+    document.getElementById('toggle-review-form').addEventListener('click', function () {
+    document.querySelector('.review-form').classList.toggle('show');
+});   
     themeSwitcher.addEventListener('click', toggleTheme);
     
     checkSavedTheme();
