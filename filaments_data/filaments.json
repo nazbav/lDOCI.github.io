@@ -6,19 +6,29 @@
     "type": "PLA",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 177,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWidth": 65,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "https://bestfilament.ru/"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://bestfilament.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/bestfilament-81775881/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=bestfilament+pla&typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=bestfilament%20pla"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "bestfilament_abs_1000",
@@ -27,19 +37,29 @@
     "type": "ABS",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 177,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWidth": 65,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "https://bestfilament.ru/"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://bestfilament.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/bestfilament-81775881/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=bestfilament+abs&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=bestfilament%20abs"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "bestfilament_petg_1000",
@@ -48,21 +68,61 @@
     "type": "PETG",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 177,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWidth": 65,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "https://bestfilament.ru/"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://bestfilament.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/bestfilament-81775881/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=bestfilament+petg&typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=bestfilament+petg&fbrand=76209"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
+  {
+    "id": "bestfilament_hips_1000",
+    "name": "Bestfilament HIPS 1000г",
+    "manufacturer": "Bestfilament",
+    "type": "HIPS",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 177,
+    "spoolDiameter": 200,
+    "spoolWidth": 65,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://bestfilament.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/search/?brand=81775881&brand_was_predicted=true&from_global=true&text=bestfilament+hips&typeofplastic=336371"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=bestfilament%20hips"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
   {
     "id": "exoflex_pla_1000",
     "name": "EXOFLEX PLA 1000г",
@@ -70,19 +130,60 @@
     "type": "PLA",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWeight": 155,
+    "spoolDiameter": 196,
+    "spoolWidth": 74,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://exoflex.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/search/?deny_category_prediction=true&from_global=true&text=exoflex+pla&typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=exoflex%20pla"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "exoflex_petg_1000",
+    "name": "EXOFLEX PETG 1000г",
+    "manufacturer": "EXOFLEX",
+    "type": "PETG",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 155,
+    "spoolDiameter": 196,
+    "spoolWidth": 74,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://exoflex.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?category_was_predicted=true&deny_category_prediction=true&from_global=true&text=exoflex+petg"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=exoflex%20petg"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "exoflex_abs_1000",
@@ -91,19 +192,29 @@
     "type": "ABS",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWeight": 155,
+    "spoolDiameter": 196,
+    "spoolWidth": 74,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://exoflex.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?category_was_predicted=true&deny_category_prediction=true&from_global=true&text=exoflex+abs&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=exoflex%20abs"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "exoflex_asa_1000",
@@ -112,41 +223,91 @@
     "type": "ASA",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWeight": 155,
+    "spoolDiameter": 196,
+    "spoolWidth": 74,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://exoflex.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/search/?text=exoflex+asa&from_global=true"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=exoflex%20asa"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
   {
     "id": "mako_pla_1000",
-    "name": "MAKO PLA 1000г",
+    "name": "MAKO PLA 950г",
     "manufacturer": "MAKO",
     "type": "PLA",
-    "weight": 1000,
+    "weight": 950,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 182,
     "spoolDiameter": 200,
     "spoolWidth": 70,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://3dmako.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/mako-100524697/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=mako+pla&typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=mako%20pla"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "mako_petg_1000",
+    "name": "MAKO PETG 1000г ",
+    "manufacturer": "MAKO",
+    "type": "PETG",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 182,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://3dmako.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?category_was_predicted=true&deny_category_prediction=true&from_global=true&text=mako+petg"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "mako_abs_1000",
@@ -155,42 +316,61 @@
     "type": "ABS",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 182,
     "spoolDiameter": 200,
     "spoolWidth": 70,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://3dmako.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/mako-100524697/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=mako+abs&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=mako%20abs"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "mako_pa6_750",
-    "name": "MAKO PA6-GF30 750г",
+    "id": "mako_pa6_1000",
+    "name": "MAKO PA6-GF30 1000г",
     "manufacturer": "MAKO",
     "type": "PA6-GF30",
-    "weight": 750,
+    "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 182,
     "spoolDiameter": 200,
     "spoolWidth": 70,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://3dmako.ru/ing"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
   {
     "id": "strimplast_pla_1000",
     "name": "СТРИМПЛАСТ PLA 1000г",
@@ -198,63 +378,61 @@
     "type": "PLA",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWeight": 174,
+    "spoolDiameter": 202,
+    "spoolWidth": 56,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://www.sp3d.ru/collection/rashodnye-materialy-fdm"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "strimplast_abs_1000",
-    "name": "СТРИМПЛАСТ ABS+ 1000г",
+    "id": "strimplast_petg_1000",
+    "name": "СТРИМПЛАСТ PETG 1000г",
     "manufacturer": "СТРИМПЛАСТ",
-    "type": "ABS+",
+    "type": "PETG",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWeight": 174,
+    "spoolDiameter": 202,
+    "spoolWidth": 56,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://www.sp3d.ru/collection/rashodnye-materialy-fdm"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/product/petg-chernyy-1-75-mm-1-0-kg-plastik-dlya-3d-pechati-tm-ecofil-1856579295/?at=oZt62MrkxtBxqzLwsA2wYA7tnq9j1NIg4wAkqhwzp8PB&keywords=pla+ecofil"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-  {
-    "id": "strimplast_flex_500",
-    "name": "СТРИМПЛАСТ Flex 500г",
-    "manufacturer": "СТРИМПЛАСТ",
-    "type": "TPU",
-    "weight": 500,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
-  },
-
   {
     "id": "cyberfiber_pla_1000",
     "name": "CYBERFIBER PLA 1000г",
@@ -269,19 +447,28 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://cyberfiber.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/223404472/detail.aspx"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
   },
   {
-    "id": "cyberfiber_carbex_750",
-    "name": "CYBERFIBER Carbex MF 750г",
+    "id": "cyberfiber_petg_1000",
+    "name": "CYBERFIBER PETG 1000г",
     "manufacturer": "CYBERFIBER",
-    "type": "ABS-MF",
-    "weight": 750,
+    "type": "PETG",
+    "weight": 1000,
     "diameter": 1.75,
     "spoolWeight": 200,
     "spoolDiameter": 200,
@@ -290,35 +477,23 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://cyberfiber.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/cyberfiber-100094527/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=cyberfiber&typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-  {
-    "id": "cyberfiber_poketon_500",
-    "name": "CYBERFIBER POKETON 500г",
-    "manufacturer": "CYBERFIBER",
-    "type": "POKETON",
-    "weight": 500,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
-  },
-
   {
     "id": "fdplast_pla_1000",
     "name": "FDplast PLA 1000г",
@@ -326,68 +501,221 @@
     "type": "PLA",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
+    "spoolWeight": 195,
+    "spoolDiameter": 188,
     "spoolWidth": 70,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://www.fdplast.ru/produkcziya/plastik-dlya-3d-pechati/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/fdplast-83906971/?typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=fdplast%20pla"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "fdplast_abs_750",
-    "name": "FDplast ABS 750г",
+    "id": "fdplast_petg_1000",
+    "name": "FDplast PETG 1000г",
+    "manufacturer": "FDplast",
+    "type": "PETG",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 195,
+    "spoolDiameter": 188,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.fdplast.ru/produkcziya/plastik-dlya-3d-pechati/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/fdplast-83906971/?typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=fdplast%20petg"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "fdplast_ABS_1000",
+    "name": "FDplast ABS 1000г",
     "manufacturer": "FDplast",
     "type": "ABS",
-    "weight": 750,
+    "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
+    "spoolWeight": 195,
+    "spoolDiameter": 188,
     "spoolWidth": 70,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://www.fdplast.ru/produkcziya/plastik-dlya-3d-pechati/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/fdplast-83906971/?typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=fdplast%20abs"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "fdplast_sbs_500",
-    "name": "FDplast SBS Glass 500г",
+    "id": "fdplast_hips_1000",
+    "name": "FDplast HIPS 1000г ",
+    "manufacturer": "FDplast",
+    "type": "HIPS",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 195,
+    "spoolDiameter": 188,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.fdplast.ru/produkcziya/plastik-dlya-3d-pechati/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.sopytka.ru/products/prutki-dlya-3d-printera/?filtersData[cats]=16&filtersData[weight]=1000"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.sopytka.ru/products/prutki-dlya-3d-printera/?filtersData[cats]=16&filtersData[weight]=1000"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "fdplast_nylon_1000",
+    "name": "FDplast NYLON 1000г",
+    "manufacturer": "FDplast",
+    "type": "NYLON",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 195,
+    "spoolDiameter": 188,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.fdplast.ru/produkcziya/plastik-dlya-3d-pechati/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?category_was_predicted=true&deny_category_prediction=true&from_global=true&text=FDplast&typeofplastic=336375"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FDplast%20nylon"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "fdplast_sbs_1000",
+    "name": "FDplast SBS 1000г",
     "manufacturer": "FDplast",
     "type": "SBS",
-    "weight": 500,
+    "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
+    "spoolWeight": 195,
+    "spoolDiameter": 188,
     "spoolWidth": 70,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://www.fdplast.ru/produkcziya/plastik-dlya-3d-pechati/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?category_was_predicted=true&deny_category_prediction=true&from_global=true&text=FDplast&typeofplastic=285452"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
+  {
+    "id": "fdplast_tpu_1000",
+    "name": "FDplast TPU 1000г",
+    "manufacturer": "FDplast",
+    "type": "TPU",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 195,
+    "spoolDiameter": 188,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.fdplast.ru/produkcziya/plastik-dlya-3d-pechati/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?category_was_predicted=true&deny_category_prediction=true&from_global=true&text=FDplast&typeofplastic=336370"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FDplast%20tpu"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
   {
     "id": "filamentarno_pla_1000",
-    "name": "FILAMENTARNO! PLA 1000г",
+    "name": "FILAMENTARNO! PLA+ 1000г",
     "manufacturer": "FILAMENTARNO!",
-    "type": "PLA",
+    "type": "PLA+",
     "weight": 1000,
     "diameter": 1.75,
     "spoolWeight": 200,
@@ -397,18 +725,59 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://www.filamentarno.ru/catalog.html#f3"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/filamentarno-83906922/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=FILAMENTARNO&typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "filamentarno_abs_750",
-    "name": "FILAMENTARNO! ABS/PA 750г",
+    "id": "filamentarno_abs_1000",
+    "name": "FILAMENTARNO! ABS 1000г",
     "manufacturer": "FILAMENTARNO!",
-    "type": "ABS-PA",
+    "type": "ABS",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.filamentarno.ru/catalog.html#f3"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/filamentarno-83906922/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=FILAMENTARNO&typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FILAMENTARNO%20abs"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": "ABS существует в разных видах: GF-4, GF-12, PA, PBT GF-13"
+  },
+  {
+    "id": "filamentarno_tpu_750",
+    "name": "FILAMENTARNO! TPU 750г",
+    "manufacturer": "FILAMENTARNO!",
+    "type": "TPU",
     "weight": 750,
     "diameter": 1.75,
     "spoolWeight": 200,
@@ -418,16 +787,150 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://www.filamentarno.ru/catalog.html#f3"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/filamentarno-83906922/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=FILAMENTARNO&typeofplastic=336370"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FILAMENTARNO%20tpu"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "filamentarno_petg_1000",
+    "name": "FILAMENTARNO! PETG 1000г",
+    "manufacturer": "FILAMENTARNO!",
+    "type": "PETG",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.filamentarno.ru/catalog.html#f3"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/filamentarno-83906922/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=FILAMENTARNO&typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FILAMENTARNO%20petg"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "filamentarno_pa_750",
+    "name": "FILAMENTARNO! NYLON 750г ",
+    "manufacturer": "FILAMENTARNO!",
+    "type": "NYLON",
+    "weight": 750,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.filamentarno.ru/catalog.html#f3"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/filamentarno-83906922/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=FILAMENTARNO&typeofplastic=336375"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FILAMENTARNO%20pa"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": "Cуществует в разных видах: PA6, PA12, PA66 GF-30"
+  },
+  {
+    "id": "filamentarno_san_750",
+    "name": "FILAMENTARNO! SAN 750г",
+    "manufacturer": "FILAMENTARNO!",
+    "type": "SAN",
+    "weight": 750,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.filamentarno.ru/catalog.html#f3"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/filamentarno-83906922/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=FILAMENTARNO&typeofplastic=101187362"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FILAMENTARNO%20SAN"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "filamentarno_pp_750",
+    "name": "FILAMENTARNO! PP 750г",
+    "manufacturer": "FILAMENTARNO!",
+    "type": "PP",
+    "weight": 750,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://www.filamentarno.ru/catalog.html#f3"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/filamentarno-83906922/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=FILAMENTARNO&typeofplastic=101157661"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FILAMENTARNO%20PP"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "filamentarno_wax_500",
-    "name": "FILAMENTARNO! WAX3D 500г",
+    "name": "FILAMENTARNO! WAX 500г",
     "manufacturer": "FILAMENTARNO!",
     "type": "WAX",
     "weight": 500,
@@ -439,62 +942,28 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://www.filamentarno.ru/catalog.html#f3"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/filamentarno-83906922/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=FILAMENTARNO&typeofplastic=101190332"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=FILAMENTARNO%20wax"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
-  },
-
-  {
-    "id": "greg_pla_900",
-    "name": "gReg PLA 900г",
-    "manufacturer": "gReg",
-    "type": "PLA",
-    "weight": 900,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "greg_petg_900",
-    "name": "gReg PETG 900г",
-    "manufacturer": "gReg",
-    "type": "PETG",
-    "weight": 900,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
-  },
-
-  {
-    "id": "my3d_pla_1000",
-    "name": "MY3D PLA 1000г",
+    "id": "my3d_petg_1000",
+    "name": "MY3D PETG 1000г",
     "manufacturer": "MY3D",
-    "type": "PLA",
+    "type": "PETG",
     "weight": 1000,
     "diameter": 1.75,
     "spoolWeight": 200,
@@ -504,19 +973,29 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://my3d.art/collection/petg"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/my3d-87369068/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=my3d"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=my3d%20petg"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "my3d_pla_carbon_750",
-    "name": "MY3D PLA Carbon 750г",
+    "id": "my3d_abs_1000",
+    "name": "MY3D ABS 1000г",
     "manufacturer": "MY3D",
-    "type": "PLA-CF",
-    "weight": 750,
+    "type": "ABS",
+    "weight": 1000,
     "diameter": 1.75,
     "spoolWeight": 200,
     "spoolDiameter": 200,
@@ -525,14 +1004,23 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://my3d.art/collection/abs-2"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
   {
     "id": "rec_pla_750",
     "name": "REC PLA 750г",
@@ -547,12 +1035,83 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://rec3d.ru/plastik-dlya-3d-printerov/pla/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/rec-87229835/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=rec&typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=rec%20pla"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
+  },
+  {
+    "id": "rec_abs_750",
+    "name": "REC ABS 750г",
+    "manufacturer": "REC",
+    "type": "ABS",
+    "weight": 750,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://rec3d.ru/plastik-dlya-3d-printerov/abs/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/rec-87229835/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=rec&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=rec%20abs"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "rec_rubber_750",
+    "name": "REC RUBBER 750г",
+    "manufacturer": "REC",
+    "type": "RUBBER",
+    "weight": 750,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://rec3d.ru/plastik-dlya-3d-printerov/rubber/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?category_was_predicted=true&deny_category_prediction=true&from_global=true&text=rec+rubber"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=rec%20rubber"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "rec_petg_750",
@@ -568,12 +1127,83 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://rec3d.ru/plastik-dlya-3d-printerov/relax/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/rec-87229835/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=rec&typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=rec%20relax"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
+  },
+  {
+    "id": "rec_asa_750",
+    "name": "REC ASA Eternal 750г ",
+    "manufacturer": "REC",
+    "type": "ASA",
+    "weight": 750,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://rec3d.ru/plastik-dlya-3d-printerov/eternal/"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=rec%20Eternal"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "rec_hips_750",
+    "name": "REC HIPS 750г",
+    "manufacturer": "REC",
+    "type": "HIPS",
+    "weight": 750,
+    "diameter": 1.75,
+    "spoolWeight": 200,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://rec3d.ru/plastik-dlya-3d-printerov/hips/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/search/?text=rec+hips&from_global=true"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=rec%20hips"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "rec_peek_500",
@@ -589,40 +1219,27 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://rec3d.ru/plastik-dlya-3d-printerov/peek/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/search/?text=rec+peek&from_global=true"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=rec%20peek"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
   },
-
   {
-    "id": "sem_abs_950",
-    "name": "SEM ABS 950г",
+    "id": "sem_abs_800",
+    "name": "SEM ABS 800г",
     "manufacturer": "SEM",
     "type": "ABS",
-    "weight": 950,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
-  },
-  {
-    "id": "sem_abspc_800",
-    "name": "SEM ABS/PC 800г",
-    "manufacturer": "SEM",
-    "type": "ABS-PC",
     "weight": 800,
     "diameter": 1.75,
     "spoolWeight": 200,
@@ -632,14 +1249,116 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://sem3d.ru/catalog/abs_plastiki/9147/?oid=9286"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/sem-101028046/"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=sem%20abs"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
+  {
+    "id": "printproduct_pla_1000",
+    "name": "PRINT PRODUCT PLA 1000г",
+    "manufacturer": "PRINT PRODUCT",
+    "type": "PLA",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 224,
+    "spoolDiameter": 197,
+    "spoolWidth": 56,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://printproduct3d.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=PRINT%20PRODUCT%20pla"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "printproduct_petg_1000",
+    "name": "PRINT PRODUCT PET-GUN 1000г ",
+    "manufacturer": "PRINT PRODUCT",
+    "type": "PETG",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 224,
+    "spoolDiameter": 197,
+    "spoolWidth": 56,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://printproduct3d.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/search/?brand=100128622&brand_was_predicted=true&from_global=true&text=PRINT+PRODUCT+PET-G"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "printproduct_abs_1000",
+    "name": "PRINT PRODUCTABS M8 1000г",
+    "manufacturer": "PRINT PRODUCT",
+    "type": "ABS",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 224,
+    "spoolDiameter": 197,
+    "spoolWidth": 56,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://printproduct3d.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/search/?brand=100128622&brand_was_predicted=true&from_global=true&text=PRINT+PRODUCT+abs"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
   {
     "id": "printproduct_titi_500",
     "name": "PRINT PRODUCT Titi Flex 500г",
@@ -647,42 +1366,30 @@
     "type": "TPU",
     "weight": 500,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWeight": 224,
+    "spoolDiameter": 197,
+    "spoolWidth": 56,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://printproduct3d.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/search/?brand=100128622&brand_was_predicted=true&from_global=true&text=PRINT+PRODUCT+Titi+Flex"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-  {
-    "id": "printproduct_nylon_1000",
-    "name": "PRINT PRODUCT Nylon Strong 1000г",
-    "manufacturer": "PRINT PRODUCT",
-    "type": "PA",
-    "weight": 1000,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
-  },
-
   {
     "id": "u3print_pla_1000",
     "name": "U3Print PLA 1000г",
@@ -690,42 +1397,154 @@
     "type": "PLA",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 256,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
+    "spoolWidth": 69,
+    "spoolInnerDiameter": 83,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://u3print.com/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/u3print-74884196/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=u3print&typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "u3print_pla_carbon_750",
-    "name": "U3Print PLA Carbon 750г",
+    "id": "u3print_petg_1000",
+    "name": "U3Print PETG 1000г",
     "manufacturer": "U3Print",
-    "type": "PLA-CF",
-    "weight": 750,
+    "type": "PETG",
+    "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 256,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
+    "spoolWidth": 69,
+    "spoolInnerDiameter": 83,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://u3print.com/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/u3print-74884196/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=u3print&typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
+  {
+    "id": "u3print_abs_1000",
+    "name": "U3Print ABS 1000г",
+    "manufacturer": "U3Print",
+    "type": "ABS",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 256,
+    "spoolDiameter": 200,
+    "spoolWidth": 69,
+    "spoolInnerDiameter": 83,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://u3print.com/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/u3print-74884196/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=u3print&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "u3print_nylon_450",
+    "name": "U3Print NYLON 450г",
+    "manufacturer": "U3Print",
+    "type": "NYLON",
+    "weight": 450,
+    "diameter": 1.75,
+    "spoolWeight": 256,
+    "spoolDiameter": 200,
+    "spoolWidth": 69,
+    "spoolInnerDiameter": 83,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://u3print.com/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/u3print-74884196/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=u3print&typeofplastic=336375"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": "Cуществует в разных видах: 6C CFF3-, SC M7, SC 2, SC M4, 6C ALL IN"
+  },
+  {
+    "id": "u3print_pp_750",
+    "name": "U3Print PP CFF 750г",
+    "manufacturer": "U3Print",
+    "type": "PP",
+    "weight": 750,
+    "diameter": 1.75,
+    "spoolWeight": 256,
+    "spoolDiameter": 200,
+    "spoolWidth": 69,
+    "spoolInnerDiameter": 83,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://u3print.com/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/u3print-74884196/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=u3print&typeofplastic=101157661"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
   {
     "id": "absmaker_petg_1000",
     "name": "ABS Maker PETG 1000г",
@@ -733,105 +1552,153 @@
     "type": "PETG",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWeight": 178,
+    "spoolDiameter": 198,
+    "spoolWidth": 75,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://absmaker.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/abs-meyker-83313007/"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/brands/abs-meyker"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
   {
-    "id": "solidfilament_pla_1000",
-    "name": "SolidFilament PLA 1000г",
+    "id": "solidfilament_petg_1000",
+    "name": "SolidFilament PETG 1000г",
     "manufacturer": "SolidFilament",
-    "type": "PLA",
+    "type": "PETG",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 147,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
+    "spoolWidth": 62,
+    "spoolInnerDiameter": 55,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://top3dshop.ru/materiali/plastik-solidfilament/?srsltid=AfmBOopm5G4KP3fGTBk1vpgAw5KBCmnyjHazKY8aZB3Ztv3OsNub_qPw"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/brand/solidfilament-81775894/"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-  {
-    "id": "solidfilament_abs_285_1000",
-    "name": "SolidFilament ABS 2.85мм 1000г",
-    "manufacturer": "SolidFilament",
-    "type": "ABS",
-    "weight": 1000,
-    "diameter": 2.85,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
-  },
-
   {
     "id": "esun_pla_1000",
     "name": "eSUN PLA+ 1000г",
     "manufacturer": "eSUN",
-    "type": "PLA",
+    "type": "PLA+",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 145,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
+    "spoolWidth": 65,
+    "spoolInnerDiameter": 54,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://esun-3d.ru/catalog/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/esun-33563653/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=esun+pla&typeofplastic=100857335"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=esun%20pla"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "esun_petg_1000",
+    "name": "eSUN PETG 1000г",
+    "manufacturer": "eSUN",
+    "type": "PETG",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 145,
+    "spoolDiameter": 200,
+    "spoolWidth": 65,
+    "spoolInnerDiameter": 54,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://esun-3d.ru/catalog/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/esun-33563653/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=esun+pla&typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=esun%20petg"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "esun_abs_1000",
     "name": "eSUN ABS+ 1000г",
     "manufacturer": "eSUN",
-    "type": "ABS",
+    "type": "ABS+",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 145,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
+    "spoolWidth": 65,
+    "spoolInnerDiameter": 54,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://esun-3d.ru/catalog/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/esun-33563653/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=esun&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=esun%20petg"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "esun_tpu_1000",
@@ -840,21 +1707,92 @@
     "type": "TPU",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
+    "spoolWeight": 145,
     "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
+    "spoolWidth": 65,
+    "spoolInnerDiameter": 54,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://esun-3d.ru/catalog/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/esun-33563653/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=esun&typeofplastic=336370"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=esun%20etpu"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
-
+  {
+    "id": "esun_nylon_1000",
+    "name": "eSUN NYLON 1000г",
+    "manufacturer": "eSUN",
+    "type": "NYLON",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 145,
+    "spoolDiameter": 200,
+    "spoolWidth": 65,
+    "spoolInnerDiameter": 54,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://esun-3d.ru/catalog/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/esun-33563653/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=esun&typeofplastic=336375"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=esun%20epa"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": "Cуществует в разных видах: ePA-CF, ePA12-CF, ePA-CF Carbon Fiber"
+  },
+  {
+    "id": "esun_pet_1000",
+    "name": "eSUN PET 1000г",
+    "manufacturer": "eSUN",
+    "type": "PET",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 145,
+    "spoolDiameter": 200,
+    "spoolWidth": 65,
+    "spoolInnerDiameter": 54,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://esun-3d.ru/catalog/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/esun-33563653/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&opened=typeofplastic&text=esun&typeofplastic=101243620"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
   {
     "id": "syntech_pla_1000",
     "name": "SynTech PLA 1000г",
@@ -862,88 +1800,188 @@
     "type": "PLA",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
+    "spoolWeight": 126,
+    "spoolDiameter": 195,
+    "spoolWidth": 63,
+    "spoolInnerDiameter": 55,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://syntechlab.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?brand=101128219%2C100109117&brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=syntech&typeofplastic=285451"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "syntech_abse_1000",
-    "name": "SynTech ABS-E 1000г",
+    "id": "syntech_petg_1000",
+    "name": "SynTech PETG 1000г",
+    "manufacturer": "SynTech",
+    "type": "PETG",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 126,
+    "spoolDiameter": 195,
+    "spoolWidth": 63,
+    "spoolInnerDiameter": 55,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://syntechlab.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?brand=101128219%2C100109117&brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=syntech&typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "syntech_abs_1000",
+    "name": "SynTech ABS 1000г",
     "manufacturer": "SynTech",
     "type": "ABS",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
+    "spoolWeight": 126,
+    "spoolDiameter": 195,
+    "spoolWidth": 63,
+    "spoolInnerDiameter": 55,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://syntechlab.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/?brand=101128219%2C100109117&brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=syntech&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
-  },
-
-  {
-    "id": "htp_pla_1000",
-    "name": "Hi-Tech Plast PLA 1000г",
-    "manufacturer": "Hi-Tech Plast",
-    "type": "PLA",
-    "weight": 1000,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
-    "id": "htp_pok_1000",
-    "name": "Hi-Tech Plast POK 1000г",
+    "id": "htp_petg_1000",
+    "name": "Hi-Tech Plast PETG 1000г",
     "manufacturer": "Hi-Tech Plast",
-    "type": "POK",
+    "type": "PETG",
     "weight": 1000,
     "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
+    "spoolWeight": 150,
+    "spoolDiameter": 198,
+    "spoolWidth": 73,
     "spoolInnerDiameter": 52,
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://h-t-p.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/hi-tech-plast-87286623/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=hi+tech+plast&typeofplastic=336369"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
+    "author_rating": 4,
+    "notes": "Белый PETG прям белесый!"
   },
-
+  {
+    "id": "htp_abs_1000",
+    "name": "Hi-Tech Plast ABS 1000г",
+    "manufacturer": "Hi-Tech Plast",
+    "type": "ABS",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 150,
+    "spoolDiameter": 198,
+    "spoolWidth": 73,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://h-t-p.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/hi-tech-plast-87286623/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=hi+tech+plast&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "htp_asa_1000",
+    "name": "Hi-Tech Plast ASA 1000г",
+    "manufacturer": "Hi-Tech Plast",
+    "type": "ASA",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 150,
+    "spoolDiameter": 198,
+    "spoolWidth": 73,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://h-t-p.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/hi-tech-plast-87286623/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=hi+tech+plast&typeofplastic=336373"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
+    ],
+    "poop_rating": false,
+    "author_rating": 0,
+    "notes": ""
+  },
   {
     "id": "nekrasovsky_petg_1000",
-    "name": "Некрасовский PETG 1000г",
+    "name": "Некрасовский (ПластикОФФ) PETG 1000г",
     "manufacturer": "Некрасовский полимер",
     "type": "PETG",
     "weight": 1000,
@@ -955,40 +1993,152 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "https://nekras.ru/product-category/polimer/"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=%D0%BF%D0%BB%D0%B0%D1%81%D1%82%D0%B8%D0%BA%D0%BE%D1%84%D1%84%20petg"
+      }
     ],
     "poop_rating": false,
-    "author_rating": 0
-  },
-
-  {
-    "id": "nit_tpu_500",
-    "name": "НИТ TPU 500г",
-    "manufacturer": "НИТ",
-    "type": "TPU",
-    "weight": 500,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": true,
-    "author_rating": 0
+    "author_rating": 0,
+    "notes": ""
   },
   {
     "id": "nit_pla_1000",
     "name": "НИТ PLA 1000г",
     "manufacturer": "НИТ",
     "type": "PLA",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 170,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://plastik-nit.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/nit-82618581/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=%D0%BD%D0%B8%D1%82+pla"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?search=%D0%BD%D0%B8%D1%82%20pla#c13753047"
+      }
+    ],
+    "poop_rating": true,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "nit_petg_1000",
+    "name": "НИТ PETG 1000г",
+    "manufacturer": "НИТ",
+    "type": "PETG",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 170,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://plastik-nit.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/nit-82618581/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=%D0%BD%D0%B8%D1%82+petg"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%BD%D0%B8%D1%82+petg&fbrand=43849"
+      }
+    ],
+    "poop_rating": true,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "nit_hips_1000",
+    "name": "НИТ HIPS 1000г",
+    "manufacturer": "НИТ",
+    "type": "HIPS",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 170,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://plastik-nit.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/product/hips-plastik-dlya-3d-pechati-nit-naturalnyy-1-kg-155378687/?at=pZtp4Gn5XiP2pgXKsvyAo5C0GK4Kvu6NBDwpF4zVvYm&keywords=%D0%BD%D0%B8%D1%82+HIPS"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/110809663/detail.aspx"
+      }
+    ],
+    "poop_rating": true,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "nit_abs_1000",
+    "name": "НИТ ABS 1000г",
+    "manufacturer": "НИТ",
+    "type": "ABS",
+    "weight": 1000,
+    "diameter": 1.75,
+    "spoolWeight": 170,
+    "spoolDiameter": 200,
+    "spoolWidth": 70,
+    "spoolInnerDiameter": 52,
+    "filamentDiameter": 85,
+    "printProfiles": [],
+    "links": [
+      {
+        "type": "website",
+        "url": "https://plastik-nit.ru/"
+      },
+      {
+        "type": "ozon",
+        "url": "https://www.ozon.ru/category/plastik-dlya-3d-printera-15794/nit-82618581/?brand_was_predicted=true&category_was_predicted=true&deny_category_prediction=true&from_global=true&text=%D0%BD%D0%B8%D1%82+abs&typeofplastic=285449"
+      },
+      {
+        "type": "wb",
+        "url": "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%BD%D0%B8%D1%82+abs&fbrand=43849"
+      }
+    ],
+    "poop_rating": true,
+    "author_rating": 0,
+    "notes": ""
+  },
+  {
+    "id": "123d_petg_1000",
+    "name": "123 3D PETG 1000г",
+    "manufacturer": "123 3D",
+    "type": "PETG",
     "weight": 1000,
     "diameter": 1.75,
     "spoolWeight": 200,
@@ -998,14 +2148,22 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
-    "poop_rating": true,
+    "poop_rating": false,
     "author_rating": 0
   },
-
   {
     "id": "kingroon_pla_1000",
     "name": "Kingroon PLA 1000г",
@@ -1020,9 +2178,18 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
@@ -1041,14 +2208,22 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
   },
-
   {
     "id": "eryone_pla_1000",
     "name": "ERYONE PLA 1000г",
@@ -1063,9 +2238,18 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
@@ -1084,14 +2268,22 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
   },
-
   {
     "id": "creality_hyper_pla_1000",
     "name": "Creality Hyper PLA 1000г",
@@ -1106,9 +2298,18 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
@@ -1127,14 +2328,22 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
   },
-
   {
     "id": "popbit_tpla_1000",
     "name": "PopBit T-PLA 1000г",
@@ -1149,9 +2358,18 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
@@ -1170,36 +2388,22 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
   },
-
-  {
-    "id": "123d_petg_1000",
-    "name": "123 3D PETG 1000г",
-    "manufacturer": "123 3D",
-    "type": "PETG",
-    "weight": 1000,
-    "diameter": 1.75,
-    "spoolWeight": 200,
-    "spoolDiameter": 200,
-    "spoolWidth": 70,
-    "spoolInnerDiameter": 52,
-    "filamentDiameter": 85,
-    "printProfiles": [],
-    "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
-    ],
-    "poop_rating": false,
-    "author_rating": 0
-  },
-
   {
     "id": "geeetech_pla_1000",
     "name": "Geeetech PLA 1000г",
@@ -1214,9 +2418,18 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
@@ -1235,9 +2448,18 @@
     "filamentDiameter": 85,
     "printProfiles": [],
     "links": [
-      {"type": "website", "url": "#"},
-      {"type": "ozon", "url": "#"},
-      {"type": "wb", "url": "#"}
+      {
+        "type": "website",
+        "url": "#"
+      },
+      {
+        "type": "ozon",
+        "url": "#"
+      },
+      {
+        "type": "wb",
+        "url": "#"
+      }
     ],
     "poop_rating": false,
     "author_rating": 0
