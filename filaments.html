@@ -1211,6 +1211,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 sortFilaments();
                 updatePagination();
                 loadingContainer.style.display = 'none';
+				
+				    if (location.hash.startsWith('#id_')) {
+					const filamentId = location.hash.substring(1);
+					const filamentToOpen = filaments.find(f => f.id === filamentId);
+					if (filamentToOpen) {
+					openFilamentModal(filamentToOpen);
+					}
+    }
+				
             })
             .catch(error => {
                 console.error('Ошибка загрузки данных:', error);
