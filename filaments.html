@@ -1186,65 +1186,66 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 }
-	
-    function loadData() {
-        loadingContainer.style.display = 'flex';
 
-        fetch('filaments_data/filaments.json')
-            .then(response => response.json())
-            .then(data => {
-                filaments = data;
+function loadData() {
+    loadingContainer.style.display = 'flex';
 
-                filaments.forEach(filament => {
-                    if (filament.type) materialTypes.add(filament.type);
-                    if (filament.manufacturer) brandNames.add(filament.manufacturer);
-                });
+    fetch('filaments_data/filaments.json')
+        .then(response => response.json())
+        .then(data => {
+            filaments = data;
 
-                populateFilters();
+            filaments.forEach(filament => {
+                if (filament.type) materialTypes.add(filament.type);
+                if (filament.manufacturer) brandNames.add(filament.manufacturer);
+            });
 
-                // Загрузка user_avg_rating для каждого филамента
-                return Promise.all(
-                    filaments.map(filament => {
- return fetch(`https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=${filament.id}&action=getReviews`)
-            .then(res => {
-                if (!res.ok) {
-                    // Если ошибка CORS, возвращаем "пустой результат"
-                    return { user_avg_rating: null };
+            populateFilters();
+
+            // Загрузка user_avg_rating для каждого филамента (устойчивая к ошибкам)
+            return Promise.all(
+                filaments.map(filament => {
+                    return fetch(`https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=${filament.id}&action=getReviews`)
+                        .then(res => {
+                            if (!res.ok) {
+                                // Если ошибка типа CORS — вернём пустой рейтинг
+                                return { user_avg_rating: null };
+                            }
+                            return res.json();
+                        })
+                        .then(data => {
+                            filament.user_avg_rating = data.user_avg_rating ?? null;
+                        })
+                        .catch(() => {
+                            filament.user_avg_rating = null; // Ошибку глушим
+                        });
+                })
+            );
+        })
+        .then(() => {
+            filteredFilaments = [...filaments];
+            sortFilaments();
+            updatePagination();
+            loadingContainer.style.display = 'none';
+
+            // Проверка на наличие якоря и открытие модалки
+            if (location.hash.startsWith('#id_')) {
+                const filamentId = location.hash.substring(1); // убираем #
+                const filamentToOpen = filaments.find(f => f.id === filamentId);
+                if (filamentToOpen) {
+                    openFilamentModal(filamentToOpen);
                 }
-                return res.json();
-            })
-            .then(data => {
-                filament.user_avg_rating = data.user_avg_rating || null;
-            })
-            .catch(() => {
-                filament.user_avg_rating = null; // Ошибки глушим
-            });
-                    })
-                );
-            })
-            .then(() => {
-                filteredFilaments = [...filaments];
-                sortFilaments();
-                updatePagination();
-                loadingContainer.style.display = 'none';
-				
-				    if (location.hash.startsWith('#id_')) {
-					const filamentId = location.hash.substring(1);
-					const filamentToOpen = filaments.find(f => f.id === filamentId);
-					if (filamentToOpen) {
-					openFilamentModal(filamentToOpen);
-					}
-    }
-				
-            })
-            .catch(error => {
-                console.error('Ошибка загрузки данных:', error);
-                loadingContainer.innerHTML =
-                    '<p>Произошла ошибка при загрузке данных: ' + error.message + '</p>' +
-                    '<button id="retry-load">Попробовать снова</button>';
-                document.getElementById('retry-load').addEventListener('click', loadData);
-            });
-    }
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка загрузки данных:', error);
+            loadingContainer.innerHTML =
+                '<p>Произошла ошибка при загрузке данных: ' + error.message + '</p>' +
+                '<button id="retry-load">Попробовать снова</button>';
+            document.getElementById('retry-load').addEventListener('click', loadData);
+        });
+}
+
     
     function populateFilters() {
         materialTypes.forEach(type => {
