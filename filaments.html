@@ -1177,6 +1177,16 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentPage = 1;
     const itemsPerPage = 12;
     
+	function checkHashAndOpenModal() {
+    if (location.hash.startsWith('#id_')) {
+        const filamentId = location.hash.substring(1); // убираем #
+        const filamentToOpen = filaments.find(f => f.id === filamentId);
+        if (filamentToOpen) {
+            openFilamentModal(filamentToOpen);
+        }
+    }
+}
+	
     function loadData() {
         loadingContainer.style.display = 'flex';
 
@@ -1195,14 +1205,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Загрузка user_avg_rating для каждого филамента
                 return Promise.all(
                     filaments.map(filament => {
-                        return fetch(`https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=${filament.id}&action=getReviews`)
-                            .then(res => res.json())
-                            .then(data => {
-                                filament.user_avg_rating = data.user_avg_rating || null;
-                            })
-                            .catch(() => {
-                                filament.user_avg_rating = null;
-                            });
+ return fetch(`https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=${filament.id}&action=getReviews`)
+            .then(res => {
+                if (!res.ok) {
+                    // Если ошибка CORS, возвращаем "пустой результат"
+                    return { user_avg_rating: null };
+                }
+                return res.json();
+            })
+            .then(data => {
+                filament.user_avg_rating = data.user_avg_rating || null;
+            })
+            .catch(() => {
+                filament.user_avg_rating = null; // Ошибки глушим
+            });
                     })
                 );
             })
