@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "registered": "2025-07-24T15:00:33.868079Z",
+    "name": "Bestfilament",
+    "comment": null,
+    "empty_spool_weight": 177,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 2,
+    "registered": "2025-07-24T15:00:33.868094Z",
+    "name": "EXOFLEX",
+    "comment": null,
+    "empty_spool_weight": 155,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 3,
+    "registered": "2025-07-24T15:00:33.868098Z",
+    "name": "MAKO",
+    "comment": null,
+    "empty_spool_weight": 182,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 4,
+    "registered": "2025-07-24T15:00:33.868101Z",
+    "name": "СТРИМПЛАСТ",
+    "comment": null,
+    "empty_spool_weight": 174,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 5,
+    "registered": "2025-07-24T15:00:33.868104Z",
+    "name": "CyberFiber",
+    "comment": null,
+    "empty_spool_weight": null,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 6,
+    "registered": "2025-07-24T15:00:33.868106Z",
+    "name": "FDPlast",
+    "comment": null,
+    "empty_spool_weight": null,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 7,
+    "registered": "2025-07-24T15:00:33.868108Z",
+    "name": "FILAMENTARNO",
+    "comment": null,
+    "empty_spool_weight": null,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 8,
+    "registered": "2025-07-24T15:00:33.868110Z",
+    "name": "SUNLU",
+    "comment": null,
+    "empty_spool_weight": 140,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 9,
+    "registered": "2025-07-24T15:00:33.868112Z",
+    "name": "PETG",
+    "comment": null,
+    "empty_spool_weight": null,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 10,
+    "registered": "2025-07-24T15:00:33.868114Z",
+    "name": "SBS",
+    "comment": null,
+    "empty_spool_weight": null,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 11,
+    "registered": "2025-07-24T15:00:33.868115Z",
+    "name": "TPU",
+    "comment": null,
+    "empty_spool_weight": null,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 12,
+    "registered": "2025-07-24T15:00:33.868117Z",
+    "name": "PrintProduct",
+    "comment": null,
+    "empty_spool_weight": 230,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 13,
+    "registered": "2025-07-24T15:00:33.868119Z",
+    "name": "U3Print",
+    "comment": null,
+    "empty_spool_weight": 250,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 14,
+    "registered": "2025-07-24T15:00:33.868121Z",
+    "name": "ESUN",
+    "comment": null,
+    "empty_spool_weight": 267,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 15,
+    "registered": "2025-07-24T15:00:33.868123Z",
+    "name": "Flashforge",
+    "comment": null,
+    "empty_spool_weight": 230,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 16,
+    "registered": "2025-07-24T15:00:33.868124Z",
+    "name": "REC",
+    "comment": null,
+    "empty_spool_weight": 240,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 17,
+    "registered": "2025-07-24T15:00:33.868126Z",
+    "name": "PrimaCREATOR",
+    "comment": null,
+    "empty_spool_weight": 200,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 18,
+    "registered": "2025-07-24T15:00:33.868128Z",
+    "name": "GEEETECH",
+    "comment": null,
+    "empty_spool_weight": 240,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 19,
+    "registered": "2025-07-24T15:00:33.868129Z",
+    "name": "HP",
+    "comment": null,
+    "empty_spool_weight": 200,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 20,
+    "registered": "2025-07-24T15:00:33.868131Z",
+    "name": "Polymaker",
+    "comment": null,
+    "empty_spool_weight": null,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 21,
+    "registered": "2025-07-24T15:00:33.868133Z",
+    "name": "Creative",
+    "comment": null,
+    "empty_spool_weight": 237,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 22,
+    "registered": "2025-07-24T15:00:33.868134Z",
+    "name": "NEOFILAMENT",
+    "comment": null,
+    "empty_spool_weight": 250,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 23,
+    "registered": "2025-07-24T15:00:33.868136Z",
+    "name": "SEM",
+    "comment": null,
+    "empty_spool_weight": 170,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 24,
+    "registered": "2025-07-24T15:00:33.868138Z",
+    "name": "ANYCUBIC",
+    "comment": null,
+    "empty_spool_weight": 240,
+    "external_id": null,
+    "extra": {}
+  },
+  {
+    "id": 25,
+    "registered": "2025-07-24T15:00:33.868139Z",
+    "name": "IEMAI",
+    "comment": null,
+    "empty_spool_weight": 240,
+    "external_id": null,
+    "extra": {}
+  }
+]

@@ -1169,6 +1169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitReviewBtn = document.getElementById('submit-review-btn');
 
     let filaments = [];
+    let vendors = [];
     let filteredFilaments = [];
     let materialTypes = new Set();
     let brandNames = new Set();
@@ -1180,22 +1181,43 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadData() {
         loadingContainer.style.display = 'flex';
 
-        fetch('filaments_data/filaments.json')
+        // Load vendors first
+        const vendorsPromise = fetch('filaments_data/vendors.json')
+            .then(response => response.json())
+            .then(data => {
+                vendors = data;
+                // Create vendors map for quick lookup
+                window.vendorsMap = {};
+                vendors.forEach(vendor => {
+                    window.vendorsMap[vendor.id] = vendor;
+                    brandNames.add(vendor.name);
+                });
+            });
+
+        // Load filaments
+        const filamentsPromise = fetch('filaments_data/filaments.json')
             .then(response => response.json())
             .then(data => {
                 filaments = data;
 
                 filaments.forEach(filament => {
-                    if (filament.type) materialTypes.add(filament.type);
-                    if (filament.manufacturer) brandNames.add(filament.manufacturer);
+                    if (filament.material) materialTypes.add(filament.material);
+                    // Add vendor name to filament object for easy access
+                    if (filament.vendor_id && window.vendorsMap[filament.vendor_id]) {
+                        filament.vendor = window.vendorsMap[filament.vendor_id];
+                    }
                 });
 
                 populateFilters();
+            });
 
+        Promise.all([vendorsPromise, filamentsPromise])
+            .then(() => {
                 // Загрузка user_avg_rating для каждого филамента
                 return Promise.all(
                     filaments.map(filament => {
-                        return fetch(`https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=${filament.id}&action=getReviews`)
+                        const filamentId = filament.external_id || filament.id;
+                        return fetch(`https://script.google.com/macros/s/AKfycbwkECATRGp5Tmq67lZe-jZdXRXS5FzczGLhW8svh_bUOe7r8342fCOO7_k9VllUYgmjZA/exec?filamentId=${filamentId}&action=getReviews`)
                             .then(res => res.json())
                             .then(data => {
                                 filament.user_avg_rating = data.user_avg_rating || null;
@@ -1391,19 +1413,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const ratingFilter = document.querySelector('input[name="rating"]:checked').value;
         
         filteredFilaments = filaments.filter(filament => {
+            const vendorName = filament.vendor ? filament.vendor.name : '';
             const matchesSearch = 
                 searchQuery === '' || 
-                filament.name.toLowerCase().includes(searchQuery) || 
-                filament.manufacturer.toLowerCase().includes(searchQuery) ||
-                filament.type.toLowerCase().includes(searchQuery);
+                (filament.name && filament.name.toLowerCase().includes(searchQuery)) || 
+                vendorName.toLowerCase().includes(searchQuery) ||
+                (filament.material && filament.material.toLowerCase().includes(searchQuery));
             
             const matchesMaterial = 
                 materialAll || 
-                materialFilters.includes(filament.type);
+                materialFilters.includes(filament.material);
             
             const matchesBrand = 
                 brandAll || 
-                brandFilters.includes(filament.manufacturer);
+                brandFilters.includes(vendorName);
             
             let matchesWeight = weightAll;
             
@@ -1423,8 +1446,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let matchesRating = ratingFilter === 'all';
             
-            if (!matchesRating && filament.author_rating) {
-                const rating = filament.author_rating;
+            if (!matchesRating) {
+                // Get rating from extra fields for backward compatibility
+                const rating = filament.extra && filament.extra.author_rating ? 
+                    parseInt(filament.extra.author_rating) : 0;
                 
                 switch (ratingFilter) {
                     case '5':
@@ -1455,21 +1480,25 @@ document.addEventListener('DOMContentLoaded', function() {
         filteredFilaments.sort((a, b) => {
             switch (sortValue) {
                 case 'name-asc':
-                    return a.name.localeCompare(b.name);
+                    return (a.name || '').localeCompare(b.name || '');
                 case 'name-desc':
-                    return b.name.localeCompare(a.name);
+                    return (b.name || '').localeCompare(a.name || '');
                 case 'weight-asc':
-                    return a.weight - b.weight;
+                    return (a.weight || 0) - (b.weight || 0);
                 case 'weight-desc':
-                    return b.weight - a.weight;
+                    return (b.weight || 0) - (a.weight || 0);
                 case 'rating-desc':
-                    return (b.author_rating || 0) - (a.author_rating || 0);
+                    const aRating = a.extra && a.extra.author_rating ? parseInt(a.extra.author_rating) : 0;
+                    const bRating = b.extra && b.extra.author_rating ? parseInt(b.extra.author_rating) : 0;
+                    return bRating - aRating;
                 case 'rating-asc':
-                    return (a.author_rating || 0) - (b.author_rating || 0);
+                    const aRatingAsc = a.extra && a.extra.author_rating ? parseInt(a.extra.author_rating) : 0;
+                    const bRatingAsc = b.extra && b.extra.author_rating ? parseInt(b.extra.author_rating) : 0;
+                    return aRatingAsc - bRatingAsc;
                 case 'price-asc':
-                    return 0;
+                    return (a.price || 0) - (b.price || 0);
                 case 'price-desc':
-                    return 0;
+                    return (b.price || 0) - (a.price || 0);
                 default:
                     return 0;
             }
@@ -1498,26 +1527,31 @@ document.addEventListener('DOMContentLoaded', function() {
             card.className = 'filament-card';
             card.dataset.id = filament.id;
             
+            const vendorName = filament.vendor ? filament.vendor.name : 'Неизвестный производитель';
+            const authorRating = filament.extra && filament.extra.author_rating ? 
+                parseInt(filament.extra.author_rating) : 0;
+            const poopRating = filament.extra && filament.extra.poop_rating === 'True';
+            
             card.innerHTML = `
                 <div class="card-header">
-                    <div class="brand">${filament.manufacturer}</div>
-                    <div class="filament-type">${filament.type}</div>
+                    <div class="brand">${vendorName}</div>
+                    <div class="filament-type">${filament.material || 'N/A'}</div>
                 </div>
                 <div class="card-content">
-                    <h3>${filament.name}</h3>
+                    <h3>${filament.name || 'Без названия'}</h3>
                     <div class="specs-section">
                         <div class="spec-item">
                             <div class="spec-label">Вес:</div>
-                            <div>${filament.weight} г</div>
+                            <div>${filament.weight || 'N/A'} г</div>
                         </div>
                         <div class="spec-item">
                             <div class="spec-label">Диаметр:</div>
-                            <div>${filament.diameter} мм</div>
+                            <div>${filament.diameter || 'N/A'} мм</div>
                         </div>
                     </div>
                     <div class="rating-section">
                         <div class="section-title">Рейтинг:</div>
-                        ${renderRating(filament.author_rating, filament.poop_rating, filament.user_avg_rating)}
+                        ${renderRating(authorRating, poopRating, filament.user_avg_rating)}
                     </div>
                     <button class="review-toggle">
                         <i class="fas fa-info-circle"></i> Подробнее
@@ -1642,53 +1676,84 @@ document.addEventListener('DOMContentLoaded', function() {
     function openFilamentModal(filament) {
         currentFilament = filament;
         
-        modalTitle.textContent = filament.name;
+        modalTitle.textContent = filament.name || 'Без названия';
+        
+        const vendorName = filament.vendor ? filament.vendor.name : 'Неизвестный производитель';
+        const authorRating = filament.extra && filament.extra.author_rating ? 
+            parseInt(filament.extra.author_rating) : 0;
+        const poopRating = filament.extra && filament.extra.poop_rating === 'True';
         
         modalSpecs.innerHTML = `
             <tr>
                 <td>Производитель</td>
-                <td>${filament.manufacturer}</td>
+                <td>${vendorName}</td>
             </tr>
             <tr>
                 <td>Тип материала</td>
-                <td>${filament.type}</td>
+                <td>${filament.material || 'N/A'}</td>
             </tr>
             <tr>
                 <td>Вес</td>
-                <td>${filament.weight} г</td>
+                <td>${filament.weight || 'N/A'} г</td>
             </tr>
             <tr>
                 <td>Диаметр нити</td>
-                <td>${filament.diameter} мм</td>
+                <td>${filament.diameter || 'N/A'} мм</td>
             </tr>
             <tr>
                 <td>Вес катушки</td>
-                <td>${filament.spoolWeight} г</td>
+                <td>${filament.spool_weight || 'N/A'} г</td>
             </tr>
+            <tr>
+                <td>Плотность</td>
+                <td>${filament.density || 'N/A'} г/см³</td>
+            </tr>
+            <tr>
+                <td>Температура экструдера</td>
+                <td>${filament.settings_extruder_temp || 'N/A'} °C</td>
+            </tr>
+            <tr>
+                <td>Температура стола</td>
+                <td>${filament.settings_bed_temp || 'N/A'} °C</td>
+            </tr>
+            ${filament.extra && filament.extra.spoolDiameter ? `
             <tr>
                 <td>Диаметр катушки</td>
-                <td>${filament.spoolDiameter} мм</td>
-            </tr>
+                <td>${filament.extra.spoolDiameter} мм</td>
+            </tr>` : ''}
+            ${filament.extra && filament.extra.spoolWidth ? `
             <tr>
                 <td>Ширина катушки</td>
-                <td>${filament.spoolWidth} мм</td>
-            </tr>
+                <td>${filament.extra.spoolWidth} мм</td>
+            </tr>` : ''}
+            ${filament.extra && filament.extra.spoolInnerDiameter ? `
             <tr>
                 <td>Внутренний диаметр катушки</td>
-                <td>${filament.spoolInnerDiameter} мм</td>
-            </tr>
+                <td>${filament.extra.spoolInnerDiameter} мм</td>
+            </tr>` : ''}
+            ${filament.extra && filament.extra.filamentDiameter ? `
             <tr>
                 <td>Диаметр намотки филамента</td>
-                <td>${filament.filamentDiameter} мм</td>
-            </tr>
+                <td>${filament.extra.filamentDiameter} мм</td>
+            </tr>` : ''}
             <tr>
                 <td>Рейтинг</td>
-                <td>${renderRating(filament.author_rating, filament.poop_rating, filament.user_avg_rating)}</td>
+                <td>${renderRating(authorRating, poopRating, filament.user_avg_rating)}</td>
             </tr>
         `;
         
-        if (filament.printProfiles && filament.printProfiles.length > 0) {
-            modalProfiles.innerHTML = filament.printProfiles.map(profile => `
+        // Handle print profiles
+        let printProfiles = [];
+        if (filament.extra && filament.extra.printProfiles) {
+            try {
+                printProfiles = JSON.parse(filament.extra.printProfiles);
+            } catch (e) {
+                console.warn('Failed to parse print profiles:', e);
+            }
+        }
+        
+        if (printProfiles && printProfiles.length > 0) {
+            modalProfiles.innerHTML = printProfiles.map(profile => `
                 <div class="profile-item">
                     <h4>${profile.name}</h4>
                     <p>${profile.description}</p>
@@ -1699,10 +1764,20 @@ document.addEventListener('DOMContentLoaded', function() {
             modalProfiles.innerHTML = '<p>Профили печати отсутствуют</p>';
         }
         
-        if (filament.links && filament.links.length > 0) {
+        // Handle links
+        let links = [];
+        if (filament.extra && filament.extra.links) {
+            try {
+                links = JSON.parse(filament.extra.links);
+            } catch (e) {
+                console.warn('Failed to parse links:', e);
+            }
+        }
+        
+        if (links && links.length > 0) {
             modalLinks.innerHTML = `
                 <div class="market-links">
-                    ${filament.links.map(link => `
+                    ${links.map(link => `
                         <a href="${link.url}" target="_blank" class="market-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -1721,7 +1796,8 @@ document.addEventListener('DOMContentLoaded', function() {
             modalLinks.innerHTML = '<p>Ссылки на маркетплейсы отсутствуют</p>';
         }
         
-        loadReviews(filament.id);
+        const reviewId = filament.external_id || filament.id;
+        loadReviews(reviewId);
         
         document.querySelector('.modal-tab[data-tab="specs"]').classList.add('active');
         document.getElementById('tab-specs').classList.add('active');
@@ -1848,8 +1924,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        const filamentId = currentFilament.external_id || currentFilament.id;
         var reviewData = {
-            material_id: currentFilament.id,
+            material_id: filamentId,
             username: reviewAuthor.value,
             rating: currentRating,
             comment: reviewText.value
@@ -1860,7 +1937,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
 
         const formData = new URLSearchParams();
-        formData.append("material_id", currentFilament.id);
+        formData.append("material_id", filamentId);
         formData.append("username", reviewAuthor.value);
         formData.append("rating", currentRating);
         formData.append("comment", reviewText.value);
@@ -1877,7 +1954,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(function(data) {
             if (data.status === "ok" && data.result && data.result.success) {
-                loadReviews(currentFilament.id);
+                loadReviews(filamentId);
                 
                 reviewAuthor.value = '';
                 reviewText.value = '';
